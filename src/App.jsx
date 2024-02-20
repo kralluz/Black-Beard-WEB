@@ -1,0 +1,35 @@
+import { Toaster, toast } from "react-hot-toast";
+import { useEffect } from "react";
+import AppRoutes from "./routes/AppRoutes";
+import { UserProvider } from "./providers/userProvider";
+
+function App() {
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            toast("Aqui vai sua mensagem!", {});
+        }, 3000);
+
+        return () => clearInterval(intervalId);
+    }, []);
+
+    return (
+        <>
+            <Toaster
+                position="bottom-right"
+                toastOptions={{
+                    className: "",
+                    duration: 2000,
+                    style: {
+                        background: "#0000008b",
+                        color: "#ffffff",
+                    },
+                }}
+            />
+            <UserProvider>
+                <AppRoutes />
+            </UserProvider>
+        </>
+    );
+}
+
+export default App;
