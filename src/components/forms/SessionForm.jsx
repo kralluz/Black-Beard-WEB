@@ -1,13 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
-import { ClientContext } from "../../providers/clientProvider";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 
 const SessionForm = () => {
     const [isHidden, setIsHidden] = useState(true);
-    const { clientLogin } = useContext(ClientContext);
     const {
         register,
         handleSubmit,
@@ -22,7 +20,7 @@ const SessionForm = () => {
     }, [isSubmitSuccessful, reset]);
 
     const onSubmit = async (formData) => {
-        clientLogin(formData);
+        alert(JSON.stringify(formData));
     };
 
     return (
@@ -71,12 +69,7 @@ const SessionForm = () => {
                                     placeholder="Senha"
                                     type={isHidden ? "password" : "text"}
                                     {...register("password", {
-                                        required: "Senha é obrigatória",
-                                        minLength: {
-                                            value: 8,
-                                            message:
-                                                "A senha precisa ter no mínimo oito caracteres.",
-                                        },
+                                        required: "Senha é obrigatória"
                                     })}
                                 />
                                 <button

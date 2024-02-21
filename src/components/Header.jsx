@@ -1,103 +1,46 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
-import { NavLink } from "react-router-dom";
-import { Dropdown } from "bootstrap";
-import { IoPersonCircleOutline } from "react-icons/io5";
-import { LuPhone } from "react-icons/lu";
-import { MdMailOutline } from "react-icons/md";
-import { PiIdentificationCard } from "react-icons/pi";
+
 import "bootstrap/dist/css/bootstrap.min.css";
-import { MdLogout } from "react-icons/md";
-import { FaUserEdit } from "react-icons/fa";
-import { Tooltip } from "react-tooltip";
 
-const Header = ({ client, setEditOpen }) => {
-    const location = useLocation();
-    const isHome = location.pathname === "/";
-
-
+const Header = () => {
+    const barberData = {
+        id: 1,
+        name: " Albarino",
+        company_name: "Albarino Cortes",
+        email: "Albarino@example.com",
+        tel: "62123456789",
+        admin: false,
+        last_access: "2024-02-18T12:34:56Z",
+        created_at: "2024-02-18T12:34:56Z",
+        updated_at: null,
+        deleted_at: null,
+    };
     return (
-        <nav className={`navbar navbar-expand-lg navbar-dark bg-primary`}>
-            <div className="container-fluid">
-                <NavLink className="navbar-brand" to="/">
-                    Connect Hub
-                </NavLink>
-                {isHome ? (
-                    <div className="ms-auto">
-                        {client && (
-                            <>
-                                <Tooltip id="my-tooltip" />
-                                <button
-                                    data-tooltip-id="my-tooltip"
-                                    data-tooltip-content={client.name}
-                                    data-tooltip-place="bottom"
-                                    className="btn text-light btn-logout bg-edit"
-                                    id="userCircle"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                >
-                                    <div className="user-circle">
-                                        <IoPersonCircleOutline
-                                            size="40"
-                                            color="white"
-                                        />
-                                    </div>
-                                </button>
-                                <ul
-                                    className=" bg-primary dropdown-menu dropdown-menu-end"
-                                    aria-labelledby="userCircle"
-                                >
-                                    <li>
-                                        <span className="text-light  dropdown-item-text">
-                                            <PiIdentificationCard />
-                                            {"   "}
-                                            {client.name}
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span className="text-light dropdown-item-text">
-                                            <MdMailOutline />
-                                            {"   "}
-                                            {client.email}
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span className="text-light dropdown-item-text">
-                                            <LuPhone /> {client.phone}
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span className="text-light dropdown-item-text">
-                                            <button
-                                                data-tooltip-id="my-tooltip"
-                                                data-tooltip-content="Editar meu perfil"
-                                                data-tooltip-place="bottom"
-                                                className="btn text-light btn-logout bg-edit"
-                                                onClick={() =>
-                                                    setEditOpen(true)
-                                                }
-                                            >
-                                                <FaUserEdit /> Editar Perfil
-                                            </button>
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span
-                                            className="text-light dropdown-item-text"
-                                            onClick={}
-                                        >
-                                            <button className="btn text-light btn-logout-size bg-danger">
-                                                <MdLogout /> Encerrar sessão
-                                            </button>
-                                        </span>
-                                    </li>
-                                </ul>
-                            </>
-                        )}
-                    </div>
-                ) : null}
-            </div>
-        </nav>
+        <header className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+                <a className="navbar-brand" href="#">
+                    {barberData.company_name}
+                </a>
+                <div className="collapse navbar-collapse" id="navbarNav">
+                    <ul className="navbar-nav ml-auto">
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">
+                                Home
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">
+                                About
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">
+                                Contact
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+        </header>
     );
 };
 
