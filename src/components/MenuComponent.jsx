@@ -29,7 +29,7 @@ const FabContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    z-index: 2; // Assegura que esteja acima do Overlay
+    z-index: 2; 
 `;
 
 const Fab = styled.button`
@@ -58,6 +58,7 @@ const FabOptions = styled.div`
 
 const OptionButton = styled.button`
     background-color: #6c757d;
+    padding: 10px;
     color: white;
     margin-bottom: 5px;
     border: none;
@@ -79,7 +80,7 @@ const Overlay = styled.div`
     display: ${(props) => (props.show ? "block" : "none")};
     background-color: rgba(0, 0, 0, 0.5);
     animation: ${fadeIn} 0.5s ease;
-    z-index: 1; // Assegura que esteja abaixo dos botões mas acima do resto
+    z-index: 1; 
 `;
 
 function FloatingActionButton() {
@@ -94,12 +95,11 @@ function FloatingActionButton() {
             <Overlay show={isOpen} onClick={toggleOptions} />
             <FabContainer>
                 <FabOptions $isOpen={isOpen}>
-                    <OptionButton delay={0.1}>Opção 1</OptionButton>
-                    <OptionButton delay={0.2}>Opção 2</OptionButton>
-                    <OptionButton delay={0.3}>Opção 3</OptionButton>
-                    <OptionButton delay={0.4}>Opção 4</OptionButton>
-                    <OptionButton delay={0.5}>Opção 5</OptionButton>
-                    <OptionButton delay={0.6}>Opção 6</OptionButton>
+                    <OptionButton delay={0.8}>Adicionar um Plano</OptionButton>
+                    <OptionButton delay={0.6}>Adicionar um Agendamento</OptionButton>
+                    <OptionButton delay={0.4}>Adicionar um serviço</OptionButton>
+                    <OptionButton delay={0.2}>Adicionar um cliente</OptionButton>
+                    <OptionButton delay={0.1}>Configurações</OptionButton>
                 </FabOptions>
 
                 <Fab onClick={toggleOptions}>
