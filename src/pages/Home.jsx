@@ -5,6 +5,9 @@ import WeeklySummaryComponent from "../components/WeeklySummaryComponent";
 import MonthSummaryComponent from "../components/MonthSummaryComponent";
 import MenuComponent from "../components/MenuComponent";
 import NextAppointmentComponent from "../components/NextAppointmentComponent";
+import ToggleDisplayComponent from "../components/ToggleDisplayComponent";
+import AgendaCards from "../components/AgendaCards";
+import EstoqueData from "../components/EstoqueData";
 
 
 const Home = () => {
@@ -16,10 +19,7 @@ const Home = () => {
         <br />
         <br />
             <h1>Olá barbeiro</h1>
-            <NextAppointmentComponent/>
-            <ScheduleComponent/>
-            <WeeklySummaryComponent/>
-            <MonthSummaryComponent/>
+            <ToggleDisplayComponent agendaComponent={<AgendaCards/>} estoqueComponent={<EstoqueData />} />
             <MenuComponent/>
         </>
     );
