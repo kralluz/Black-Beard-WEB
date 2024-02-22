@@ -23,12 +23,9 @@ const DataTitle = styled.h3`
 const EstoqueData = () => {
     return (
         <DataContainer>
-            {/* Exemplo de card de dados de estoque */}
             <DataCard>
                 <DataTitle>Dados do Estoque</DataTitle>
-                {/* Outras informações do estoque */}
             </DataCard>
-            {/* Outros cards de estoque */}
         </DataContainer>
     );
 };

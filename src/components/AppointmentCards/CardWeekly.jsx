@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import ScreenWeekly from "../SchedulingScreens/ScreenWeekly";
 
 const SummaryCard = styled.div`
     background-color: #fff;
@@ -55,7 +56,10 @@ const Button = styled.button`
 `;
 
 const WeeklySummaryComponent = () => {
+    const [weeklyModal, setWeeklyModal] = useState(false);
     return (
+        <>
+        <ScreenWeekly isOpen={weeklyModal} onClose={() => setWeeklyModal(false)} />
         <SummaryCard>
             <CardHeader>15 serviços esta semana</CardHeader>
             <Content>
@@ -74,9 +78,10 @@ const WeeklySummaryComponent = () => {
                     <Value>Dia mais movimentado:</Value>
                     <Value>Quinta-Feira</Value>
                 </Section>
-                <Button>ver mais detalhes</Button>
+                <Button  onClick={() => setWeeklyModal(true)}>ver mais detalhes</Button>
             </Content>
         </SummaryCard>
+        </>
     );
 };
 

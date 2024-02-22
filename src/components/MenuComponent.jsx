@@ -1,3 +1,7 @@
+import ScreenAddAppointment from "./actionButtonsScreens/ScreenAddAppointment";
+import ScreenCreatePlan from "./actionButtonsScreens/ScreenCreatePlan";
+import ScreenAddClient from "./actionButtonsScreens/ScreenAddClient";
+import ScreenSettings from "./actionButtonsScreens/ScreenSettings";
 import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { RxScissors } from "react-icons/rx";
@@ -7,6 +11,7 @@ import {
     MdLibraryAddCheck,
 } from "react-icons/md";
 import { FaUserPlus, FaTools } from "react-icons/fa";
+import ScreenAddService from "./actionButtonsScreens/ScreenAddService";
 
 const slideIn = keyframes`
 from {
@@ -40,9 +45,9 @@ const FabContainer = styled.div`
 
 const Fab = styled.button`
     border-radius: 50%;
-    width: 80px;
-    height: 80px;
-    background-color: #007bff;
+    width: 65px;
+    height: 65px;
+    background-color: #1f1f1f;
     color: white;
     display: flex;
     justify-content: center;
@@ -50,6 +55,7 @@ const Fab = styled.button`
     border: none;
     cursor: pointer;
     transform: rotate(270deg);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
 
     &:focus {
         outline: none;
@@ -124,40 +130,79 @@ function FloatingActionButton() {
         setIsOpen(!isOpen);
     };
 
+    const [isPlanModalOpen, setIsPlanModalOpen] = useState(false);
+    const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
+    const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
+    const [isClientModalOpen, setIsClientModalOpen] = useState(false);
+    const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
+
     return (
         <>
             <Overlay show={isOpen} onClick={toggleOptions} />
             <FabContainer>
                 <FabOptions $isOpen={isOpen}>
-                    <OptionButton delay={0.7}>
+                    <OptionButton
+                        delay={0.4}
+                        onClick={() => setIsPlanModalOpen(true)}
+                    >
+                        <ScreenCreatePlan
+                            isOpen={isPlanModalOpen}
+                            onClose={() => setIsPlanModalOpen(false)}
+                        />
                         Criar um Plano{" "}
                         <MdLibraryAddCheck
                             style={{ fontSize: "var(--icon-size)" }}
                         />
                     </OptionButton>
-                    <OptionButton delay={0.6}>
+
+                    <OptionButton
+                        delay={0.3}
+                        onClick={() => setIsAppointmentModalOpen(true)}
+                    >
+                        <ScreenAddAppointment
+                            isOpen={isAppointmentModalOpen}
+                            onClose={() => setIsAppointmentModalOpen(false)}
+                        />
                         Adicionar um Agendamento{" "}
                         <MdEventAvailable
                             style={{ fontSize: "var(--icon-size)" }}
                         />
                     </OptionButton>
-                    <OptionButton delay={0.5}>
+
+                    <OptionButton
+                        delay={0.25}
+                        onClick={() => setIsServiceModalOpen(true)}
+                    >
+                        <ScreenAddService
+                            isOpen={isServiceModalOpen}
+                            onClose={() => setIsServiceModalOpen(false)}
+                        />
                         Adicionar um serviço{" "}
                         <FaTools style={{ fontSize: "var(--icon-size)" }} />
                     </OptionButton>
-                    <OptionButton delay={0.3}>
+                    <OptionButton
+                        delay={0.2}
+                        onClick={() => setIsClientModalOpen(true)}
+                    >
+                        <ScreenAddClient
+                            isOpen={isClientModalOpen}
+                            onClose={() => setIsClientModalOpen(false)}
+                        />
                         Adicionar um cliente{" "}
                         <FaUserPlus style={{ fontSize: "var(--icon-size)" }} />
                     </OptionButton>
-                    <OptionButton delay={0.1}>
+                    <OptionButton delay={0.1} onClick={() => setIsSettingsModalOpen(true)}>
+                        <ScreenSettings
+                            isOpen={isSettingsModalOpen}
+                            onClose={() => setIsSettingsModalOpen(false)}
+                        />
                         Configurações{" "}
                         <MdSettings style={{ fontSize: "var(--icon-size)" }} />
                     </OptionButton>
                 </FabOptions>
-
                 <Fab onClick={toggleOptions} className={isOpen ? "active" : ""}>
                     <div className="icon-wrapper">
-                        <RxScissors size={50} />
+                        <RxScissors size={40} />
                     </div>
                 </Fab>
             </FabContainer>

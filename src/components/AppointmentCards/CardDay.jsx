@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import ScreenDay from "../SchedulingScreens/ScreenDay";
 
 const ScheduleCard = styled.div`
     background-color: #fff;
@@ -31,7 +32,6 @@ const Day = styled.span`
 const Date = styled.span`
     font-size: 18px;
     font-weight: bold;
-    color: #f90;
 `;
 
 const AppointmentList = styled.ul`
@@ -65,7 +65,7 @@ const Time = styled.span`
 const DetailsButton = styled.button`
     background-color: transparent;
     border: none;
-    color: #00f;
+    color: #0015ff;
     padding: 10px 0;
     text-decoration: underline;
     cursor: pointer;
@@ -76,32 +76,41 @@ const DetailsButton = styled.button`
 `;
 
 const ScheduleComponent = () => {
+    const [DayModal, setDayModal] = useState(false);
     return (
-        <ScheduleCard>
-            <Header>
-                <Day>segunda-feira</Day>
-                <Date>18 de dezembro</Date>
-            </Header>
-            <AppointmentList>
-                <AppointmentItem>
-                    <Name>Carlos Henrique</Name>
-                    <Time>cabelo</Time>
-                </AppointmentItem>
-                <AppointmentItem>
-                    <Name>Vitor Santos</Name>
-                    <Time>cabelo + barba</Time>
-                </AppointmentItem>
-                <AppointmentItem>
-                    <Name>Igor Henrique</Name>
-                    <Time>barba</Time>
-                </AppointmentItem>
-                <AppointmentItem>
-                    <Name>Pedro Lacerda</Name>
-                    <Time>barba</Time>
-                </AppointmentItem>
-            </AppointmentList>
-            <DetailsButton>ver mais detalhes</DetailsButton>
-        </ScheduleCard>
+        <>
+            <ScreenDay
+                isOpen={DayModal}
+                onClose={() => setDayModal(false)}
+            />
+            <ScheduleCard>
+                <Header>
+                    <Day>segunda-feira</Day>
+                    <Date>18 de dezembro</Date>
+                </Header>
+                <AppointmentList>
+                    <AppointmentItem>
+                        <Name>Carlos Henrique</Name>
+                        <Time>cabelo</Time>
+                    </AppointmentItem>
+                    <AppointmentItem>
+                        <Name>Vitor Santos</Name>
+                        <Time>cabelo + barba</Time>
+                    </AppointmentItem>
+                    <AppointmentItem>
+                        <Name>Igor Henrique</Name>
+                        <Time>barba</Time>
+                    </AppointmentItem>
+                    <AppointmentItem>
+                        <Name>Pedro Lacerda</Name>
+                        <Time>barba</Time>
+                    </AppointmentItem>
+                </AppointmentList>
+                <DetailsButton onClick={() => setDayModal(true)}>
+                    ver mais detalhes
+                </DetailsButton>
+            </ScheduleCard>
+        </>
     );
 };
 

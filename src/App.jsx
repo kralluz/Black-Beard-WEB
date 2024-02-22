@@ -16,7 +16,7 @@ function App() {
     return (
         <>
             <Toaster
-                position="bottom-right"
+                position="bottom-left"
                 toastOptions={{
                     className: "",
                     duration: 1000,

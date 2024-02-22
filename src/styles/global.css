@@ -26,31 +26,32 @@
     }
 }
 
-/* Personalização para navegadores baseados em WebKit (Chrome, Safari, Edge) */
 ::-webkit-scrollbar {
-    width: 12px; /* Largura da barra de rolagem */
+    width: 12px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Cor de fundo da trilha da barra de rolagem */
-    border-radius: 10px; /* Bordas arredondadas para a trilha */
+    background: #f1f1f1;
+    border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #888; /* Cor do manipulador da barra de rolagem */
-    border-radius: 10px; /* Bordas arredondadas para o manipulador */
+    background: #888;
+    border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #555; /* Cor do manipulador da barra de rolagem ao passar o mouse */
+    background: #555;
 }
 
-/* Personalização para Firefox */
 * {
-    scrollbar-width: thin; /* "auto" ou "thin" */
-    scrollbar-color: #888 rgb(255, 255, 255); /* Cor do manipulador e cor da trilha */
+    scrollbar-width: thin;
+    scrollbar-color: #888 rgb(255, 255, 255);
 }
 
+.index_adjust {
+    z-index: 1;
+}
 
 .btn-logout-size {
     text-align: center;
@@ -82,3 +83,4 @@
 .btn-edit:hover {
     background-color: #0056b3;
 }
+

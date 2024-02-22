@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import NextAppointmentComponent from "./NextAppointmentComponent";
-import ScheduleComponent from "./ScheduleComponent";
-import WeeklySummaryComponent from "./WeeklySummaryComponent";
-import MonthSummaryComponent from "./MonthSummaryComponent";
+import NextAppointmentComponent from "./AppointmentCards/CardNextAppointment";
+import ScheduleComponent from "./AppointmentCards/CardDay";
+import WeeklySummaryComponent from "./AppointmentCards/CardWeekly";
+import MonthSummaryComponent from "./AppointmentCards/CardMonth";
 
-// Estilos para o container dos cards de agendamento
 const CardsContainer = styled.div`
     padding: 16px;
 `;

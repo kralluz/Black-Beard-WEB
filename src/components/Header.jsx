@@ -17,7 +17,7 @@ const Header = () => {
         deleted_at: null,
     };
     return (
-        <header className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <header className=" index_adjust navbar navbar-expand-lg navbar-light bg-light fixed-top">
                 <a className="navbar-brand" href="#">
                     {barberData.company_name}
                 </a>

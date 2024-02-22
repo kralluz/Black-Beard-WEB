@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { UserContext } from "../../providers/userProvider";
 import { Link, useNavigate } from "react-router-dom";
-import InputField from "../InputField";
-import PasswordInput from "../PasswordInput";
+import InputField from "../inputs/InputField";
+import PasswordInput from "../inputs/PasswordInput";
 import { signupSchema } from "../../Zodrezolvers/register";
 import { zodResolver } from "@hookform/resolvers/zod";
 
