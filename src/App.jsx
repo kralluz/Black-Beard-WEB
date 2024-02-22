@@ -8,7 +8,7 @@ function App() {
     useEffect(() => {
         const intervalId = setInterval(() => {
             toast("Aqui vai sua mensagem!", {});
-        }, 3000);
+        }, 5000);
 
         return () => clearInterval(intervalId);
     }, []);
@@ -19,7 +19,7 @@ function App() {
                 position="bottom-right"
                 toastOptions={{
                     className: "",
-                    duration: 2000,
+                    duration: 1000,
                     style: {
                         background: "#0000008b",
                         color: "#ffffff",

@@ -1,25 +1,31 @@
 import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { RxScissors } from "react-icons/rx";
+import {
+    MdSettings,
+    MdEventAvailable,
+    MdLibraryAddCheck,
+} from "react-icons/md";
+import { FaUserPlus, FaTools } from "react-icons/fa";
 
 const slideIn = keyframes`
-  from {
+from {
     transform: translateX(100%);
     opacity: 0;
-  }
-  to {
+}
+to {
     transform: translateX(0%);
     opacity: 1;
-  }
+}
 `;
 
 const fadeIn = keyframes`
-  from {
+from {
     background-color: rgba(0, 0, 0, 0);
-  }
-  to {
+}
+to {
     background-color: rgba(0, 0, 0, 0.5);
-  }
+}
 `;
 
 const FabContainer = styled.div`
@@ -29,13 +35,13 @@ const FabContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    z-index: 2; 
+    z-index: 2;
 `;
 
 const Fab = styled.button`
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     background-color: #007bff;
     color: white;
     display: flex;
@@ -43,9 +49,30 @@ const Fab = styled.button`
     align-items: center;
     border: none;
     cursor: pointer;
+    transform: rotate(270deg);
 
     &:focus {
         outline: none;
+    }
+
+    .icon-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.3s ease;
+    }
+
+    &.active .icon-wrapper {
+        transform: rotate(-90deg);
+    }
+`;
+
+const fadeInOption = keyframes`
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 `;
 
@@ -57,14 +84,21 @@ const FabOptions = styled.div`
 `;
 
 const OptionButton = styled.button`
-    background-color: #6c757d;
+    background-color: transparent; // Removendo a cor de fundo cinza
     padding: 10px;
     color: white;
     margin-bottom: 5px;
     border: none;
     cursor: pointer;
-    animation: ${slideIn} 0.5s ease forwards;
-    animation-delay: ${(props) => props.delay}s;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 10px;
+
+    animation: ${fadeInOption} 0.5s ease forwards;
+    animation-delay: ${(props) =>
+        props.delay}s; // Cada botão aparece em um momento diferente
 
     &:last-child {
         margin-bottom: 0;
@@ -75,12 +109,12 @@ const Overlay = styled.div`
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     display: ${(props) => (props.show ? "block" : "none")};
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: #212121c4;
     animation: ${fadeIn} 0.5s ease;
-    z-index: 1; 
+    z-index: 1;
 `;
 
 function FloatingActionButton() {
@@ -95,17 +129,36 @@ function FloatingActionButton() {
             <Overlay show={isOpen} onClick={toggleOptions} />
             <FabContainer>
                 <FabOptions $isOpen={isOpen}>
-                    <OptionButton delay={0.8}>Adicionar um Plano</OptionButton>
-                    <OptionButton delay={0.6}>Adicionar um Agendamento</OptionButton>
-                    <OptionButton delay={0.4}>Adicionar um serviço</OptionButton>
-                    <OptionButton delay={0.2}>Adicionar um cliente</OptionButton>
-                    <OptionButton delay={0.1}>Configurações</OptionButton>
+                    <OptionButton delay={0.7}>
+                        Criar um Plano{" "}
+                        <MdLibraryAddCheck
+                            style={{ fontSize: "var(--icon-size)" }}
+                        />
+                    </OptionButton>
+                    <OptionButton delay={0.6}>
+                        Adicionar um Agendamento{" "}
+                        <MdEventAvailable
+                            style={{ fontSize: "var(--icon-size)" }}
+                        />
+                    </OptionButton>
+                    <OptionButton delay={0.5}>
+                        Adicionar um serviço{" "}
+                        <FaTools style={{ fontSize: "var(--icon-size)" }} />
+                    </OptionButton>
+                    <OptionButton delay={0.3}>
+                        Adicionar um cliente{" "}
+                        <FaUserPlus style={{ fontSize: "var(--icon-size)" }} />
+                    </OptionButton>
+                    <OptionButton delay={0.1}>
+                        Configurações{" "}
+                        <MdSettings style={{ fontSize: "var(--icon-size)" }} />
+                    </OptionButton>
                 </FabOptions>
 
-                <Fab onClick={toggleOptions}>
-                    <i className="fas fa-plus">
+                <Fab onClick={toggleOptions} className={isOpen ? "active" : ""}>
+                    <div className="icon-wrapper">
                         <RxScissors size={50} />
-                    </i>{" "}
+                    </div>
                 </Fab>
             </FabContainer>
         </>
