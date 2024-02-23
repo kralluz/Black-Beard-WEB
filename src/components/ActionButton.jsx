@@ -1,4 +1,4 @@
-import ScreenAddAppointment from "./actionButtonsScreens/ScreenAddAppointment";
+import ScreenAppointment from "./actionButtonsScreens/ScreenAppointment";
 import ScreenPlan from "./actionButtonsScreens/ScreenPlan";
 import ScreenAddClient from "./actionButtonsScreens/ScreenAddClient";
 import ScreenSettings from "./actionButtonsScreens/ScreenSettings";
@@ -142,7 +142,7 @@ function FloatingActionButton() {
                 isOpen={isPlanModalOpen}
                 onClose={() => setIsPlanModalOpen(false)}
             />
-            <ScreenAddAppointment
+            <ScreenAppointment
                 isOpen={isAppointmentModalOpen}
                 onClose={() => setIsAppointmentModalOpen(false)}
             />
