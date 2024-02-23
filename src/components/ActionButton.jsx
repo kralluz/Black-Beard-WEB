@@ -166,7 +166,7 @@ function FloatingActionButton() {
                         delay={0.4}
                         onClick={() => setIsPlanModalOpen(true)}
                     >
-                        Criar um Plano{" "}
+                        Gerenciar meus Planos{" "}
                         <MdLibraryAddCheck
                             style={{ fontSize: "var(--icon-size)" }}
                         />
@@ -176,7 +176,7 @@ function FloatingActionButton() {
                         delay={0.3}
                         onClick={() => setIsAppointmentModalOpen(true)}
                     >
-                        Adicionar um Agendamento{" "}
+                        Gerenciar Agendamentos{" "}
                         <MdEventAvailable
                             style={{ fontSize: "var(--icon-size)" }}
                         />
@@ -186,14 +186,14 @@ function FloatingActionButton() {
                         delay={0.25}
                         onClick={() => setIsServiceModalOpen(true)}
                     >
-                        Adicionar um serviço{" "}
+                        Gerenciar serviços{" "}
                         <FaTools style={{ fontSize: "var(--icon-size)" }} />
                     </OptionButton>
                     <OptionButton
                         delay={0.2}
                         onClick={() => setIsClientModalOpen(true)}
                     >
-                        Adicionar um cliente{" "}
+                        Gerenciar clientes{" "}
                         <FaUserPlus style={{ fontSize: "var(--icon-size)" }} />
                     </OptionButton>
                     <OptionButton

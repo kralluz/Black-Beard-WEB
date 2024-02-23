@@ -16,7 +16,6 @@ const ScreenAddService = ({ isOpen, onClose }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // TODO: Implementar lógica para adicionar o serviço
     };
 
     return (

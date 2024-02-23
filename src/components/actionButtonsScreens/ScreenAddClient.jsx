@@ -16,7 +16,6 @@ const ScreenAddClient = ({ isOpen, onClose }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // TODO: Implementar lógica para adicionar o cliente
     };
 
     return (

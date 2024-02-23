@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-// Estilos para o container dos dados de estoque
 const DataContainer = styled.div`
     padding: 16px;
 `;

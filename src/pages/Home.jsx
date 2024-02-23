@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../components/Header";
-import MenuComponent from "../components/MenuComponent";
+import FloatingActionButton from "../components/ActionButton";
 import ToggleDisplayComponent from "../components/HeadToggleDisplay";
 import AgendaCards from "../components/AgendaCards";
 import EstoqueData from "../components/StockData";
@@ -17,7 +17,7 @@ const Home = () => {
                 agendaComponent={<AgendaCards />}
                 estoqueComponent={<EstoqueData />}
             />
-                <MenuComponent />
+                <FloatingActionButton/>
         </>
     );
 };
