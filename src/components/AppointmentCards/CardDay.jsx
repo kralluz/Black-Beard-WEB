@@ -1,117 +1,64 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import ScreenDay from "../SchedulingScreens/ScreenDay";
+import React from "react";
+import CardComponent from "./CardComponent";
+import {
+    SummaryInfo,
+    ClientList,
+    Data,
+    DataKey,
+    DataValue,
+    ClientName,
+    ServicesContainer,
+    ServiceTag,
+    AppointmentsList,
+} from "./styles";
+import { agenda } from "../../providers/agendamento";
+import { color } from "react-magic-motion";
+const DailyCard = () => {
+    const dailySummary = {
+        totalAppointments: 12,
+        estimatedRevenue: "R$ 1.200,00",
+        nextClients: [
+            { name: "João Silva", service: "Corte" },
+            { name: "Maria Oliveira", service: ["Coloração", "hidratação"] },
+            { name: "Carlos Andrade", service: "Hidratação" },
+            { name: "Ana Júlia", service: "Escova" },
+        ],
+    };
+    const day = new Date().toLocaleDateString("pt-BR", { weekday: "long" });
+    const headerText = `Resumo Diário:  ${day}`;
 
-const ScheduleCard = styled.div`
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    margin: 0 auto;
-`;
-
-const Header = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    padding: 16px;
-    background-color: #e2c07d;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-`;
-
-const Day = styled.span`
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-`;
-
-const Date = styled.span`
-    font-size: 18px;
-    font-weight: bold;
-`;
-
-const AppointmentList = styled.ul`
-    list-style: none;
-    padding: 0;
-    margin: 0;
-`;
-
-const AppointmentItem = styled.li`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    padding: 0 16px;
-
-    &:last-child {
-        margin-bottom: 0;
-    }
-`;
-
-const Name = styled.span`
-    font-size: 16px;
-    color: #333;
-`;
-
-const Time = styled.span`
-    font-size: 16px;
-    color: #333;
-`;
-
-const DetailsButton = styled.button`
-    background-color: transparent;
-    border: none;
-    color: #0015ff;
-    padding: 10px 0;
-    text-decoration: underline;
-    cursor: pointer;
-    width: 100%;
-    text-align: center;
-    margin-top: 20px;
-    display: block;
-`;
-
-const ScheduleComponent = () => {
-    const [DayModal, setDayModal] = useState(false);
     return (
-        <>
-            <ScreenDay
-                isOpen={DayModal}
-                onClose={() => setDayModal(false)}
-            />
-            <ScheduleCard>
-                <Header>
-                    <Day>segunda-feira</Day>
-                    <Date>18 de dezembro</Date>
-                </Header>
-                <AppointmentList>
-                    <AppointmentItem>
-                        <Name>Carlos Henrique</Name>
-                        <Time>cabelo</Time>
-                    </AppointmentItem>
-                    <AppointmentItem>
-                        <Name>Vitor Santos</Name>
-                        <Time>cabelo + barba</Time>
-                    </AppointmentItem>
-                    <AppointmentItem>
-                        <Name>Igor Henrique</Name>
-                        <Time>barba</Time>
-                    </AppointmentItem>
-                    <AppointmentItem>
-                        <Name>Pedro Lacerda</Name>
-                        <Time>barba</Time>
-                    </AppointmentItem>
-                </AppointmentList>
-                <DetailsButton onClick={() => setDayModal(true)}>
-                    ver mais detalhes
-                </DetailsButton>
-            </ScheduleCard>
-        </>
+        <CardComponent
+            headerContent={headerText}
+            buttonText="Ver Mais"
+            onButtonClick={() => alert("Detalhes do Dia")}
+        >
+            <Data>
+                <DataKey>Agendamentos para hoje: </DataKey>
+                <DataValue>{agenda.length}</DataValue>
+            </Data>
+            <Data>
+                <DataKey>Receita: </DataKey>
+                <DataValue>{dailySummary.estimatedRevenue}</DataValue>
+            </Data>
+            <ClientList>
+                {agenda.slice(0, 4).map((appointment, index) => (
+                    <AppointmentsList key={index}>
+                        <ClientName>{appointment.client.name}</ClientName>
+                        <ServicesContainer className="fullWidth">
+                            <ServiceTag>
+                                {appointment.services.length === 1
+                                    ? appointment.services[0].service_name
+                                    : `${
+                                            appointment.services[0].service_name
+                                        } e + ${appointment.services.length - 1}`}
+                            </ServiceTag>
+                        </ServicesContainer>
+                    </AppointmentsList>
+                ))}
+            </ClientList>
+        </CardComponent>
     );
 };
 
-export default ScheduleComponent;
+export default DailyCard;

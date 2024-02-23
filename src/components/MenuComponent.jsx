@@ -90,7 +90,7 @@ const FabOptions = styled.div`
 `;
 
 const OptionButton = styled.button`
-    background-color: transparent; // Removendo a cor de fundo cinza
+    background-color: transparent;
     padding: 10px;
     color: white;
     margin-bottom: 5px;
@@ -104,7 +104,7 @@ const OptionButton = styled.button`
 
     animation: ${fadeInOption} 0.5s ease forwards;
     animation-delay: ${(props) =>
-        props.delay}s; // Cada botão aparece em um momento diferente
+        props.delay};
 
     &:last-child {
         margin-bottom: 0;
@@ -115,8 +115,8 @@ const Overlay = styled.div`
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     display: ${(props) => (props.show ? "block" : "none")};
     background-color: #212121c4;
     animation: ${fadeIn} 0.5s ease;

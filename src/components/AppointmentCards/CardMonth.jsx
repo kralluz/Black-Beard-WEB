@@ -1,102 +1,47 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import ScreenMonth from "../SchedulingScreens/ScreenMonth";
+import React from "react";
+import CardComponent from "./CardComponent";
+import { Data, DataKey, DataValue } from "./styles";
 
-const SummaryCard = styled.div`
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border: 1px solid #ccc;
-    width: 300px;
-    margin: 0 auto;
-`;
+const MonthlyCard = () => {
+    const monthlySummary = {
+        totalRevenue: "R$ 12.000,00",
+        totalServices: 320,
+        mostFrequentClient: "João Silva",
+        mostPopularService: "Corte Masculino",
+        growthComparison: "+8%",
+    };
 
-const CardHeader = styled.div`
-    background-color: #e2c07d;
-    padding: 16px;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-`;
+    const month = new Date().toLocaleDateString("pt-BR", { month: "long" });
+    const headerText = `Resumo Mensal:  ${month}`;
 
-const Content = styled.div`
-    padding: 16px;
-`;
-
-const Row = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-
-    &:last-child {
-        margin-bottom: 20px;
-    }
-`;
-
-const Column = styled.div`
-    display: flex;
-    flex-direction: column;
-`;
-
-const Title = styled.span`
-    font-size: 16px;
-    color: #888;
-`;
-
-const Value = styled.span`
-    font-size: 16px;
-    color: #333;
-`;
-
-const Button = styled.button`
-    background-color: transparent;
-    border: none;
-    color: #00f;
-    padding: 10px 0;
-    text-decoration: underline;
-    cursor: pointer;
-    width: 100%;
-    text-align: center;
-    display: block;
-`;
-
-const MonthSummaryComponent = () => {
-    const [monthModal, setMonthModal] = useState(false);
-    
     return (
-        <>
-        <ScreenMonth isOpen={monthModal} onClose={() => setMonthModal(false)}/>
-            <SummaryCard>
-                <CardHeader>dezembro</CardHeader>
-                <Content>
-                    <Row>
-                        <Column>
-                            <Title>Resumo do mês</Title>
-                            <Value>principais dias</Value>
-                            <Value>1-2-3-4-5-6-7</Value>
-                        </Column>
-                        <Column>
-                            <Title>receita total</Title>
-                            <Value>R$3.486,45</Value>
-                        </Column>
-                    </Row>
-                    <Row>
-                        <Column>
-                            <Title>total de agendamentos</Title>
-                            <Value>285</Value>
-                        </Column>
-                        <Column>
-                            <Title>taxa de agendamentos</Title>
-                            <Value>75%</Value>
-                        </Column>
-                    </Row>
-                    <Button  onClick={ ()=>setMonthModal(true)}>ver mais detalhes</Button>
-                </Content>
-            </SummaryCard>
-        </>
+        <CardComponent
+            headerContent={headerText}
+            buttonText="Mais Detalhes"
+            onButtonClick={() => alert("Detalhes do Mês")}
+        >
+                <Data>
+                    <DataKey>Receita Total: </DataKey>
+                    <DataValue>{monthlySummary.totalRevenue}</DataValue>
+                </Data>
+                <Data>
+                    <DataKey>Total de Serviços: </DataKey>
+                    <DataValue>{monthlySummary.totalServices}</DataValue>
+                </Data>
+                <Data>
+                    <DataKey>Cliente Mais Frequente:</DataKey>
+                    <DataValue>{monthlySummary.mostFrequentClient}</DataValue>
+                </Data>
+                <Data>
+                    <DataKey>Serviço Mais Procurado: </DataKey>
+                    <DataValue>{monthlySummary.mostPopularService}</DataValue>
+                </Data>
+                <Data>
+                    <DataKey>Crescimento: </DataKey>
+                    <DataValue>{monthlySummary.growthComparison}</DataValue>
+                </Data>
+        </CardComponent>
     );
 };
 
-export default MonthSummaryComponent;
+export default MonthlyCard;

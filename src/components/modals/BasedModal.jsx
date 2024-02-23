@@ -44,7 +44,7 @@ const CloseButton = styled.button`
 `;
 
 const ModalBase = ({ children, isOpen, onClose }) => (
-    <Transition in={isOpen} timeout={300} unmountOnExit>
+    <Transition in={isOpen} unmountOnExit>
         {(state) => (
             <Backdrop className={state} onClick={onClose}>
                 <ModalWrapper
