@@ -138,6 +138,27 @@ function FloatingActionButton() {
 
     return (
         <>
+            <ScreenCreatePlan
+                isOpen={isPlanModalOpen}
+                onClose={() => setIsPlanModalOpen(false)}
+            />
+            <ScreenAddAppointment
+                isOpen={isAppointmentModalOpen}
+                onClose={() => setIsAppointmentModalOpen(false)}
+            />
+            <ScreenAddService
+                isOpen={isServiceModalOpen}
+                onClose={() => setIsServiceModalOpen(false)}
+            />
+            <ScreenAddClient
+                isOpen={isClientModalOpen}
+                onClose={() => setIsClientModalOpen(false)}
+            />
+            <ScreenSettings
+                isOpen={isSettingsModalOpen}
+                onClose={() => setIsSettingsModalOpen(false)}
+            />
+
             <Overlay show={isOpen} onClick={toggleOptions} />
             <FabContainer>
                 <FabOptions $isOpen={isOpen}>
@@ -145,10 +166,6 @@ function FloatingActionButton() {
                         delay={0.4}
                         onClick={() => setIsPlanModalOpen(true)}
                     >
-                        <ScreenCreatePlan
-                            isOpen={isPlanModalOpen}
-                            onClose={() => setIsPlanModalOpen(false)}
-                        />
                         Criar um Plano{" "}
                         <MdLibraryAddCheck
                             style={{ fontSize: "var(--icon-size)" }}
@@ -159,10 +176,6 @@ function FloatingActionButton() {
                         delay={0.3}
                         onClick={() => setIsAppointmentModalOpen(true)}
                     >
-                        <ScreenAddAppointment
-                            isOpen={isAppointmentModalOpen}
-                            onClose={() => setIsAppointmentModalOpen(false)}
-                        />
                         Adicionar um Agendamento{" "}
                         <MdEventAvailable
                             style={{ fontSize: "var(--icon-size)" }}
@@ -173,10 +186,6 @@ function FloatingActionButton() {
                         delay={0.25}
                         onClick={() => setIsServiceModalOpen(true)}
                     >
-                        <ScreenAddService
-                            isOpen={isServiceModalOpen}
-                            onClose={() => setIsServiceModalOpen(false)}
-                        />
                         Adicionar um serviço{" "}
                         <FaTools style={{ fontSize: "var(--icon-size)" }} />
                     </OptionButton>
@@ -184,18 +193,13 @@ function FloatingActionButton() {
                         delay={0.2}
                         onClick={() => setIsClientModalOpen(true)}
                     >
-                        <ScreenAddClient
-                            isOpen={isClientModalOpen}
-                            onClose={() => setIsClientModalOpen(false)}
-                        />
                         Adicionar um cliente{" "}
                         <FaUserPlus style={{ fontSize: "var(--icon-size)" }} />
                     </OptionButton>
-                    <OptionButton delay={0.1} onClick={() => setIsSettingsModalOpen(true)}>
-                        <ScreenSettings
-                            isOpen={isSettingsModalOpen}
-                            onClose={() => setIsSettingsModalOpen(false)}
-                        />
+                    <OptionButton
+                        delay={0.1}
+                        onClick={() => setIsSettingsModalOpen(true)}
+                    >
                         Configurações{" "}
                         <MdSettings style={{ fontSize: "var(--icon-size)" }} />
                     </OptionButton>
