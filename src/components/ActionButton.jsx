@@ -1,5 +1,5 @@
 import ScreenAddAppointment from "./actionButtonsScreens/ScreenAddAppointment";
-import ScreenCreatePlan from "./actionButtonsScreens/ScreenCreatePlan";
+import ScreenPlan from "./actionButtonsScreens/ScreenPlan";
 import ScreenAddClient from "./actionButtonsScreens/ScreenAddClient";
 import ScreenSettings from "./actionButtonsScreens/ScreenSettings";
 import React, { useState } from "react";
@@ -10,7 +10,7 @@ import {
     MdEventAvailable,
     MdLibraryAddCheck,
 } from "react-icons/md";
-import { FaUserPlus, FaTools } from "react-icons/fa";
+import { FaUser, FaTools } from "react-icons/fa";
 import ScreenAddService from "./actionButtonsScreens/ScreenAddService";
 
 const slideIn = keyframes`
@@ -138,7 +138,7 @@ function FloatingActionButton() {
 
     return (
         <>
-            <ScreenCreatePlan
+            <ScreenPlan
                 isOpen={isPlanModalOpen}
                 onClose={() => setIsPlanModalOpen(false)}
             />
@@ -194,7 +194,7 @@ function FloatingActionButton() {
                         onClick={() => setIsClientModalOpen(true)}
                     >
                         Gerenciar clientes{" "}
-                        <FaUserPlus style={{ fontSize: "var(--icon-size)" }} />
+                        <FaUser style={{ fontSize: "var(--icon-size)" }} />
                     </OptionButton>
                     <OptionButton
                         delay={0.1}
