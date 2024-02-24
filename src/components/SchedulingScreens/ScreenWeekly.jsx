@@ -11,11 +11,11 @@ const NextAppointmentCard = styled.div`
 
 const AppointmentDetails = styled.div``;
 
-const ScreenWeekly = ({ isOpen, onClose }) => {
+const ScreenWeeklyModal = ({ isOpen, onClose }) => {
     return (
         <ModalBase isOpen={isOpen} onClose={onClose}>
             <NextAppointmentCard>
-                <h2>dezembro</h2>
+                <h2>dezemawasabro</h2>
                 <AppointmentDetails>
                     <h3>Comparativo semanal</h3>
                     <p>
@@ -29,4 +29,4 @@ const ScreenWeekly = ({ isOpen, onClose }) => {
     );
 };
 
-export default ScreenWeekly;
+export default ScreenWeeklyModal;

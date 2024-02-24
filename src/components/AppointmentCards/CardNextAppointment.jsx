@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import NextAppointmentModal from "../SchedulingScreens/ScreenNextAppointment";
+import ScreenNextAppointmentModal from "../SchedulingScreens/ScreenNextAppointment";
 import {
     NextAppointmentCard,
     CardHeader,
@@ -21,7 +21,7 @@ const NextAppointmentComponent = () => {
 
     return (
         <>
-            <NextAppointmentModal
+            <ScreenNextAppointmentModal
                 isOpen={nextModal}
                 onClose={() => setNextModal(false)}
             />

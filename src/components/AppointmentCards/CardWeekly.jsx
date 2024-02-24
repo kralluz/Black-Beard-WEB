@@ -1,4 +1,5 @@
-import React from "react";
+import ScreenWeeklyModal from "../SchedulingScreens/ScreenWeekly";
+import React, { useState } from "react";
 import CardComponent from "./CardComponent";
 import { Data, DataKey, DataValue } from "./styles";
 
@@ -11,29 +12,37 @@ const WeeklyCard = () => {
         customerSatisfaction: "92%",
     };
 
+    const [showWeekly, setShowWeekly] = useState(false);
+
     return (
-        <CardComponent
-            headerContent="Resumo Semanal"
-            buttonText="Detalhes"
-            onButtonClick={() => alert("Detalhes da Semana")}
-        >
-            <Data>
-                <DataKey>Serviços na Semana:</DataKey>
-                <DataValue>{weeklySummary.totalServices}</DataValue>
-            </Data>
-            <Data>
-                <DataKey>Comparativo Semanal:</DataKey>
-                <DataValue>{weeklySummary.comparison}</DataValue>
-            </Data>
-            <Data>
-                <DataKey>Dia Mais Movimentado:</DataKey>
-                <DataValue>{weeklySummary.busiestDay}</DataValue>
-            </Data>
-            <Data>
-                <DataKey>Taxa de Ocupação:</DataKey>
-                <DataValue>{weeklySummary.occupancyRate}</DataValue>
-            </Data>
-        </CardComponent>
+        <>
+            <ScreenWeeklyModal
+                isOpen={showWeekly}
+                onClose={() => setShowWeekly(false)}
+            />
+            <CardComponent
+                headerContent="Resumo Semanal"
+                buttonText="Detalhes"
+                onButtonClick={() => setShowWeekly(true)}
+            >
+                <Data>
+                    <DataKey>Serviços na Semana:</DataKey>
+                    <DataValue>{weeklySummary.totalServices}</DataValue>
+                </Data>
+                <Data>
+                    <DataKey>Comparativo Semanal:</DataKey>
+                    <DataValue>{weeklySummary.comparison}</DataValue>
+                </Data>
+                <Data>
+                    <DataKey>Dia Mais Movimentado:</DataKey>
+                    <DataValue>{weeklySummary.busiestDay}</DataValue>
+                </Data>
+                <Data>
+                    <DataKey>Taxa de Ocupação:</DataKey>
+                    <DataValue>{weeklySummary.occupancyRate}</DataValue>
+                </Data>
+            </CardComponent>
+        </>
     );
 };
 

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import CardComponent from "./CardComponent";
 import { Data, DataKey, DataValue } from "./styles";
+import ScreenMonthModal from "../SchedulingScreens/ScreenMonth";
 
 const MonthlyCard = () => {
     const monthlySummary = {
@@ -14,12 +15,19 @@ const MonthlyCard = () => {
     const month = new Date().toLocaleDateString("pt-BR", { month: "long" });
     const headerText = `Resumo Mensal:  ${month}`;
 
+    const [showMonth, setShowMonth] = useState(false);
+
     return (
-        <CardComponent
-            headerContent={headerText}
-            buttonText="Mais Detalhes"
-            onButtonClick={() => alert("Detalhes do Mês")}
-        >
+        <>
+            <ScreenMonthModal
+                isOpen={showMonth}
+                onClose={() => setShowMonth(false)}
+            />
+            <CardComponent
+                headerContent={headerText}
+                buttonText="Mais Detalhes"
+                onButtonClick={() => setShowMonth(true)}
+            >
                 <Data>
                     <DataKey>Receita Total: </DataKey>
                     <DataValue>{monthlySummary.totalRevenue}</DataValue>
@@ -40,7 +48,8 @@ const MonthlyCard = () => {
                     <DataKey>Crescimento: </DataKey>
                     <DataValue>{monthlySummary.growthComparison}</DataValue>
                 </Data>
-        </CardComponent>
+            </CardComponent>
+        </>
     );
 };
 

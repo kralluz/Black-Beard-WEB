@@ -11,7 +11,7 @@ const NextAppointmentCard = styled.div`
 
 const AppointmentDetails = styled.div``;
 
-const ScreenMonth = ({ isOpen, onClose }) => {
+const ScreenMonthModal = ({ isOpen, onClose }) => {
     return (
         <ModalBase isOpen={isOpen} onClose={onClose}>
             <NextAppointmentCard>
@@ -29,4 +29,4 @@ const ScreenMonth = ({ isOpen, onClose }) => {
     );
 };
 
-export default ScreenMonth;
+export default ScreenMonthModal;
