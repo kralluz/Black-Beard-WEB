@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import SchedulingComponent from "./AppointmentCards/SchedulingComponent.jsx";
 import NextAppointmentComponent from "./AppointmentCards/CardNextAppointment";
 import ScheduleComponent from "./AppointmentCards/CardDay";
 import WeeklySummaryComponent from "./AppointmentCards/CardWeekly";
@@ -27,6 +28,7 @@ const CardTitle = styled.h3`
 const AgendaCards = () => {
     return (
         <CardsContainer>
+            <SchedulingComponent/>
             <NextAppointmentComponent/>
             <ScheduleComponent/>
             <WeeklySummaryComponent/>

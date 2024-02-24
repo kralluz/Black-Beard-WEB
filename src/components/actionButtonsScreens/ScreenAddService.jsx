@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import ModalBase from "../modals/BasedModal";
+import { RiEdit2Line, RiDeleteBinLine } from "react-icons/ri";
 
 const ContentScreen = styled.div`
     background: transparent;
@@ -9,49 +10,86 @@ const ContentScreen = styled.div`
     margin: 0;
 `;
 
-const ScreenAddService = ({ isOpen, onClose }) => {
-    const [serviceName, setServiceName] = useState("");
-    const [serviceDescription, setServiceDescription] = useState("");
-    const [servicePrice, setServicePrice] = useState("");
+const PlanDetails = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    width: 100%;
+`;
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-    };
+const PlanName = styled.h4`
+    font-size: 20px;
+    margin-bottom: 10px;
+`;
+
+const PlanPrice = styled.p`
+    font-size: 16px;
+    margin-bottom: 5px;
+`;
+
+const PlanDescription = styled.p`
+    font-size: 14px;
+`;
+
+const PlanContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+`;
+
+const ServiceButton = styled.button`
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+`;
+
+const ScreenAddService = ({ isOpen, onClose }) => {
+    const [name, setName] = useState("");
+    const [price, setPrice] = useState("");
+    const [description, setDescription] = useState("");
+
+    const servicePlans = [
+        { name: "Corte de Cabelo", price: 50, description: "Corte moderno e estilizado" },
+        { name: "Barba", price: 30, description: "Barba bem feita e aparada" },
+        { name: "Sobrancelha", price: 20, description: "Design de sobrancelha perfeito" },
+        { name: "Pigmentação", price: 80, description: "Coloração de cabelo personalizada" },
+        { name: "Hidratação", price: 40, description: "Tratamento para cabelos secos" },
+        { name: "Corte Afro", price: 60, description: "Corte especializado para cabelos afro" },
+        { name: "Corte Social", price: 45, description: "Corte clássico e elegante" },
+        { name: "Coloração", price: 70, description: "Coloração de cabelo em diferentes tons" },
+    ];
 
     return (
         <ModalBase isOpen={isOpen} onClose={onClose}>
             <ContentScreen>
-                <h2>Adicionar Serviço</h2>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label htmlFor="serviceName">Nome do serviço:</label>
-                        <input
-                            type="text"
-                            id="serviceName"
-                            value={serviceName}
-                            onChange={(e) => setServiceName(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="serviceDescription">Descrição do serviço:</label>
-                        <input
-                            type="text"
-                            id="serviceDescription"
-                            value={serviceDescription}
-                            onChange={(e) => setServiceDescription(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="servicePrice">Preço do serviço:</label>
-                        <input
-                            type="text"
-                            id="servicePrice"
-                            value={servicePrice}
-                            onChange={(e) => setServicePrice(e.target.value)}
-                        />
-                    </div>
-                    <button type="submit">Adicionar</button>
-                </form>
+                <h2>Meus Serviços</h2>
+                {servicePlans.map((plan, index) => (
+                    <PlanDetails key={index}>
+                        <PlanContainer>
+                            <div>
+                                <PlanName>{plan.name}</PlanName>
+                                <PlanDescription>
+                                    {plan.description}
+                                </PlanDescription>
+                            </div>
+                            <PlanPrice>R${plan.price}</PlanPrice>
+                            <div>
+                                <ServiceButton>
+                                    <RiEdit2Line />
+                                </ServiceButton>
+                                <ServiceButton>
+                                    <RiDeleteBinLine />
+                                </ServiceButton>
+                            </div>
+                        </PlanContainer>
+                    </PlanDetails>
+                ))}
             </ContentScreen>
         </ModalBase>
     );

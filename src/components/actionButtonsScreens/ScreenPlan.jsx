@@ -59,23 +59,18 @@ const ScreenPlan = ({ isOpen, onClose }) => {
         // Lógica para adicionar o plano de serviço
     };
 
-    const servicePlans = [
-        { name: "Corte de Cabelo", price: 50, description: "Corte moderno e estilizado" },
-        { name: "Barba", price: 30, description: "Barba bem feita e aparada" },
-        { name: "Sobrancelha", price: 20, description: "Design de sobrancelha perfeito" },
-        { name: "Pigmentação", price: 80, description: "Coloração de cabelo personalizada" },
-        { name: "Hidratação", price: 40, description: "Tratamento para cabelos secos" },
-        { name: "Corte Afro", price: 60, description: "Corte especializado para cabelos afro" },
-        { name: "Corte Social", price: 45, description: "Corte clássico e elegante" },
-        { name: "Coloração", price: 70, description: "Coloração de cabelo em diferentes tons" },
+    const planOptions = [
+        { name: "Plano Básico", price: 50, description: "Acesso aos serviços básicos por 30 dias" },
+        { name: "Plano Premium", price: 100, description: "Acesso ilimitado aos serviços" },
+        { name: "Plano Empresarial", price: 200, description: "Acesso aos serviços para empresas" },
     ];
 
     return (
         <ModalBase isOpen={isOpen} onClose={onClose}>
             <ContentScreen>
                 <h2>Meus Planos</h2>
-                <h3>Planos de Serviço:</h3>
-                {servicePlans.map((plan, index) => (
+                <h3>Planos Disponíveis:</h3>
+                {planOptions.map((plan, index) => (
                     <PlanDetails key={index}>
                         <PlanContainer>
                             <div>

@@ -43,6 +43,13 @@ export const Button = styled.button`
     margin-top: 20px;
 `;
 
+export const SubmitButton = styled.button`
+    border-radius: 16px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+`;
+
 export const Data = styled.div`
     width: 100%;
     display: flex;
