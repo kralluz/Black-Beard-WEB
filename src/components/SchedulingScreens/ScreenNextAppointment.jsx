@@ -76,7 +76,7 @@ const ScreenNextAppointmentModal = ({ isOpen, onClose }) => {
         date: "12/02/2022",
         time: "14:25",
         clientName: "José da Pinga",
-        phoneNumber: "+5511999999999",
+        phoneNumber: "+5562985401969",
         services: [
             { id: 1, name: "Corte", value: 30 },
             { id: 2, name: "Barba", value: 20 },

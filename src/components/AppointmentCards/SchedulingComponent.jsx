@@ -1,3 +1,4 @@
+import services from '../../responses/services'
 import React from "react";
 import styled, { css } from "styled-components";
 import { useForm } from "react-hook-form";
@@ -135,14 +136,6 @@ const SchedulingComponent = () => {
         }
     }, [errors.clientName]);
 
-    const servicesList = [
-        "Corte de Cabelo",
-        "Barba",
-        "Pigmentação",
-        "Hidratação",
-        "Descoloração",
-    ];
-
     const handleServiceChange = (service) => {
         setSelectedServices((prev) =>
             prev.includes(service)
@@ -240,19 +233,19 @@ const SchedulingComponent = () => {
                                 borderRadius: "5px",
                             }}
                         >
-                            {servicesList.map((service) => (
+                            {services.map((service) => (
                                 <ServiceTag
-                                    key={service}
+                                    key={service.name}
                                     $isSelected={selectedServices.includes(
-                                        service
+                                        service.name
                                     )}
                                     onClick={() => {
-                                        handleServiceChange(service);
+                                        handleServiceChange(service.name);
                                         if (showServiceError)
-                                            setShowServiceError(false); // Reseta o erro ao modificar a seleção
+                                            setShowServiceError(false);
                                     }}
                                 >
-                                    {service}
+                                    {service.name}
                                 </ServiceTag>
                             ))}
                         </div>

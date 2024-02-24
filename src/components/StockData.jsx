@@ -23,7 +23,7 @@ const EstoqueData = () => {
     return (
         <DataContainer>
             <DataCard>
-                <DataTitle>Dados do Estoque</DataTitle>
+                <DataTitle>Disponível em breve.</DataTitle>
             </DataCard>
         </DataContainer>
     );

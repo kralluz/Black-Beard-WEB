@@ -5,14 +5,6 @@ import { UserProvider } from "./providers/userProvider";
 import Layout from './components/Layout';
 
 function App() {
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-            toast("Aqui vai sua mensagem!", {});
-        }, 5000);
-
-        return () => clearInterval(intervalId);
-    }, []);
-
     return (
         <>
             <Toaster

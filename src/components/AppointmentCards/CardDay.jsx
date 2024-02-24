@@ -1,3 +1,4 @@
+import { receitaTotal } from "../../responses/appointments";
 import React, { useState } from "react";
 import CardComponent from "./CardComponent";
 import ScreenDayModal from "../SchedulingScreens/ScreenDay";
@@ -13,7 +14,9 @@ import {
     AppointmentsList,
 } from "./styles";
 import { agenda } from "../../providers/agendamento";
+import appointments from "../../responses/appointments";
 import { color } from "react-magic-motion";
+
 const DailyCard = () => {
     const dailySummary = {
         totalAppointments: 12,
@@ -27,7 +30,7 @@ const DailyCard = () => {
     };
     const day = new Date().toLocaleDateString("pt-BR", { weekday: "long" });
     const headerText = `Resumo Diário:  ${day}`;
-
+    console.log("🚀 ~ DailyCard ~ appointments:", appointments);
     const [dayModal, setDayModal] = useState(false);
     return (
         <>
@@ -38,30 +41,28 @@ const DailyCard = () => {
             <CardComponent
                 headerContent={headerText}
                 buttonText="Ver Mais"
-                onButtonClick={() => setDayModal(true )}
+                onButtonClick={() => setDayModal(true)}
             >
                 <Data>
+                    const
                     <DataKey>Agendamentos para hoje: </DataKey>
-                    <DataValue>{agenda.length}</DataValue>
+                    <DataValue>{appointments.length}</DataValue>
                 </Data>
                 <Data>
                     <DataKey>Receita: </DataKey>
-                    <DataValue>{dailySummary.estimatedRevenue}</DataValue>
+                    <DataValue>{`R$ ${receitaTotal},00`}</DataValue>
                 </Data>
                 <ClientList>
-                    {agenda.slice(0, 4).map((appointment, index) => (
+                    {appointments.slice(0, 4).map((appointment, index) => (
                         <AppointmentsList key={index}>
                             <ClientName>{appointment.client.name}</ClientName>
                             <ServicesContainer className="fullWidth">
                                 <ServiceTag>
-                                    {appointment.services.length === 1
-                                        ? appointment.services[0].service_name
-                                        : `${
-                                            appointment.services[0]
-                                                .service_name
-                                        } e + ${
-                                            appointment.services.length - 1
-                                        }`}
+                                    {appointment.service.length === 1
+                                        ? appointment.service[0].name
+                                        : `${appointment.service[0].name} e + ${
+                                              appointment.service.length - 1
+                                          }`}
                                 </ServiceTag>
                             </ServicesContainer>
                         </AppointmentsList>
