@@ -1,32 +1,83 @@
-import styled from "styled-components";
-import React from "react";
-import ModalBase from "../modals/BasedModal";
+import React from 'react';
+import styled from 'styled-components';
+import ModalBase from '../modals/BasedModal';
 
-const NextAppointmentCard = styled.div`
-    background: transparent;
+const WeeklyPerformanceCard = styled.div`
+    background: #f0f0f0;
     padding: 20px;
     border-radius: 10px;
     margin: 0;
 `;
 
-const AppointmentDetails = styled.div``;
+const PerformanceDetail = styled.div`
+    margin-bottom: 15px;
+`;
 
-const ScreenWeeklyModal = ({ isOpen, onClose }) => {
+const ServiceList = styled.ul`
+    margin: 0;
+    padding-left: 20px;
+`;
+
+const FeedbackList = styled.div`
+    margin-top: 10px;
+`;
+
+const ImprovementTip = styled.li`
+    color: #31708f;
+    font-style: italic;
+`;
+
+const formatCurrency = (value) => `R$ ${value.toFixed(2).replace('.', ',')}`;
+
+const ScreenWeekly = ({ isOpen, onClose }) => {
+    // Dados de exemplo internos
+    const weeklyData = {
+        weekRange: '20-26 Dezembro',
+        totalRevenue: 3486.45,
+        totalAppointments: 285,
+        mostProvidedServices: [
+            { name: 'Corte de cabelo', count: 150 },
+            { name: 'Barba', count: 100 },
+            { name: 'Hidratação', count: 35 }
+        ],
+        occupancyRate: 75,
+        customerFeedbacks: [
+            { rating: 5, comment: 'Excelente serviço!' },
+            { rating: 4, comment: 'Muito bom, mas a espera foi longa.' }
+        ],
+        improvementTips: [
+            'Considere oferecer serviços combinados para aumentar a receita.',
+            'Promova agendamentos online para reduzir tempos de espera.'
+        ]
+    };
+
     return (
         <ModalBase isOpen={isOpen} onClose={onClose}>
-            <NextAppointmentCard>
-                <h2>dezemawasabro</h2>
-                <AppointmentDetails>
-                    <h3>Comparativo semanal</h3>
-                    <p>
-                        Resumo do mês principais dias 1-2-3-4-5-6-7 receita
-                        total R$3.486,45 total de agendamentos 285 taxa de
-                        agendamentos 75%
-                    </p>
-                </AppointmentDetails>
-            </NextAppointmentCard>
+            <WeeklyPerformanceCard>
+                <h2>Desempenho Semanal: {weeklyData.weekRange}</h2>
+                <PerformanceDetail>
+                    <h3>Receita Total</h3>
+                    <p>{formatCurrency(weeklyData.totalRevenue)}</p>
+                </PerformanceDetail>
+                <PerformanceDetail>
+                    <h3>Agendamentos Totais</h3>
+                    <p>{weeklyData.totalAppointments}</p>
+                </PerformanceDetail>
+                <PerformanceDetail>
+                    <h3>Serviços Mais Prestados</h3>
+                    <ServiceList>
+                        {weeklyData.mostProvidedServices.map((service, index) => (
+                            <li key={index}>{`${service.name}: ${service.count} vezes`}</li>
+                        ))}
+                    </ServiceList>
+                </PerformanceDetail>
+                <PerformanceDetail>
+                    <h3>Taxa de Ocupação</h3>
+                    <p>{`${weeklyData.occupancyRate}%`}</p>
+                </PerformanceDetail>
+            </WeeklyPerformanceCard>
         </ModalBase>
     );
 };
 
-export default ScreenWeeklyModal;
+export default ScreenWeekly;

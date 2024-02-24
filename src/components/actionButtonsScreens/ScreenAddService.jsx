@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import React, { useState } from "react";
-import ModalBase from "../modals/BasedModal";
-import { RiEdit2Line, RiDeleteBinLine } from "react-icons/ri";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import ModalBase from '../modals/BasedModal';
+import { RiEdit2Line, RiDeleteBinLine, RiAddLine } from 'react-icons/ri';
 
 const ContentScreen = styled.div`
     background: transparent;
@@ -49,41 +49,90 @@ const ServiceButton = styled.button`
     margin-left: 10px;
 `;
 
-const ScreenAddService = ({ isOpen, onClose }) => {
-    const [name, setName] = useState("");
-    const [price, setPrice] = useState("");
-    const [description, setDescription] = useState("");
+const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+`;
 
-    const servicePlans = [
-        { name: "Corte de Cabelo", price: 50, description: "Corte moderno e estilizado" },
-        { name: "Barba", price: 30, description: "Barba bem feita e aparada" },
-        { name: "Sobrancelha", price: 20, description: "Design de sobrancelha perfeito" },
-        { name: "Pigmentação", price: 80, description: "Coloração de cabelo personalizada" },
-        { name: "Hidratação", price: 40, description: "Tratamento para cabelos secos" },
-        { name: "Corte Afro", price: 60, description: "Corte especializado para cabelos afro" },
-        { name: "Corte Social", price: 45, description: "Corte clássico e elegante" },
-        { name: "Coloração", price: 70, description: "Coloração de cabelo em diferentes tons" },
-    ];
+const Input = styled.input`
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+`;
+
+const Button = styled.button`
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    background-color: #007bff;
+    color: white;
+`;
+
+const ScreenAddService = ({ isOpen, onClose }) => {
+    const [servicePlans, setServicePlans] = useState([
+        { id: 1, name: "Corte de Cabelo", price: 50, description: "Corte moderno e estilizado" },
+        // Adicione os demais serviços pré-existentes aqui
+    ]);
+    const [name, setName] = useState('');
+    const [price, setPrice] = useState('');
+    const [description, setDescription] = useState('');
+    const [editingId, setEditingId] = useState(null);
+
+    const handleAddService = (e) => {
+        e.preventDefault();
+        const newService = { id: Date.now(), name, price: Number(price), description };
+        setServicePlans([...servicePlans, newService]);
+        setName('');
+        setPrice('');
+        setDescription('');
+    };
+
+    const handleEdit = (service) => {
+        setName(service.name);
+        setPrice(service.price);
+        setDescription(service.description);
+        setEditingId(service.id);
+    };
+
+    const handleUpdateService = (e) => {
+        e.preventDefault();
+        setServicePlans(servicePlans.map(service => service.id === editingId ? { ...service, name, price: Number(price), description } : service));
+        setName('');
+        setPrice('');
+        setDescription('');
+        setEditingId(null);
+    };
+
+    const handleDelete = (id) => {
+        setServicePlans(servicePlans.filter(service => service.id !== id));
+    };
 
     return (
         <ModalBase isOpen={isOpen} onClose={onClose}>
             <ContentScreen>
                 <h2>Meus Serviços</h2>
-                {servicePlans.map((plan, index) => (
-                    <PlanDetails key={index}>
+                <Form onSubmit={editingId ? handleUpdateService : handleAddService}>
+                    <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="Nome do Serviço" required />
+                    <Input type="number" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="Preço" required />
+                    <Input value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Descrição" required />
+                    <Button type="submit">{editingId ? 'Atualizar Serviço' : 'Adicionar Serviço'}</Button>
+                </Form>
+                {servicePlans.map((plan) => (
+                    <PlanDetails key={plan.id}>
                         <PlanContainer>
                             <div>
                                 <PlanName>{plan.name}</PlanName>
-                                <PlanDescription>
-                                    {plan.description}
-                                </PlanDescription>
+                                <PlanDescription>{plan.description}</PlanDescription>
                             </div>
                             <PlanPrice>R${plan.price}</PlanPrice>
                             <div>
-                                <ServiceButton>
+                                <ServiceButton onClick={() => handleEdit(plan)}>
                                     <RiEdit2Line />
                                 </ServiceButton>
-                                <ServiceButton>
+                                <ServiceButton onClick={() => handleDelete(plan.id)}>
                                     <RiDeleteBinLine />
                                 </ServiceButton>
                             </div>
