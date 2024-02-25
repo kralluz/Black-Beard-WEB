@@ -33,7 +33,7 @@ to {
 }
 `;
 
-const FabContainer = styled.div`
+const FabContainer = styled.div` //Container de todos os elementos do botão da tesoura
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -43,7 +43,7 @@ const FabContainer = styled.div`
     z-index: 2;
 `;
 
-const Fab = styled.button`
+const Fab = styled.button` //Botão da tesoura
     border-radius: 50%;
     width: 65px;
     height: 65px;
@@ -89,7 +89,7 @@ const FabOptions = styled.div`
     animation: ${slideIn} 0.5s ease forwards;
 `;
 
-const OptionButton = styled.button`
+const OptionButton = styled.button` //Estiliza as opções
     background-color: transparent;
     padding: 10px;
     color: white;
@@ -110,7 +110,7 @@ const OptionButton = styled.button`
     }
 `;
 
-function FloatingActionButton() {
+function ActionButton() {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleOptions = () => {
@@ -125,11 +125,11 @@ function FloatingActionButton() {
 
     return (
         <>
-            <ScreenPlan
+            <ScreenPlan //Gerenciar o plano
                 isOpen={isPlanModalOpen}
                 onClose={() => setIsPlanModalOpen(false)}
             />
-            <ScreenAppointment
+            <ScreenAppointment //Gerenciar agendamentos
                 isOpen={isAppointmentModalOpen}
                 onClose={() => setIsAppointmentModalOpen(false)}
             />
@@ -199,4 +199,4 @@ function FloatingActionButton() {
     );
 }
 
-export default FloatingActionButton;
+export default ActionButton;

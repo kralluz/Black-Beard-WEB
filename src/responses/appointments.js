@@ -24,7 +24,7 @@ const appointments = [
                 updated_at: null,
             },
         ],
-        appointment_time: "2024-02-24T08:00:00.000Z",
+        appointment_time: "2024-02-25wT23:00:00.000Z",
         description: "Agendamento de corte de cabelo.",
         created_at: new Date().toISOString(),
         updated_at: null,
