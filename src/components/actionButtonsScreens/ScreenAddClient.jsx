@@ -67,7 +67,7 @@ const ScreenAddClient = ({ isOpen, onClose }) => {
     const [editingId, setEditingId] = useState(null);
 
     useEffect(() => {
-        // Aqui você poderia buscar os clientes existentes de uma API ou armazenamento local
+        
     }, []);
     
 
