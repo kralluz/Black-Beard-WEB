@@ -7,32 +7,32 @@ import { FaUserAlt, FaWhatsapp, FaSearch, FaPhoneAlt } from "react-icons/fa";
 
 const ContentScreen = styled.div`
     background: #f9f9f9;
-    padding: 20px;
+    padding: 10px;
     border-radius: 10px;
     margin: 0 auto;
     overflow-y: auto;
     max-height: 80vh;
     width: 100%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
+    
     &::-webkit-scrollbar {
         display: none;
     }
-
+    
     scrollbar-width: none;
     -ms-overflow-style: none;
-`;
+    `;
 
 const ClientSection = styled.div`
     background: #ffffff;
     border-radius: 6px;
-    padding: 1em;
+    padding: px;
     margin-bottom: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     display: flex;
     justify-content: space-between;
     align-items: center;
-`;
+    `;
 
 const ClientDetails = styled.div`
     display: flex;
@@ -80,6 +80,7 @@ const Button = styled.button`
     display: flex;
     align-items: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 0.8rem;
     svg {
         margin-right: 5px;
     }
@@ -260,6 +261,8 @@ const ScreenClients = ({ isOpen, onClose }) => {
                                                 flexDirection: "row",
                                                 alignItems: "center",
                                                 justifyContent: " center",
+                                                flexWrap: "wrap",
+                                                gap: "10px",
                                             }}
                                         >
                                             <Button onClick={handleMakeCall}>
@@ -268,7 +271,7 @@ const ScreenClients = ({ isOpen, onClose }) => {
                                             <Button
                                                 onClick={() => openWhatsApp()}
                                             >
-                                                Conversar <FaWhatsapp />
+                                                Conversar<FaWhatsapp />
                                             </Button>
                                         </div>
                                     </div>
