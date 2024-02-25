@@ -27,9 +27,8 @@ const ModalWrapper = styled.div`
     border-radius: 15px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     z-index: 1001;
-    width: 90vw;
-    max-width: 500px; 
-    max-height: 90vh;
+    width: 98vw;
+    max-height: 98vh;
     overflow: auto;
 `;
 
