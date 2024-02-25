@@ -145,7 +145,7 @@ const appointments = [
                 updated_at: null,
             },
         ],
-        appointment_time: "2024-02-24T23:45:00.000Z",
+        appointment_time: "2024-02-24T22:53:00.000Z",
         description: "Agendamento para hidratação capilar.",
         created_at: new Date().toISOString(),
         updated_at: null,
