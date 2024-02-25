@@ -17,7 +17,7 @@ const Home = () => {
                 agendaComponent={<AgendaCards />}
                 estoqueComponent={<EstoqueData />}
             />
-                <FloatingActionButton/>
+            <FloatingActionButton />
         </>
     );
 };

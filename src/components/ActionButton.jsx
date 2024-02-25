@@ -103,24 +103,11 @@ const OptionButton = styled.button`
     gap: 10px;
 
     animation: ${fadeInOption} 0.5s ease forwards;
-    animation-delay: ${(props) =>
-        props.delay};
+    animation-delay: ${(props) => props.delay};
 
     &:last-child {
         margin-bottom: 0;
     }
-`;
-
-const Overlay = styled.div`
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: ${(props) => (props.show ? "block" : "none")};
-    background-color: #212121c4;
-    animation: ${fadeIn} 0.5s ease;
-    z-index: 1;
 `;
 
 function FloatingActionButton() {
@@ -159,11 +146,13 @@ function FloatingActionButton() {
                 onClose={() => setIsSettingsModalOpen(false)}
             />
 
-            <Overlay show={isOpen} onClick={toggleOptions} />
+            <div
+                className={isOpen ? "overlay-visible" : "overlay-hidden"}
+                onClick={toggleOptions}
+            ></div>
             <FabContainer>
                 <FabOptions $isOpen={isOpen}>
                     <OptionButton
-                        delay={0.4}
                         onClick={() => setIsPlanModalOpen(true)}
                     >
                         Gerenciar meus Planos{" "}
@@ -173,7 +162,6 @@ function FloatingActionButton() {
                     </OptionButton>
 
                     <OptionButton
-                        delay={0.3}
                         onClick={() => setIsAppointmentModalOpen(true)}
                     >
                         Gerenciar Agendamentos{" "}
@@ -183,21 +171,18 @@ function FloatingActionButton() {
                     </OptionButton>
 
                     <OptionButton
-                        delay={0.25}
                         onClick={() => setIsServiceModalOpen(true)}
                     >
                         Gerenciar serviços{" "}
                         <FaTools style={{ fontSize: "var(--icon-size)" }} />
                     </OptionButton>
                     <OptionButton
-                        delay={0.2}
                         onClick={() => setIsClientModalOpen(true)}
                     >
                         Gerenciar clientes{" "}
                         <FaUser style={{ fontSize: "var(--icon-size)" }} />
                     </OptionButton>
                     <OptionButton
-                        delay={0.1}
                         onClick={() => setIsSettingsModalOpen(true)}
                     >
                         Configurações{" "}

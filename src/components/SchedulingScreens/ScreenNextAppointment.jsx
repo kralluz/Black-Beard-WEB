@@ -71,7 +71,7 @@ const Button = styled(motion.button)`
     }
 `;
 
-const ScreenNextAppointmentModal = ({ isOpen, onClose }) => {
+const ScreenNextAppointmentModal = ({ isOpen, onClose, nextAppointment }) => {
     const [appointment, setAppointment] = useState({
         date: "12/02/2022",
         time: "14:25",
@@ -87,8 +87,8 @@ const ScreenNextAppointmentModal = ({ isOpen, onClose }) => {
         // Implementar a lógica de edição aqui, possivelmente utilizando um modal ou um prompt
     };
 
-    const totalValue = appointment.services.reduce(
-        (total, service) => total + service.value,
+    const totalValue = nextAppointment.service.reduce(
+        (total, service) => total + service.price,
         0
     );
 
@@ -104,7 +104,7 @@ const ScreenNextAppointmentModal = ({ isOpen, onClose }) => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
             >
-                <h2>Próximo Agendamento</h2>
+                <h2>Próximo Agendamento </h2>
                 <AppointmentDetails>
                     <p>
                         Data:{" "}
@@ -119,14 +119,14 @@ const ScreenNextAppointmentModal = ({ isOpen, onClose }) => {
                     <p>
                         Cliente:{" "}
                         <DetailHighlight>
-                            {appointment.clientName}
+                            {nextAppointment.client.name}
                         </DetailHighlight>{" "}
                         <EditIcon onClick={() => handleEdit("clientName")} />
                     </p>
                     <p>
                         Telefone:{" "}
                         <DetailHighlight>
-                            {appointment.phoneNumber}
+                            {nextAppointment.client.phone}
                         </DetailHighlight>{" "}
                         <WhatsAppIcon
                             onClick={() =>
@@ -138,10 +138,10 @@ const ScreenNextAppointmentModal = ({ isOpen, onClose }) => {
                 </AppointmentDetails>
                 <ServicesSection>
                     <ServicesHeader>Serviços</ServicesHeader>
-                    {appointment.services.map((service) => (
+                    {nextAppointment.service.map((service) => (
                         <ServiceItem key={service.id}>
                             <span>{service.name}</span>
-                            <span>R$ {service.value}</span>
+                            <span>R$ {service.price}</span>
                         </ServiceItem>
                     ))}
                     <TotalValue>Valor Total: R$ {totalValue}</TotalValue>

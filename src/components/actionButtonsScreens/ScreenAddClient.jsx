@@ -1,3 +1,4 @@
+import clients from '../../responses/clients';
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ModalBase from '../modals/BasedModal';
@@ -58,7 +59,7 @@ const SearchBar = styled.input`
 `;
 
 const ScreenAddClient = ({ isOpen, onClose }) => {
-    const [clients, setClients] = useState([]);
+    const [clientes, setClientes] = useState(clients);
     const [searchTerm, setSearchTerm] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -75,9 +76,9 @@ const ScreenAddClient = ({ isOpen, onClose }) => {
         const newClient = { id: editingId ?? Date.now(), name, email, phone };
 
         if (editingId) {
-            setClients(clients.map(client => client.id === editingId ? newClient : client));
+            setClients(clientes.map(client => client.id === editingId ? newClient : client));
         } else {
-            setClients([...clients, newClient].sort((a, b) => a.name.localeCompare(b.name)));
+            setClients([...clientes, newClient].sort((a, b) => a.name.localeCompare(b.name)));
         }
 
         setName('');
@@ -94,18 +95,18 @@ const ScreenAddClient = ({ isOpen, onClose }) => {
     };
 
     const handleDelete = (id) => {
-        setClients(clients.filter(client => client.id !== id));
+        setClientes(clientes.filter(client => client.id !== id));
     };
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
     };
 
-    const filteredClients = clients.filter(client =>
+    const filteredClientes = clientes.filter(client =>
         client.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    const groupedClients = filteredClients.reduce((acc, client) => {
+    const groupedClientes = filteredClientes.reduce((acc, client) => {
         const firstLetter = client.name[0].toUpperCase();
         if (!acc[firstLetter]) {
             acc[firstLetter] = [];
@@ -148,10 +149,10 @@ const ScreenAddClient = ({ isOpen, onClose }) => {
                     />
                     <Button type="submit">{editingId ? 'Atualizar' : 'Adicionar'}</Button>
                 </Form>
-                {Object.keys(groupedClients).sort().map((letter) => (
+                {Object.keys(groupedClientes).sort().map((letter) => (
                     <React.Fragment key={letter}>
                         <LetterHeader>{letter}</LetterHeader>
-                        {groupedClients[letter].map((client) => (
+                        {groupedClientes[letter].map((client) => (
                             <ClientSection key={client.id}>
                                 <ClientDetails>
                                     <ClientName>{client.name}</ClientName>

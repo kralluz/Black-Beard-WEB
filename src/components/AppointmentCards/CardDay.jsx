@@ -30,7 +30,6 @@ const DailyCard = () => {
     };
     const day = new Date().toLocaleDateString("pt-BR", { weekday: "long" });
     const headerText = `Resumo Diário:  ${day}`;
-    console.log("🚀 ~ DailyCard ~ appointments:", appointments);
     const [dayModal, setDayModal] = useState(false);
     return (
         <>

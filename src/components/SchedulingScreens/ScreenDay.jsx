@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import ModalBase from "../modals/BasedModal";
-
+import appointments from "../../responses/appointments";
 const NextAppointmentCard = styled.div`
     background: transparent;
     padding: 20px;
@@ -31,93 +31,7 @@ const SummaryInfo = styled.div`
     text-align: center;
 `;
 
-
-// Exemplo de dados de agendamentos
-const appointments = [
-    {
-        id: 1,
-        date: "2024-02-24",
-        time: "09:00",
-        name: "Carlos Henrique",
-        services: ["Corte de Cabelo", "Barba"],
-        totalValue: 150,
-    },
-    {
-        id: 2,
-        date: "2024-02-24",
-        time: "11:00",
-        name: "Vitor Santos",
-        services: ["Corte de Cabelo"],
-        totalValue: 50,
-    },
-    {
-        id: 3,
-        date: "2024-02-24",
-        time: "14:00",
-        name: "Igor Henrique",
-        services: ["Barba", "Pedicure"],
-        totalValue: 100,
-    },
-    {
-        id: 4,
-        date: "2024-02-24",
-        time: "16:00",
-        name: "Ana Silva",
-        services: ["Manicure"],
-        totalValue: 30,
-    },
-    {
-        id: 5,
-        date: "2024-02-24",
-        time: "18:00",
-        name: "Mariana Oliveira",
-        services: ["Corte de Cabelo", "Barba"],
-        totalValue: 120,
-    },
-    {
-        id: 6,
-        date: "2024-02-24",
-        time: "10:00",
-        name: "Juliana Santos",
-        services: ["Pedicure"],
-        totalValue: 40,
-    },
-    {
-        id: 7,
-        date: "2024-02-24",
-        time: "13:00",
-        name: "Rafaela Costa",
-        services: ["Corte de Cabelo", "Barba", "Manicure"],
-        totalValue: 180,
-    },
-    {
-        id: 8,
-        date: "2024-02-24",
-        time: "15:00",
-        name: "Lucas Oliveira",
-        services: ["Barba"],
-        totalValue: 50,
-    },
-    {
-        id: 9,
-        date: "2024-02-24",
-        time: "17:00",
-        name: "Pedro Almeida",
-        services: ["Corte de Cabelo", "Pedicure"],
-        totalValue: 90,
-    },
-    {
-        id: 10,
-        date: "2024-02-24",
-        time: "19:00",
-        name: "Fernanda Silva",
-        services: ["Corte de Cabelo", "Barba", "Manicure"],
-        totalValue: 170,
-    },
-];
-
 const ScreenDayModal = ({ isOpen, onClose }) => {
-    const renderServices = (services) => services.join(", ");
 
     // Função para obter o dia atual formatado e a quantidade de agendamentos
     const getCurrentDateInfo = () => {
@@ -141,10 +55,17 @@ const ScreenDayModal = ({ isOpen, onClose }) => {
                 </SummaryInfo>
                 {appointments.map((appointment) => (
                     <AppointmentDetails key={appointment.id}>
-                        <AppointmentInfo>Horário: {appointment.time}</AppointmentInfo>
-                        <AppointmentInfo>Nome: {appointment.name}</AppointmentInfo>
-                        <AppointmentInfo>Serviços: {renderServices(appointment.services)}</AppointmentInfo>
-                        <AppointmentInfo>Valor Total: R$ {appointment.totalValue},00</AppointmentInfo>
+                        <AppointmentInfo>Horário: {appointment.appointment_time}</AppointmentInfo>
+                        <AppointmentInfo>Nome: {appointment.client.name}</AppointmentInfo>
+                        <AppointmentInfo>Serviços: 
+                        {appointment.service.map((service) => (
+                            <div key={service.id}>
+                                <span>{service.name}</span>
+                                <span>R$ {service.price}</span>
+                            </div>
+                        ))}
+                        </AppointmentInfo>
+                        <AppointmentInfo>Valor Total: R$ 10,00</AppointmentInfo>
                         <IconsWrapper>
                             <FaEdit cursor="pointer" />
                             <FaTrashAlt cursor="pointer" />

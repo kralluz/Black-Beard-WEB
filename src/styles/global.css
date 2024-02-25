@@ -87,3 +87,19 @@
 .fullWidth{
     width: 100%;
 }
+
+.overlay-visible {
+    display: block;
+    background-color: #212121c4;
+    animation: fadeIn 0.5s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.overlay-hidden {
+    display: none;
+}

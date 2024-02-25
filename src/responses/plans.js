@@ -1,4 +1,4 @@
-let plans = [
+export const plans = [
     {
         id: 1,
         user_id: 101,

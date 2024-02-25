@@ -1,5 +1,4 @@
 import React from "react";
-import { Transition } from "react-transition-group";
 import styled from "styled-components";
 
 const Backdrop = styled.div`
@@ -13,6 +12,9 @@ const Backdrop = styled.div`
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    transition: opacity 300ms ease-in-out;
+    opacity: ${props => props.isOpen ? '1' : '0'};
+    pointer-events: ${props => props.isOpen ? 'all' : 'none'};
 `;
 
 const ModalWrapper = styled.div`
@@ -33,7 +35,7 @@ const ModalWrapper = styled.div`
 
 const CloseButton = styled.button`
     position: absolute;
-    padding:5px;
+    padding: 5px;
     top: 0px;
     right: 10px;
     background: none;
@@ -43,20 +45,19 @@ const CloseButton = styled.button`
     cursor: pointer;
 `;
 
-const ModalBase = ({ children, isOpen, onClose }) => (
-    <Transition in={isOpen} unmountOnExit>
-        {(state) => (
-            <Backdrop className={state} onClick={onClose}>
-                <ModalWrapper
-                    className={state}
-                    onClick={(e) => e.stopPropagation()}
-                >
-                    <CloseButton onClick={onClose}>&times;</CloseButton>
-                    {children}
-                </ModalWrapper>
-            </Backdrop>
-        )}
-    </Transition>
-);
+const ModalBase = ({ children, isOpen, onClose }) => {
+  if (!isOpen) return null;
+
+  return (
+      <Backdrop isOpen={isOpen} onClick={onClose}>
+          <ModalWrapper
+              onClick={(e) => e.stopPropagation()}
+          >
+              <CloseButton onClick={onClose}>&times;</CloseButton>
+              {children}
+          </ModalWrapper>
+      </Backdrop>
+  );
+};
 
 export default ModalBase;

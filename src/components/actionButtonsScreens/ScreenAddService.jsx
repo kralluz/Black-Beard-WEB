@@ -1,3 +1,4 @@
+import services from '../../responses/services';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ModalBase from '../modals/BasedModal';
@@ -74,10 +75,7 @@ const Button = styled.button`
 `;
 
 const ScreenAddService = ({ isOpen, onClose }) => {
-    const [servicePlans, setServicePlans] = useState([
-        { id: 1, name: "Corte de Cabelo", price: 50, description: "Corte moderno e estilizado" },
-        // Adicione os demais serviços pré-existentes aqui
-    ]);
+    const [service, setService] = useState(services);
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
@@ -86,7 +84,7 @@ const ScreenAddService = ({ isOpen, onClose }) => {
     const handleAddService = (e) => {
         e.preventDefault();
         const newService = { id: Date.now(), name, price: Number(price), description };
-        setServicePlans([...servicePlans, newService]);
+        setService([...service, newService]);
         setName('');
         setPrice('');
         setDescription('');
@@ -101,7 +99,7 @@ const ScreenAddService = ({ isOpen, onClose }) => {
 
     const handleUpdateService = (e) => {
         e.preventDefault();
-        setServicePlans(servicePlans.map(service => service.id === editingId ? { ...service, name, price: Number(price), description } : service));
+        setService(service.map(service => service.id === editingId ? { ...service, name, price: Number(price), description } : service));
         setName('');
         setPrice('');
         setDescription('');
@@ -109,7 +107,7 @@ const ScreenAddService = ({ isOpen, onClose }) => {
     };
 
     const handleDelete = (id) => {
-        setServicePlans(servicePlans.filter(service => service.id !== id));
+        setService(service.filter(service => service.id !== id));
     };
 
     return (
@@ -122,7 +120,7 @@ const ScreenAddService = ({ isOpen, onClose }) => {
                     <Input value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Descrição" required />
                     <Button type="submit">{editingId ? 'Atualizar Serviço' : 'Adicionar Serviço'}</Button>
                 </Form>
-                {servicePlans.map((plan) => (
+                {service.map((plan) => (
                     <PlanDetails key={plan.id}>
                         <PlanContainer>
                             <div>
