@@ -1,9 +1,13 @@
+// Importações necessárias para o componente
+import { format, parseISO } from "date-fns";
+import ptBR from "date-fns/locale/pt-BR";
 import services from "../../responses/services";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import ModalBase from "./BasedModal";
 
+// Estilos dos componentes utilizando styled-components
 const Form = styled.form`
     display: flex;
     flex-direction: column;
@@ -14,21 +18,13 @@ const Input = styled.input`
     padding: 8px;
     border-radius: 4px;
     border: 1px solid #ccc;
+    background-color: #f2f2f2;
     &:disabled {
-        background-color: #f2f2f2;
         cursor: not-allowed;
     }
 `;
 
-const TextArea = styled.textarea`
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    &:disabled {
-        background-color: #f2f2f2;
-        cursor: not-allowed;
-    }
-`;
+const TextArea = styled(Input).attrs({ as: "textarea" })``;
 
 const Button = styled.button`
     padding: 10px;
@@ -54,14 +50,13 @@ const FormLabel = styled.label`
 `;
 
 const DataDisplay = styled.p`
+    font-weight: 600;
     padding: 8px;
-    background-color: #f2f2f2;
     border-radius: 4px;
 `;
 
 const ServiceTag = styled.div`
     display: inline-flex;
-    background-color: #f9e79f;
     align-items: center;
     font-weight: 600;
     color: #17202a;
@@ -69,13 +64,15 @@ const ServiceTag = styled.div`
     border-radius: 15px;
     margin: 5px;
     cursor: pointer;
-
+    background-color: ${({ selected }) => (selected ? "#f4d03f" : "#f9e79f")};
     &:hover {
         background-color: #f4d03f;
     }
 `;
 
+// Componente principal: AppointmentCRUD
 const AppointmentCRUD = ({ isOpen, onClose }) => {
+    // Estado do componente
     const [isEditable, setIsEditable] = useState(false);
     const [showServiceError, setShowServiceError] = useState(false);
 
@@ -113,8 +110,10 @@ const AppointmentCRUD = ({ isOpen, onClose }) => {
         defaultValues.service.map((service) => service.name)
     );
 
+    // Configuração do useForm do react-hook-form
     const { register, handleSubmit, reset, watch } = useForm({ defaultValues });
 
+    // Manipulação dos serviços selecionados
     const handleServiceChange = (serviceName) => {
         if (selectedServices.includes(serviceName)) {
             setSelectedServices(
@@ -125,39 +124,62 @@ const AppointmentCRUD = ({ isOpen, onClose }) => {
         }
     };
 
+    // Função para submeter o formulário
     const onSubmit = (data) => {
         if (selectedServices.length === 0) {
             setShowServiceError(true);
             return;
         }
         console.log(data, selectedServices);
-        setIsEditable(false); // Desabilita a edição após o submit
+        setIsEditable(false);
     };
 
+    // Funções para manipulação do estado de edição
     const handleEdit = () => {
         setIsEditable(true);
     };
-
     const handleDelete = () => {
         console.log("Deletar agendamento");
-        onClose(); // Fechar o modal após deletar, opcional
+        onClose();
+    };
+    const toggleEdit = () => {
+        setIsEditable(!isEditable);
     };
 
+    // Formatação da data do agendamento
+    const formattedDate = format(
+        parseISO(watch("appointment_time")),
+        "dd, iiii, 'de' MMMM",
+        { locale: ptBR }
+    );
+
+    // Renderização do formulário com condicionais para edição e visualização
     return (
         <ModalBase isOpen={isOpen} onClose={onClose}>
-            <h1>CRUD APPOINTMENT</h1>
+            <h1>{formattedDate}</h1>
             <Form onSubmit={handleSubmit(onSubmit)}>
                 {isEditable ? (
                     <>
                         <FormGroup>
-                            <FormLabel>Cliente</FormLabel>
-                            <Input {...register("client.name")} />
-                            <Input {...register("client.email")} />
-                            <Input {...register("client.phone")} />
+                            <FormLabel>
+                                Cliente
+                                <Input {...register("client.name")} />
+                            </FormLabel>
+                            <FormLabel>
+                                Cliente
+                                <Input {...register("client.name")} />
+                            </FormLabel>
+                            <FormLabel>
+                                Telefone:
+                                <Input {...register("client.phone")} />
+                            </FormLabel>
+                            <FormLabel></FormLabel>
                         </FormGroup>
                         <FormGroup>
-                            <FormLabel>Descrição</FormLabel>
-                            <TextArea {...register("description")} />
+                            <FormLabel>
+                                Descrição do agendamento: 
+                                <TextArea {...register("description")} />
+                            </FormLabel>
                         </FormGroup>
                         <FormGroup>
                             <FormLabel>Serviços</FormLabel>
@@ -198,12 +220,17 @@ const AppointmentCRUD = ({ isOpen, onClose }) => {
                     </>
                 ) : (
                     <>
-                        <DataDisplay>{watch("client.name")}</DataDisplay>
-                        <DataDisplay>{watch("client.email")}</DataDisplay>
-                        <DataDisplay>{watch("client.phone")}</DataDisplay>
-                        <DataDisplay>{watch("description")}</DataDisplay>
+                        <DataDisplay>
+                            Cliente: {watch("client.name")}
+                        </DataDisplay>
+                        <DataDisplay>
+                            Telefone: {watch("client.phone")}
+                        </DataDisplay>
+                        <DataDisplay>
+                            Descrição do agendamento: {watch("description")}
+                        </DataDisplay>
                         <FormGroup>
-                            <FormLabel>Serviços Selecionados</FormLabel>
+                            <FormLabel>Serviços Agendados:</FormLabel>
                             <div>
                                 {selectedServices.map((serviceName) => (
                                     <ServiceTag key={serviceName}>

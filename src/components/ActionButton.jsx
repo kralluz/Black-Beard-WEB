@@ -1,6 +1,6 @@
 import ScreenAppointment from "./actionButtonsScreens/ScreenAppointment";
 import ScreenPlan from "./actionButtonsScreens/ScreenPlan";
-import ScreenAddClient from "./actionButtonsScreens/ScreenAddClient";
+import ScreenClients from "./actionButtonsScreens/ScreenClients";
 import ScreenSettings from "./actionButtonsScreens/ScreenSettings";
 import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
@@ -137,7 +137,7 @@ function ActionButton() {
                 isOpen={isServiceModalOpen}
                 onClose={() => setIsServiceModalOpen(false)}
             />
-            <ScreenAddClient
+            <ScreenClients
                 isOpen={isClientModalOpen}
                 onClose={() => setIsClientModalOpen(false)}
             />

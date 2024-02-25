@@ -1,8 +1,9 @@
-import clients from '../../responses/clients';
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import ModalBase from '../modals/BasedModal';
-import { RiEdit2Line, RiDeleteBinLine } from 'react-icons/ri';
+import clients from "../../responses/clients";
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import ModalBase from "../modals/BasedModal";
+import { RiEdit2Line, RiDeleteBinLine } from "react-icons/ri";
+import { FaRegEye, FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
 
 const ContentScreen = styled.div`
     background: transparent;
@@ -15,6 +16,9 @@ const ContentScreen = styled.div`
 
 const ClientSection = styled.div`
     margin-bottom: 20px;
+    background: grey;
+    border-radius: 6px;
+    padding: 0.5em;
 `;
 
 const ClientDetails = styled.div`
@@ -48,8 +52,6 @@ const Input = styled.input`
     margin-right: 5px;
 `;
 
-
-
 const SearchBar = styled.input`
     width: 100%;
     padding: 10px;
@@ -58,32 +60,37 @@ const SearchBar = styled.input`
     border: 1px solid #ccc;
 `;
 
-const ScreenAddClient = ({ isOpen, onClose }) => {
+const ScreenClients = ({ isOpen, onClose }) => {
     const [clientes, setClientes] = useState(clients);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
+    const [searchTerm, setSearchTerm] = useState("");
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
     const [editingId, setEditingId] = useState(null);
 
-    useEffect(() => {
-        
-    }, []);
-    
+    useEffect(() => {}, []);
 
     const handleAddOrUpdateClient = (e) => {
         e.preventDefault();
         const newClient = { id: editingId ?? Date.now(), name, email, phone };
 
         if (editingId) {
-            setClients(clientes.map(client => client.id === editingId ? newClient : client));
+            setClientes(
+                clientes.map((client) =>
+                    client.id === editingId ? newClient : client
+                )
+            );
         } else {
-            setClients([...clientes, newClient].sort((a, b) => a.name.localeCompare(b.name)));
+            setClientes(
+                [...clientes, newClient].sort((a, b) =>
+                    a.name.localeCompare(b.name)
+                )
+            );
         }
 
-        setName('');
-        setEmail('');
-        setPhone('');
+        setName("");
+        setEmail("");
+        setPhone("");
         setEditingId(null);
     };
 
@@ -95,14 +102,14 @@ const ScreenAddClient = ({ isOpen, onClose }) => {
     };
 
     const handleDelete = (id) => {
-        setClientes(clientes.filter(client => client.id !== id));
+        setClientes(clientes.filter((client) => client.id !== id));
     };
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
     };
 
-    const filteredClientes = clientes.filter(client =>
+    const filteredClientes = clientes.filter((client) =>
         client.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
@@ -114,6 +121,15 @@ const ScreenAddClient = ({ isOpen, onClose }) => {
         acc[firstLetter].push(client);
         return acc;
     }, {});
+
+    const handleMakeCall = () => {
+        window.location.href = `tel:${"62985401969"}`;
+    };
+
+    const openWhatsApp = () => {
+        const url = `https://wa.me/${"62985401969"}`;
+        window.open(url, "_blank");
+    };
 
     return (
         <ModalBase isOpen={isOpen} onClose={onClose}>
@@ -134,40 +150,43 @@ const ScreenAddClient = ({ isOpen, onClose }) => {
                         required
                     />
                     <Input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Email"
-                        required
-                    />
-                    <Input
                         type="text"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="Telefone"
                         required
                     />
-                    <Button type="submit">{editingId ? 'Atualizar' : 'Adicionar'}</Button>
+                    <Button type="submit">
+                        {editingId ? "Atualizar" : "Adicionar"}
+                    </Button>
                 </Form>
-                {Object.keys(groupedClientes).sort().map((letter) => (
-                    <React.Fragment key={letter}>
-                        <LetterHeader>{letter}</LetterHeader>
-                        {groupedClientes[letter].map((client) => (
-                            <ClientSection key={client.id}>
-                                <ClientDetails>
-                                    <ClientName>{client.name}</ClientName>
-                                    <ClientInfo>Email: {client.email}</ClientInfo>
-                                    <ClientInfo>Telefone: {client.phone}</ClientInfo>
-                                </ClientDetails>
-                                <Button onClick={() => handleEdit(client)}><RiEdit2Line /></Button>
-                                <Button onClick={() => handleDelete(client.id)}><RiDeleteBinLine /></Button>
-                            </ClientSection>
-                        ))}
-                    </React.Fragment>
-                ))}
+                {Object.keys(groupedClientes)
+                    .sort()
+                    .map((letter) => (
+                        <React.Fragment key={letter}>
+                            <LetterHeader>{letter}</LetterHeader>
+                            {groupedClientes[letter].map((client) => (
+                                <ClientSection key={client.id}>
+                                    <ClientDetails>
+                                        <ClientName>{client.name}</ClientName>
+                                        <ClientInfo>{client.phone}</ClientInfo>
+                                    </ClientDetails>
+                                    <Button onClick={() => handleEdit(client)}>
+                                        <FaRegEye />
+                                    </Button>
+                                    <Button onClick={handleMakeCall}>
+                                        <FaPhoneAlt />
+                                    </Button>
+                                    <Button onClick={() => openWhatsApp()}>
+                                        <FaWhatsapp />
+                                    </Button>
+                                </ClientSection>
+                            ))}
+                        </React.Fragment>
+                    ))}
             </ContentScreen>
         </ModalBase>
     );
 };
 
-export default ScreenAddClient;
+export default ScreenClients;
