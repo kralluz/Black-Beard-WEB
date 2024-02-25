@@ -12,7 +12,7 @@ const Home = () => {
             <br />
             <br />
             <br />
-            <h1>Olá barbeiro</h1>
+            <h1> {"("} nome do barbeiro{")"}</h1>
             <ToggleDisplayComponent //Barra de baixo do header
                 agendaComponent={<AgendaCards />}
                 estoqueComponent={<EstoqueData />}

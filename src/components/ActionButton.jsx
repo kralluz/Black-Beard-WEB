@@ -33,7 +33,8 @@ to {
 }
 `;
 
-const FabContainer = styled.div` //Container de todos os elementos do botão da tesoura
+const FabContainer = styled.div`
+    //Container de todos os elementos do botão da tesoura
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -43,7 +44,8 @@ const FabContainer = styled.div` //Container de todos os elementos do botão da 
     z-index: 2;
 `;
 
-const Fab = styled.button` //Botão da tesoura
+const Fab = styled.button`
+    //Botão da tesoura
     border-radius: 50%;
     width: 65px;
     height: 65px;
@@ -89,7 +91,8 @@ const FabOptions = styled.div`
     animation: ${slideIn} 0.5s ease forwards;
 `;
 
-const OptionButton = styled.button` //Estiliza as opções
+const OptionButton = styled.button`
+    //Estiliza as opções
     background-color: transparent;
     padding: 10px;
     color: white;
@@ -153,15 +156,6 @@ function ActionButton() {
             <FabContainer>
                 <FabOptions $isOpen={isOpen}>
                     <OptionButton
-                        onClick={() => setIsPlanModalOpen(true)}
-                    >
-                        Gerenciar meus Planos{" "}
-                        <MdLibraryAddCheck
-                            style={{ fontSize: "var(--icon-size)" }}
-                        />
-                    </OptionButton>
-
-                    <OptionButton
                         onClick={() => setIsAppointmentModalOpen(true)}
                     >
                         Gerenciar Agendamentos{" "}
@@ -170,21 +164,24 @@ function ActionButton() {
                         />
                     </OptionButton>
 
-                    <OptionButton
-                        onClick={() => setIsServiceModalOpen(true)}
-                    >
-                        Gerenciar serviços{" "}
-                        <FaTools style={{ fontSize: "var(--icon-size)" }} />
-                    </OptionButton>
-                    <OptionButton
-                        onClick={() => setIsClientModalOpen(true)}
-                    >
-                        Gerenciar clientes{" "}
+                    <OptionButton onClick={() => setIsClientModalOpen(true)}>
+                        Gerenciar Clientes{" "}
                         <FaUser style={{ fontSize: "var(--icon-size)" }} />
                     </OptionButton>
-                    <OptionButton
-                        onClick={() => setIsSettingsModalOpen(true)}
-                    >
+
+                    <OptionButton onClick={() => setIsPlanModalOpen(true)}>
+                        Gerenciar Planos{" "}
+                        <MdLibraryAddCheck
+                            style={{ fontSize: "var(--icon-size)" }}
+                        />
+                    </OptionButton>
+
+                    <OptionButton onClick={() => setIsServiceModalOpen(true)}>
+                        Gerenciar Serviços{" "}
+                        <FaTools style={{ fontSize: "var(--icon-size)" }} />
+                    </OptionButton>
+
+                    <OptionButton onClick={() => setIsSettingsModalOpen(true)}>
                         Configurações{" "}
                         <MdSettings style={{ fontSize: "var(--icon-size)" }} />
                     </OptionButton>

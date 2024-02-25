@@ -3,10 +3,9 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import ModalBase from "../modals/BasedModal";
 import ShowClient from "../modals/ShowClient.jsx";
-import { FaUserAlt, FaWhatsapp, FaSearch, FaPhoneAlt } from "react-icons/fa";
+import { FaUserAlt, FaWhatsapp, FaSearch, FaPhoneAlt, FaPhone } from "react-icons/fa";
 
 const ContentScreen = styled.div`
-    background: #f9f9f9;
     padding: 10px;
     border-radius: 10px;
     margin: 0 auto;
@@ -32,6 +31,7 @@ const ClientSection = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-right: 10px;
     `;
 
 const ClientDetails = styled.div`
@@ -266,13 +266,14 @@ const ScreenClients = ({ isOpen, onClose }) => {
                                             }}
                                         >
                                             <Button onClick={handleMakeCall}>
-                                                Ligar
+                                            <FaPhoneAlt /> Ligar
                                             </Button>
                                             <Button
                                                 onClick={() => openWhatsApp()}
                                             >
-                                                Conversar<FaWhatsapp />
+                                                <FaWhatsapp /> Conversar
                                             </Button>
+                                            
                                         </div>
                                     </div>
                                 </ClientSection>

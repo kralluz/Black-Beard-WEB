@@ -93,15 +93,15 @@ export const ServiceTag = styled.span`
     background-color: #e2c07d;
     border-radius: 15px;
     padding: 5px 10px;
-    font-size: 10px;
+    font-size: 11px;
     color: #333;
-    margin: 5px 5px 5px 0;
+    margin: 5px 0px ;
+    font-weight: bold;
 `;
 
 export const ServicesContainer = styled.div`
     display: flex;
-    flex-direction: row-reverse;
-    flex-wrap: wrap;
+    justify-content: end;
 `;
 
 export const TotalValue = styled.span`

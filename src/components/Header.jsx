@@ -7,7 +7,7 @@ const Header = () => {
     const barberData = {
         id: 1,
         name: " Albarino",
-        company_name: "Albarino Cortes",
+        company_name: "Cabeçalho",
         email: "Albarino@example.com",
         tel: "62123456789",
         admin: false,
