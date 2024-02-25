@@ -16,6 +16,17 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: auto;
+    max-height: 80vh;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 `;
 
 const ViewButton = styled.button`

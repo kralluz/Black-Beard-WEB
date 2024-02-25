@@ -8,6 +8,17 @@ const ContentScreen = styled.div`
     padding: 20px;
     border-radius: 10px;
     margin: 0;
+    overflow-y: auto;
+    max-height: 80vh;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 `;
 
 const PlanDetails = styled.div`

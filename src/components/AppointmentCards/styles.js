@@ -5,7 +5,7 @@ export const Card = styled.div`
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border: 1px solid #ccc;
-    max-width: 800px;
+    max-width: 500px;
     width: 100%;
     margin: 20px auto;
 `;
@@ -14,7 +14,7 @@ export const CardHeader = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: #e2c07d;
+    background-color: white;
     padding: 16px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -115,7 +115,7 @@ export const NextAppointmentCard = styled.div`
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border: 1px solid #ccc;
-    max-width: 800px;
+    max-width: 500px;
     width: 100%;
     margin: 20px auto;
 `;

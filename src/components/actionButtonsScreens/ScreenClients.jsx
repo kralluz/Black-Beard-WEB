@@ -2,62 +2,121 @@ import clients from "../../responses/clients";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import ModalBase from "../modals/BasedModal";
-import { RiEdit2Line, RiDeleteBinLine } from "react-icons/ri";
-import { FaRegEye, FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
+import ShowClient from "../modals/ShowClient.jsx";
+import { FaUserAlt, FaWhatsapp, FaSearch, FaPhoneAlt } from "react-icons/fa";
 
 const ContentScreen = styled.div`
-    background: transparent;
+    background: #f9f9f9;
     padding: 20px;
     border-radius: 10px;
-    margin: 0;
+    margin: 0 auto;
     overflow-y: auto;
     max-height: 80vh;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 `;
 
 const ClientSection = styled.div`
-    margin-bottom: 20px;
-    background: grey;
+    background: #ffffff;
     border-radius: 6px;
-    padding: 0.5em;
+    padding: 1em;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 `;
 
 const ClientDetails = styled.div`
-    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.233);
 `;
 
 const ClientName = styled.h4`
-    margin: 0;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    color: #333;
+    margin: 0 0 5px 0;
+    svg {
+        margin-right: 10px;
+    }
 `;
 
 const ClientInfo = styled.p`
-    margin: 0;
+    color: #666;
     font-size: 14px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    svg {
+        margin-right: 10px;
+    }
 `;
 
 const LetterHeader = styled.h3`
     margin-top: 20px;
+    color: #444;
 `;
 
 const Button = styled.button`
-    margin-left: 10px;
+    background-color: #4caf50;
+    color: white;
+    padding: 6px 8px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    svg {
+        margin-right: 5px;
+    }
+    &:hover {
+        background-color: #45a049;
+    }
 `;
 
 const Form = styled.form`
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     margin-bottom: 20px;
 `;
 
 const Input = styled.input`
+    flex: 1;
+    padding: 10px;
     margin-bottom: 10px;
     margin-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 `;
 
-const SearchBar = styled.input`
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+const SearchContainer = styled.div`
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 4px;
+`;
+
+const SearchInput = styled.input`
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 0.5rem;
+    font-size: 1rem;
 `;
 
 const ScreenClients = ({ isOpen, onClose }) => {
@@ -131,16 +190,26 @@ const ScreenClients = ({ isOpen, onClose }) => {
         window.open(url, "_blank");
     };
 
+    const [openShowClient, setOpenShowClient] = useState(false);
+
     return (
         <ModalBase isOpen={isOpen} onClose={onClose}>
+            <ShowClient
+                isOpen={openShowClient}
+                onClose={() => setOpenShowClient(false)}
+                client={clients[0]}
+            />
             <ContentScreen>
                 <h2>Gerenciar Clientes</h2>
-                <SearchBar
-                    type="text"
-                    placeholder="Buscar cliente..."
-                    value={searchTerm}
-                    onChange={handleSearchChange}
-                />
+                <SearchContainer>
+                    <FaSearch />
+                    <SearchInput
+                        type="text"
+                        placeholder="Buscar cliente..."
+                        value={searchTerm}
+                        onChange={handleSearchChange}
+                    />
+                </SearchContainer>
                 <Form onSubmit={handleAddOrUpdateClient}>
                     <Input
                         type="text"
@@ -167,19 +236,42 @@ const ScreenClients = ({ isOpen, onClose }) => {
                             <LetterHeader>{letter}</LetterHeader>
                             {groupedClientes[letter].map((client) => (
                                 <ClientSection key={client.id}>
-                                    <ClientDetails>
-                                        <ClientName>{client.name}</ClientName>
-                                        <ClientInfo>{client.phone}</ClientInfo>
+                                    <ClientDetails
+                                        onClick={() => setOpenShowClient(true)}
+                                    >
+                                        <ClientName>
+                                            <FaUserAlt /> {client.name}
+                                        </ClientName>
+                                        <ClientInfo>
+                                            <FaPhoneAlt /> {client.phone}
+                                        </ClientInfo>
                                     </ClientDetails>
-                                    <Button onClick={() => handleEdit(client)}>
-                                        <FaRegEye />
-                                    </Button>
-                                    <Button onClick={handleMakeCall}>
-                                        <FaPhoneAlt />
-                                    </Button>
-                                    <Button onClick={() => openWhatsApp()}>
-                                        <FaWhatsapp />
-                                    </Button>
+                                    <div
+                                        style={{
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            alignItems: "center",
+                                            justifyContent: " center",
+                                        }}
+                                    >
+                                        <div
+                                            style={{
+                                                display: "flex",
+                                                flexDirection: "row",
+                                                alignItems: "center",
+                                                justifyContent: " center",
+                                            }}
+                                        >
+                                            <Button onClick={handleMakeCall}>
+                                                Ligar
+                                            </Button>
+                                            <Button
+                                                onClick={() => openWhatsApp()}
+                                            >
+                                                Conversar <FaWhatsapp />
+                                            </Button>
+                                        </div>
+                                    </div>
                                 </ClientSection>
                             ))}
                         </React.Fragment>

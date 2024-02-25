@@ -13,7 +13,7 @@ export const plans = [
     {
         id: 2,
         user_id: 102,
-        name: "Plano Completo",
+        name: "Plano Mensal",
         description: "Inclui 3 cortes de cabelo e barba por mês.",
         price: 180.0,
         service_quota: 3,
