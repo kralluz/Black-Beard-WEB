@@ -39,6 +39,23 @@ const ClientName = styled.h4`
     }
 `;
 
+const ClientPlanInfo = styled.p`
+    margin: 5px 0;
+    font-size: 16px;
+    color: #666;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.1);
+
+
+    @media (max-width: 768px) {
+        font-size: 14px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+`;
 const ClientInfo = styled.p`
     margin: 5px 0;
     font-size: 16px;
@@ -57,7 +74,7 @@ const ClientInfo = styled.p`
 
 const PlanTag = styled.span`
     display: inline-block;
-    background-color: #9c27b0;
+    background-color: #9b27b0b1;
     color: #ffffff;
     padding: 4px 10px;
     border-radius: 20px;
@@ -67,7 +84,7 @@ const PlanTag = styled.span`
 const ActionButtons = styled.div`
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-around;
     flex-wrap: wrap;
 
     @media (max-width: 768px) {
@@ -150,28 +167,32 @@ const ClientModal = ({ isOpen, onClose, client }) => {
                     <ClientInfo>
                         <strong>Email:</strong> {client.email}
                     </ClientInfo>
-                    <ClientInfo>
-                        <strong>Telefone:</strong> {client.phone}
-                        <ActionButtons>
-                            <ChatButton onClick={openWhatsApp}>
-                                <FaWhatsapp /> Conversar
-                            </ChatButton>
-                            <CallButton onClick={handleMakeCall}>
-                                <FaPhoneAlt /> Ligar
-                            </CallButton>
-                        </ActionButtons>
-                    </ClientInfo>
+                        <ClientInfo>
+                            <strong>Telefone:</strong> {client.phone}
+                        </ClientInfo>
+                            <ActionButtons>
+                                <ChatButton onClick={openWhatsApp}>
+                                    <FaWhatsapp /> Conversar
+                                </ChatButton>
+                                <CallButton onClick={handleMakeCall}>
+                                    <FaPhoneAlt /> Ligar
+                                </CallButton>
+                            </ActionButtons>
                     <ClientInfo>
                         <strong>Descrição:</strong> {client.description}
                     </ClientInfo>
-                    <ClientInfo>
+                    <ClientPlanInfo>
                         <strong>Planos cadastrados</strong>
                         <PlanTag>{clientPlan.name}</PlanTag>{" "}
-                        <strong>Adicionado em: {" "}
-                        {new Date(clientPlan.created_at).toLocaleDateString()}</strong>{" "}
-                    </ClientInfo>
+                        <strong>
+                            Adicionado em:{" "}
+                            {new Date(
+                                clientPlan.created_at
+                            ).toLocaleDateString()}
+                        </strong>{" "}
+                    </ClientPlanInfo>
                     <ClientInfo>
-                        <p>Data de Expiração do Plano: 2/2023</p>{" "}
+                        <strong>Data de Expiração do Plano: 2/2023</strong>{" "}
                     </ClientInfo>
                     <div
                         style={{
