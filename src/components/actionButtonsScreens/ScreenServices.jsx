@@ -5,6 +5,7 @@ import { RiEdit2Line, RiDeleteBinLine } from "react-icons/ri";
 import { useForm } from "react-hook-form";
 import { services } from "../../responses/services";
 
+
 const ContentScreen = styled.div`
     background: transparent;
     padding: 20px;
@@ -127,14 +128,34 @@ const ScreenServices = ({ isOpen, onClose }) => {
                 <h2>Meus Serviços</h2>
                 {showCreateForm ? (
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <Input {...register("name")} placeholder="Nome do Serviço" required />
-                        <Input type="number" {...register("price")} placeholder="Preço" required />
-                        <Input {...register("description")} placeholder="Descrição" required />
+                        <Input
+                            {...register("name")}
+                            placeholder="Nome do Serviço"
+                            required
+                        />
+                        <Input
+                            type="number"
+                            {...register("price")}
+                            placeholder="Preço"
+                            required
+                        />
+                        <Input
+                            {...register("description")}
+                            placeholder="Descrição"
+                            required
+                        />
                         <Button type="submit">Adicionar Serviço</Button>
-                        <Button type="button" onClick={() => setShowCreateForm(false)}>Cancelar</Button>
+                        <Button
+                            type="button"
+                            onClick={() => setShowCreateForm(false)}
+                        >
+                            Cancelar
+                        </Button>
                     </form>
                 ) : (
-                    <Button onClick={toggleCreateForm}>Criar Novo Serviço</Button>
+                    <Button onClick={toggleCreateForm}>
+                        Criar Novo Serviço
+                    </Button>
                 )}
                 {localServices.map((service) => (
                     <PlanDetails key={service.id}>
@@ -142,24 +163,42 @@ const ScreenServices = ({ isOpen, onClose }) => {
                             <div>
                                 <PlanName>{service.name}</PlanName>
                                 <PlanPrice>R${service.price}</PlanPrice>
-                                <PlanDescription>{service.description}</PlanDescription>
+                                <PlanDescription>
+                                    {service.description}
+                                </PlanDescription>
                             </div>
                             <div>
-                                <ServiceButton onClick={() => startEditing(service)}>
+                                <ServiceButton
+                                    onClick={() => startEditing(service)}
+                                >
                                     <RiEdit2Line />
                                 </ServiceButton>
-                                <ServiceButton onClick={() => handleDelete(service.id)}>
+                                <ServiceButton
+                                    onClick={() => handleDelete(service.id)}
+                                >
                                     <RiDeleteBinLine />
                                 </ServiceButton>
                             </div>
                         </PlanContainer>
                         {editingId === service.id && (
                             <form onSubmit={handleSubmit(onSubmit)}>
-                                <Input {...register("name")} defaultValue={service.name} />
-                                <Input type="number" {...register("price")} defaultValue={service.price} />
-                                <Input {...register("description")} defaultValue={service.description} />
+                                <Input
+                                    {...register("name")}
+                                    defaultValue={service.name}
+                                />
+                                <Input
+                                    type="number"
+                                    {...register("price")}
+                                    defaultValue={service.price}
+                                />
+                                <Input
+                                    {...register("description")}
+                                    defaultValue={service.description}
+                                />
                                 <Button type="submit">Salvar</Button>
-                                <Button type="button" onClick={cancelEditing}>Cancelar Edição</Button>
+                                <Button type="button" onClick={cancelEditing}>
+                                    Cancelar Edição
+                                </Button>
                             </form>
                         )}
                     </PlanDetails>

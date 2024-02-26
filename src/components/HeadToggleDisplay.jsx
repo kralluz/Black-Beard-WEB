@@ -6,7 +6,7 @@ const SubHeader = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #e2c07d;
+    background-color: #F9E79F;
     padding: 4px 16px;
 `;
 const Container = styled.div`
@@ -21,23 +21,25 @@ const ButtonContainer = styled.div`
 `;
 
 const Underline = styled.div`
-    background-color: #e2c07d;
+    background-color: #F9E79F;
     width: 100px;
     height: 2px;
 `;
 
 const Button = styled.button`
-    background-color: ${(props) => (props.$active ? "#000" : "transparent")};
-    color: ${(props) => (props.$active ? "#fff" : "#000")};
+    background-color: ${(props) => (props.$active ? "#e2c07d" : "transparent")};
+    color: ${(props) => (props.$active ? "#fff" : "#000000")};
     border: none;
     border-radius: 4px;
     padding: 8px;
     cursor: pointer;
     outline: none;
     font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
     &:hover {
-        background-color: ${(props) => (props.$active ? "#000" : "#ddd")};
+        background-color: ${(props) => (props.$active ? "#cbac70" : "#e2c07d")};
     }
 `;
 
