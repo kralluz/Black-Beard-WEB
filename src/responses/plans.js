@@ -2,9 +2,9 @@ export const plans = [
     {
         id: 1,
         user_id: 101,
-        name: "Plano Básico",
-        description: "Inclui 3 cortes de cabelo por mês.",
-        price: 90.0,
+        name: "Plano básico",
+        description: "Sem benefícios ou descontos.",
+        price: 0.0,
         service_quota: 3,
         expires_in: 30,
         created_at: new Date().toISOString(),

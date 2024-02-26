@@ -3,7 +3,13 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import ModalBase from "../modals/BasedModal";
 import ShowClient from "../modals/ShowClient.jsx";
-import { FaUserAlt, FaWhatsapp, FaSearch, FaPhoneAlt, FaPhone } from "react-icons/fa";
+import {
+    FaUserAlt,
+    FaWhatsapp,
+    FaSearch,
+    FaPhoneAlt,
+    FaPhone,
+} from "react-icons/fa";
 
 const ContentScreen = styled.div`
     padding: 10px;
@@ -13,14 +19,14 @@ const ContentScreen = styled.div`
     max-height: 80vh;
     width: 100%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    
+
     &::-webkit-scrollbar {
         display: none;
     }
-    
+
     scrollbar-width: none;
     -ms-overflow-style: none;
-    `;
+`;
 
 const ClientSection = styled.div`
     background: #ffffff;
@@ -32,7 +38,7 @@ const ClientSection = styled.div`
     justify-content: space-between;
     align-items: center;
     padding-right: 10px;
-    `;
+`;
 
 const ClientDetails = styled.div`
     display: flex;
@@ -127,6 +133,7 @@ const ScreenClients = ({ isOpen, onClose }) => {
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [editingId, setEditingId] = useState(null);
+    const [showForm, setShowForm] = useState(false);
 
     useEffect(() => {}, []);
 
@@ -153,12 +160,14 @@ const ScreenClients = ({ isOpen, onClose }) => {
         setPhone("");
         setEditingId(null);
     };
-
-    const handleEdit = (client) => {
-        setName(client.name);
-        setEmail(client.email);
-        setPhone(client.phone);
-        setEditingId(client.id);
+    
+    const handleCancel = () => {
+        // Reseta o estado dos inputs e esconde o formulário sem salvar
+        setName("");
+        setEmail("");
+        setPhone("");
+        setEditingId(null);
+        setShowForm(false);
     };
 
     const handleDelete = (id) => {
@@ -211,25 +220,33 @@ const ScreenClients = ({ isOpen, onClose }) => {
                         onChange={handleSearchChange}
                     />
                 </SearchContainer>
-                <Form onSubmit={handleAddOrUpdateClient}>
-                    <Input
-                        type="text"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        placeholder="Nome"
-                        required
-                    />
-                    <Input
-                        type="text"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        placeholder="Telefone"
-                        required
-                    />
-                    <Button type="submit">
-                        {editingId ? "Atualizar" : "Adicionar"}
-                    </Button>
-                </Form>
+                <Button onClick={() => setShowForm(true)}>
+                    {showForm ? "Cancelar" : "Adicionar"}
+                </Button>
+                {showForm && (
+                    <Form onSubmit={handleAddOrUpdateClient}>
+                        <Input
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder="Nome"
+                            required
+                        />
+                        <Input
+                            type="text"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                            placeholder="Telefone"
+                            required
+                        />
+                        <Button type="submit">
+                            {editingId ? "Atualizar" : "Salvar"}
+                        </Button>
+                        <Button type="button" onClick={handleCancel}>
+                            Cancelar
+                        </Button>
+                    </Form>
+                )}
                 {Object.keys(groupedClientes)
                     .sort()
                     .map((letter) => (
@@ -266,14 +283,15 @@ const ScreenClients = ({ isOpen, onClose }) => {
                                             }}
                                         >
                                             <Button onClick={handleMakeCall}>
-                                            <FaPhoneAlt /> Ligar
+                                                <FaPhoneAlt />
+                                                 Ligar
                                             </Button>
                                             <Button
                                                 onClick={() => openWhatsApp()}
                                             >
-                                                <FaWhatsapp /> Conversar
+                                                <FaWhatsapp />
+                                                 Conversar
                                             </Button>
-                                            
                                         </div>
                                     </div>
                                 </ClientSection>

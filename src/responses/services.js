@@ -1,4 +1,4 @@
-const services = [
+export const services = [
     {
         id: 1,
         user_id: 101,

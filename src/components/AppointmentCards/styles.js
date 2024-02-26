@@ -90,7 +90,7 @@ export const AppointmentsList = styled.div`
 `;
 
 export const ServiceTag = styled.span`
-    background-color: #e2c07d;
+    background-color: #f9e79f;
     border-radius: 15px;
     padding: 5px 10px;
     font-size: 11px;

@@ -11,7 +11,7 @@ import {
     MdLibraryAddCheck,
 } from "react-icons/md";
 import { FaUser, FaTools } from "react-icons/fa";
-import ScreenAddService from "./actionButtonsScreens/ScreenAddService";
+import ScreenServices from "./actionButtonsScreens/ScreenServices";
 
 const slideIn = keyframes`
 from {
@@ -34,7 +34,6 @@ to {
 `;
 
 const FabContainer = styled.div`
-    //Container de todos os elementos do botão da tesoura
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -136,7 +135,7 @@ function ActionButton() {
                 isOpen={isAppointmentModalOpen}
                 onClose={() => setIsAppointmentModalOpen(false)}
             />
-            <ScreenAddService
+            <ScreenServices
                 isOpen={isServiceModalOpen}
                 onClose={() => setIsServiceModalOpen(false)}
             />
