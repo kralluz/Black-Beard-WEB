@@ -156,7 +156,6 @@ const SchedulingComponent = () => {
         }
         setShowServiceError(false);
         try {
-            console.log({ ...data, selectedServices });
             toast.success(
                 `Agendamento do ${data.clientName} realizado com sucesso!`,
                 {

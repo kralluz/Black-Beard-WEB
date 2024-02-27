@@ -1,53 +1,145 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
-import ModalBase from "../modals/BasedModal";
 import { RiEdit2Line, RiDeleteBinLine } from "react-icons/ri";
 import { FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
+import ModalBase from "../modals/BasedModal";
+import EditClientModal from "./EditClientModal.jsx";
 
 const ContentScreen = styled.div`
     border-radius: 10px;
     margin: 0 auto;
     overflow-y: auto;
-    width: 100%;
-    padding: 20px;
-    max-width: 600px;
     @media (max-width: 768px) {
-        padding: 10px;
+        padding: 0px;
     }
+`;
+
+const CardHeader = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px 5px 0 0;
+    padding-bottom: 10px;
+`;
+
+const ClientName = styled.h4`
+    font-size: 32px;
+    color: #333;
+
+    @media (max-width: 768px) {
+        font-size: 32px;
+    }
+`;
+
+const DateContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+`;
+const ClientDateKey = styled.span`
+    font-size: 14px;
+    color: #181818;
+    font-weight: 500;
+`;
+const ClientDateValue = styled.span`
+    font-size: 14px;
+    color: #181818;
+`;
+const ClientInfoKey = styled.span`
+    font-size: 20px;
+    color: #181818;
+    font-weight: 600;
+`;
+const ClientInfoValue = styled.span`
+    font-size: 20px;
+    color: #181818;
 `;
 
 const ClientSection = styled.div`
     background: #ffffff;
     border-radius: 6px;
-    padding: 20px;
+    padding: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
 
     @media (max-width: 768px) {
-        padding: 15px;
+        padding: 10px;
     }
 `;
 
-const ClientName = styled.h4`
-    margin: 0 0 10px 0;
-    font-size: 24px;
-    color: #333;
+const ClientInfoContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+`;
+
+const ContactClientContainer = styled.div`
+    display: flex;
+`;
+
+const ClientInfo = styled.div`
+    font-size: 16px;
+    color: #181818;
 
     @media (max-width: 768px) {
-        font-size: 20px;
+        font-size: 14px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+`;
+
+export const DescriptionContainer = styled.div`
+    width: 100%;
+`;
+
+export const DescriptionKey = styled.p`
+    font-size: 16px;
+    color: #181818;
+    margin-bottom: 4px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+`;
+
+export const DescriptionValue = styled.p`
+    border: none;
+    width: 100%;
+    font-size: 16px;
+    color: #181818;
+    margin-bottom: 4px;
+    font-family: "Roboto", sans-serif;
+    padding: 10px;
+    box-sizing: border-box;
+    resize: vertical;
+    min-height: 70px;
+    line-height: 1.5;
+    border-radius: 5px;
+    resize: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+
+    &:focus {
+        outline: none;
+        border-bottom: 1px solid #007bff;
+        box-shadow: 0 1px 3px rgba(0, 123, 255, 0.3);
+    }
+
+    &::placeholder {
+        color: #181818;
     }
 `;
 
 const ClientPlanInfo = styled.p`
     margin: 5px 0;
     font-size: 16px;
-    color: #666;
+    color: #181818;
     display: flex;
-    align-items: start;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
     box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.1);
-
 
     @media (max-width: 768px) {
         font-size: 14px;
@@ -56,20 +148,19 @@ const ClientPlanInfo = styled.p`
         gap: 5px;
     }
 `;
-const ClientInfo = styled.p`
-    margin: 5px 0;
-    font-size: 16px;
-    color: #666;
+
+const PlanContainer = styled.div`
     display: flex;
     align-items: center;
+    gap: 10px;
     justify-content: space-between;
-
-    @media (max-width: 768px) {
-        font-size: 14px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 5px;
-    }
+    align-items: center;
+    padding: 20px 0px;
+`;
+const PlanClientInfo = styled.p`
+    display: flex;
+    align-items: center;
+    gap: 10px;
 `;
 
 const PlanTag = styled.span`
@@ -84,24 +175,32 @@ const PlanTag = styled.span`
 const ActionButtons = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    flex-wrap: wrap;
-
+    flex-direction: column;
+    align-items: flex-end;
     @media (max-width: 768px) {
         width: 100%;
         justify-content: space-between;
     }
 `;
 
+const Panel = styled.div`
+    display: flex;
+    width: 100%;
+    gap: 20%;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+`;
+
 const buttonStyles = css`
     color: white;
-    padding: 8px 12px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
-    margin: 10px;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     svg {
         margin-right: 5px;
     }
@@ -110,34 +209,49 @@ const buttonStyles = css`
     }
 
     @media (max-width: 768px) {
-        padding: 6px 10px;
-        margin: 5px;
         font-size: 14px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
 `;
 
 const CallButton = styled.button`
     ${buttonStyles}
     background-color: #4CAF50;
+    @media (max-width: 768px) {
+        padding: 8px 12px;
+        margin: 5px;
+    }
 `;
 
 const ChatButton = styled.button`
     ${buttonStyles}
     background-color: #008cffc9;
+    @media (max-width: 768px) {
+        padding: 8px 12px;
+        margin: 5px;
+    }
 `;
 
 const DeleteButton = styled.button`
     ${buttonStyles}
     background-color: #F44336;
+    @media (max-width: 768px) {
+        padding: 10px 16px;
+    }
 `;
 
 const EditButton = styled.button`
     ${buttonStyles}
     background-color: #FFEB3B;
-    color: #333;
-    font-weight: 500;
+    color: #000000;
+    font-weight: 600;
+    @media (max-width: 768px) {
+        padding: 10px 16px;
+    }
 `;
+
 const ClientModal = ({ isOpen, onClose, client }) => {
+    const [showEditClientModal, setShowEditClientModal] = useState(false);
     const clientPlan = {
         id: 2,
         user_id: 102,
@@ -150,6 +264,14 @@ const ClientModal = ({ isOpen, onClose, client }) => {
         updated_at: null,
     };
 
+    const formattedDate = new Date(client.created_at).toLocaleDateString(
+        "pt-BR",
+        {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+        }
+    );
     const handleMakeCall = () => {
         window.location.href = `tel:${client.phone}`;
     };
@@ -161,56 +283,61 @@ const ClientModal = ({ isOpen, onClose, client }) => {
 
     return (
         <ModalBase isOpen={isOpen} onClose={onClose}>
+            <EditClientModal
+                isOpen={showEditClientModal}
+                onClose={() => setShowEditClientModal(false)}
+                client={client}
+            />
             <ContentScreen>
                 <ClientSection>
-                    <ClientName>{client.name}</ClientName>
-                    <ClientInfo>
-                        <strong>Email:</strong> {client.email}
-                    </ClientInfo>
-                        <ClientInfo>
-                            <strong>Telefone:</strong> {client.phone}
-                        </ClientInfo>
-                            <ActionButtons>
-                                <ChatButton onClick={openWhatsApp}>
-                                    <FaWhatsapp /> Conversar
-                                </ChatButton>
-                                <CallButton onClick={handleMakeCall}>
-                                    <FaPhoneAlt /> Ligar
-                                </CallButton>
-                            </ActionButtons>
-                    <ClientInfo>
-                        <strong>Descrição:</strong> {client.description}
-                    </ClientInfo>
-                    <ClientPlanInfo>
-                        <strong>Planos cadastrados</strong>
-                        <PlanTag>{clientPlan.name}</PlanTag>{" "}
-                        <strong>
-                            Adicionado em:{" "}
-                            {new Date(
-                                clientPlan.created_at
-                            ).toLocaleDateString()}
-                        </strong>{" "}
-                    </ClientPlanInfo>
-                    <ClientInfo>
-                        <strong>Data de Expiração do Plano: 2/2023</strong>{" "}
-                    </ClientInfo>
-                    <div
-                        style={{
-                            display: "flex",
-                            width: "100%",
-                            gap: "20%",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                            flexWrap: "wrap",
-                        }}
-                    >
+                    <CardHeader>
+                        <ClientName>{client.name}</ClientName>
+                        <DateContainer>
+                            <ClientDateKey>Adicionado em</ClientDateKey>
+                            <ClientDateValue>{formattedDate}</ClientDateValue>
+                        </DateContainer>
+                    </CardHeader>
+
+                    <ContactClientContainer>
+                        <ClientInfoContainer>
+                            <ClientInfoKey>Telefone:</ClientInfoKey>
+                            <ClientInfoValue>{client.phone}</ClientInfoValue>
+                        </ClientInfoContainer>
+                        <ActionButtons>
+                            <ChatButton onClick={openWhatsApp}>
+                                <FaWhatsapp /> Conversar
+                            </ChatButton>
+                            <CallButton onClick={handleMakeCall}>
+                                <FaPhoneAlt /> Ligar
+                            </CallButton>
+                        </ActionButtons>
+                    </ContactClientContainer>
+                    <DescriptionContainer>
+                        <DescriptionKey>Descrição:</DescriptionKey>
+                        <DescriptionValue>
+                            {client.description}
+                        </DescriptionValue>
+                    </DescriptionContainer>
+                    <PlanContainer>
+                        <div>
+                            <DescriptionKey>Plano Cadastrado:</DescriptionKey>
+                            <PlanTag>{clientPlan.name}</PlanTag>{" "}
+                        </div>
+                        <div>
+                            <DateContainer>
+                                <ClientDateKey>Vencerá dia:</ClientDateKey>
+                                <ClientDateValue>27/2/2023</ClientDateValue>
+                            </DateContainer>
+                        </div>
+                    </PlanContainer>
+                    <Panel>
                         <DeleteButton>
                             <RiDeleteBinLine /> Excluir
                         </DeleteButton>
-                        <EditButton>
+                        <EditButton onClick={() =>setShowEditClientModal(true)}>
                             <RiEdit2Line /> Editar
                         </EditButton>
-                    </div>
+                    </Panel>
                 </ClientSection>
             </ContentScreen>
         </ModalBase>

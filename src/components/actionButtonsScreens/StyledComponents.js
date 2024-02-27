@@ -44,7 +44,7 @@ export const DescriptionValue = styled.p`
     border: none; /* Remove a borda padrão */
     width: 100%; /* Garante que ocupe toda a largura disponível */
     font-size: 16px; /* Tamanho da fonte para legibilidade */
-    color: #666; /* Cor do texto */
+    color: #181818; /* Cor do texto */
     margin-bottom: 4px; /* Margem inferior para espaçamento */
     font-family: "Roboto", sans-serif; /* Família da fonte */
     padding: 10px; /* Adiciona um pouco de espaço interno para melhorar a legibilidade */
@@ -63,19 +63,19 @@ export const DescriptionValue = styled.p`
     }
 
     &::placeholder {
-        color: #aaa; /* Cor do texto do placeholder para contraste suave */
+        color: #181818; /* Cor do texto do placeholder para contraste suave */
     }
 `;
 
 export const MainContent = styled.p`
     font-size: 16px;
-    color: #666;
+    color: #181818;
     margin-bottom: 4px;
     font-family: "Roboto", sans-serif;
 `;
 export const FooterContent = styled.p`
     font-size: 12px;
-    color: #666;
+    color: #181818;
     margin-bottom: 4px;
     font-family: "Roboto", sans-serif;
 `;
@@ -143,7 +143,7 @@ export const EditableContainer = styled.div`
 export const PlanNameLabel = styled.label`
     display: none;
     font-size: 14px;
-    color: #666;
+    color: #181818;
     font-family: "Roboto", sans-serif;
     padding: 0px;
     margin: 0px;
@@ -172,7 +172,7 @@ export const EditableInput = styled.input`
     width: 20%;
     background-color: transparent;
     font-size: 16px;
-    color: #666;
+    color: #181818;
     margin-bottom: 4px;
     font-family: "Roboto", sans-serif;
 
@@ -184,7 +184,7 @@ export const EditableInput = styled.input`
 
 export const Label = styled.label`
     font-size: 16px;
-    color: #666;
+    color: #181818;
     font-family: "Roboto", sans-serif;
     padding: 0px;
     margin: 0px;
@@ -202,7 +202,7 @@ export const TextareaContainer = styled.div`
 `;
 export const TextareaLabel = styled.label`
     font-size: 16px;
-    color: #666;
+    color: #181818;
     font-family: "Roboto", sans-serif;
     padding: 0px;
     margin: 0px;
@@ -214,7 +214,7 @@ export const TextareaLabel = styled.label`
     white-space: nowrap;
     font-family: "Roboto", sans-serif;
     font-size: 16px;
-    color: #666;
+    color: #181818;
     margin-bottom: 4px;
     font-family: "Roboto", sans-serif;
     padding: 0px;
@@ -225,7 +225,7 @@ export const TextareaInput = styled.textarea`
     width: 100%; /* Garante que ocupe toda a largura disponível */
     background-color: transparent; /* Fundo transparente para se integrar a qualquer fundo */
     font-size: 16px; /* Tamanho da fonte para legibilidade */
-    color: #666; /* Cor do texto */
+    color: #181818; /* Cor do texto */
     margin-bottom: 4px; /* Margem inferior para espaçamento */
     font-family: "Roboto", sans-serif; /* Família da fonte */
     padding: 10px; /* Adiciona um pouco de espaço interno para melhorar a legibilidade */
@@ -244,6 +244,6 @@ export const TextareaInput = styled.textarea`
     }
 
     &::placeholder {
-        color: #aaa; /* Cor do texto do placeholder para contraste suave */
+        color: #181818; /* Cor do texto do placeholder para contraste suave */
     }
 `;

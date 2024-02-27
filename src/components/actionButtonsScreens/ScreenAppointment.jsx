@@ -83,7 +83,6 @@ const EditButton = styled.button`
 
 const ScreenAppointment = ({ isOpen, onClose }) => {
     const [selectedDate, setSelectedDate] = useState(new Date());
-    console.log(selectedDate);
     const [appointments, setAppointments] = useState(sampleAppointments);
     const [showAppointmentCRUD, setShowAppointmentCRUD] = useState(false);
 
@@ -127,10 +126,8 @@ const ScreenAppointment = ({ isOpen, onClose }) => {
     }
 
     const isoDateString = selectedDate;
-    console.log(isoDateString);
     const monthName = getMonthName(isoDateString);
 
-    console.log("🚀 ~ ScreenAppointment ~ monthName:", monthName);
 
     return (
         <ModalBase isOpen={isOpen} onClose={onClose}>

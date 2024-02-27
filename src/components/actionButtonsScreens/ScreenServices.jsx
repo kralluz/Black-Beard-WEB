@@ -1,16 +1,26 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import ModalBase from "../modals/BasedModal";
-import { RiEdit2Line, RiDeleteBinLine } from "react-icons/ri";
 import { useForm } from "react-hook-form";
+import { RiDeleteBinLine } from "react-icons/ri";
+import ModalBase from "../modals/BasedModal";
 import { services } from "../../responses/services";
+import EditServiceModal from "./EditServiceModal.jsx";
+import { RiEdit2Line } from "react-icons/ri";
+import ServiceForm from "./ServiceForm.jsx";
 
+// Estilos aplicados ao componente
+const NewServiceCard = styled.div`
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+`;
 
 const ContentScreen = styled.div`
     background: transparent;
     padding: 20px;
     border-radius: 10px;
-    margin: 0;
     overflow-y: auto;
     max-height: 80vh;
     width: 100%;
@@ -22,12 +32,36 @@ const ContentScreen = styled.div`
     -ms-overflow-style: none;
 `;
 
-const PlanDetails = styled.div`
+const ServiceDetails = styled.div`
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 20px;
     width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+`;
+
+const ServiceButton = styled.button`
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    background-color: #007bff;
+`;
+
+const Button = styled.button`
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    margin-bottom: 20px;
 `;
 
 const PlanName = styled.h4`
@@ -44,167 +78,109 @@ const PlanDescription = styled.p`
     font-size: 14px;
 `;
 
-const PlanContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 100%;
-`;
-
-const ServiceButton = styled.button`
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 10px;
-`;
-
 const Input = styled.input`
     margin-bottom: 10px;
     padding: 8px;
     border-radius: 4px;
     border: 1px solid #ccc;
-    width: calc(100% - 16px); /* Adjust width to ensure it fits well */
-`;
-const Button = styled.button`
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    margin-bottom: 20px; // Adicionei uma margem para separar do formulário
+    width: calc(100% - 16px);
 `;
 
 const ScreenServices = ({ isOpen, onClose }) => {
     const [localServices, setLocalServices] = useState(services);
-    const [editingId, setEditingId] = useState(null);
     const [showCreateForm, setShowCreateForm] = useState(false);
-    const { register, handleSubmit, reset, setValue } = useForm();
+    const [showEditService, setShowEditService] = useState(false);
+    const { register, handleSubmit, reset } = useForm();
 
-    const onSubmit = (data) => {
-        if (editingId) {
-            const updatedServices = localServices.map((service) =>
-                service.id === editingId ? { ...service, ...data } : service
-            );
-            setLocalServices(updatedServices);
-            setEditingId(null);
-        } else {
-            const newService = { ...data, id: Date.now() };
-            setLocalServices([...localServices, newService]);
-        }
-        setShowCreateForm(false); // Fecha o formulário após a submissão
+    const handleFormSubmit = (data) => {
+        const newService = { ...data, id: Date.now() };
+        setLocalServices([...localServices, newService]);
+        setShowCreateForm(false);
         reset();
-    };
-
-    const startEditing = (service) => {
-        setEditingId(service.id);
-        setValue("name", service.name);
-        setValue("price", service.price);
-        setValue("description", service.description);
-        setShowCreateForm(false); // Fecha o formulário de criação ao começar a editar
     };
 
     const handleDelete = (id) => {
         setLocalServices(localServices.filter((service) => service.id !== id));
     };
 
-    const cancelEditing = () => {
-        setEditingId(null);
-        reset();
-    };
-
     const toggleCreateForm = () => {
         setShowCreateForm(!showCreateForm);
-        setEditingId(null); // Cancela a edição ao abrir o formulário de criação
-        reset(); // Reseta os campos do formulário
+        reset();
     };
 
     return (
         <ModalBase isOpen={isOpen} onClose={onClose}>
             <ContentScreen>
                 <h2>Meus Serviços</h2>
-                {showCreateForm ? (
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <Input
-                            {...register("name")}
-                            placeholder="Nome do Serviço"
-                            required
+                {showCreateForm && (
+                    <NewServiceCard>
+                        <ServiceForm
+                            onSubmit={handleFormSubmit}
+                            onCancel={() => setShowCreateForm(false)}
                         />
-                        <Input
-                            type="number"
-                            {...register("price")}
-                            placeholder="Preço"
-                            required
-                        />
-                        <Input
-                            {...register("description")}
-                            placeholder="Descrição"
-                            required
-                        />
-                        <Button type="submit">Adicionar Serviço</Button>
-                        <Button
-                            type="button"
-                            onClick={() => setShowCreateForm(false)}
-                        >
-                            Cancelar
-                        </Button>
-                    </form>
-                ) : (
+                    </NewServiceCard>
+                )}
+                {!showCreateForm && (
                     <Button onClick={toggleCreateForm}>
                         Criar Novo Serviço
                     </Button>
                 )}
                 {localServices.map((service) => (
-                    <PlanDetails key={service.id}>
-                        <PlanContainer>
+                    <React.Fragment key={service.id}>
+                        <EditServiceModal
+                            isOpen={showEditService}
+                            onClose={() => setShowEditService(false)}
+                            service={service}
+                        />
+                        <ServiceDetails>
                             <div>
                                 <PlanName>{service.name}</PlanName>
-                                <PlanPrice>R${service.price}</PlanPrice>
+                                <PlanPrice>Valor R${service.price}</PlanPrice>
                                 <PlanDescription>
                                     {service.description}
                                 </PlanDescription>
                             </div>
-                            <div>
+                            <div
+                                style={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    alignContent: "center",
+                                    justifyContent: "center",
+                                    gap: "10px",
+                                }}
+                            >
                                 <ServiceButton
-                                    onClick={() => startEditing(service)}
-                                >
-                                    <RiEdit2Line />
-                                </ServiceButton>
-                                <ServiceButton
+                                    style={{
+                                        color: "white",
+                                        width: "100%",
+                                        padding: "8px 16px",
+                                        borderRadius: "5px",
+                                        backgroundColor: "#F44336",
+                                    }}
                                     onClick={() => handleDelete(service.id)}
                                 >
                                     <RiDeleteBinLine />
                                 </ServiceButton>
+                                <ServiceButton
+                                    onClick={() => setShowEditService(true)}
+                                    style={{
+                                        color: "white",
+                                        width: "100%",
+                                        padding: "8px 16px",
+                                        borderRadius: "5px",
+                                        backgroundColor: "#FFEB3B",
+                                        color: "#000000",
+                                    }}
+                                >
+                                    <RiEdit2Line />
+                                </ServiceButton>
                             </div>
-                        </PlanContainer>
-                        {editingId === service.id && (
-                            <form onSubmit={handleSubmit(onSubmit)}>
-                                <Input
-                                    {...register("name")}
-                                    defaultValue={service.name}
-                                />
-                                <Input
-                                    type="number"
-                                    {...register("price")}
-                                    defaultValue={service.price}
-                                />
-                                <Input
-                                    {...register("description")}
-                                    defaultValue={service.description}
-                                />
-                                <Button type="submit">Salvar</Button>
-                                <Button type="button" onClick={cancelEditing}>
-                                    Cancelar Edição
-                                </Button>
-                            </form>
-                        )}
-                    </PlanDetails>
+                        </ServiceDetails>
+                    </React.Fragment>
                 ))}
             </ContentScreen>
         </ModalBase>
     );
 };
+
 export default ScreenServices;

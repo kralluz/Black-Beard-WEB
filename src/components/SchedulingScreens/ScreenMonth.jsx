@@ -19,7 +19,7 @@ const SectionTitle = styled.h3`
 `;
 
 const PerformanceData = styled.p`
-    color: #666; // Cor suave para os detalhes
+    color: #181818; // Cor suave para os detalhes
 `;
 
 const ScreenMonthlyModal = ({ isOpen, onClose }) => {

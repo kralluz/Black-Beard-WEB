@@ -60,7 +60,7 @@ const ClientName = styled.h4`
 `;
 
 const ClientInfo = styled.p`
-    color: #666;
+    color: #181818;
     font-size: 14px;
     margin: 0;
     display: flex;
