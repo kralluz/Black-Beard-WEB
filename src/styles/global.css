@@ -84,13 +84,13 @@
     background-color: #0056b3;
 }
 
-.fullWidth{
+.fullWidth {
     width: 100%;
 }
 
 .overlay-visible {
     display: block;
-    background-color: #212121c4;
+    background-color: #000000c4;
     animation: fadeIn 0.5s ease;
     position: fixed;
     top: 0;
@@ -104,3 +104,23 @@
     display: none;
 }
 
+.css-rhmlg1-MuiTypography-root-MuiDayCalendar-weekDayLabel {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* ----------------------------------------------------------------- */
+/* ----------------------------------------------------------------- */
+/* REMOVE A SCROLL BAR DE TODO O HTML */
+
+* {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+    display: none;
+}
+
+/* ----------------------------------------------------------------- */
+/* ----------------------------------------------------------------- */

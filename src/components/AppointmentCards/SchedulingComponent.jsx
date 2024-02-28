@@ -1,18 +1,8 @@
-import services from '../../responses/services'
-import React from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
-import CardComponent from "./CardComponent";
-import {
-    FaRegCalendarPlus,
-    FaUser,
-    FaPhone,
-    FaClock,
-    FaCalendarAlt,
-    FaTimes,
-    FaCheck,
-} from "react-icons/fa";
+import HorarioDisponivelModal from "./HorarioDisponivelModal.jsx";
 
 const FormContainer = styled.div`
     max-width: 500px;
@@ -20,17 +10,11 @@ const FormContainer = styled.div`
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
+    background-color: #d4edda;
 `;
 
 const FormGroup = styled.div`
     margin-bottom: 15px;
-`;
-
-const FormLabel = styled.label`
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
 `;
 
 const FormInput = styled.input`
@@ -38,42 +22,6 @@ const FormInput = styled.input`
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
-`;
-
-const ButtonContainer = styled.div`
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    gap: 30%;
-`;
-
-const SubmitButton = styled.button`
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-
-    &:hover {
-        background-color: #0056b3;
-    }
-`;
-
-const CancelButton = styled.button`
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    background-color: #dc3545;
-    color: white;
-    cursor: pointer;
-    margin-left: 10px;
-
-    &:hover {
-        background-color: #c82333;
-    }
 `;
 
 const ServiceTag = styled.div`
@@ -108,13 +56,18 @@ const SchedulingComponent = () => {
         reset,
     } = useForm();
     const [selectedServices, setSelectedServices] = React.useState([]);
-
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [showClientNameError, setShowClientNameError] = React.useState(false);
+    const [selectedDate, setSelectedDate] = useState("");
     const [showPhoneNumberError, setShowPhoneNumberError] =
         React.useState(false);
     const [showDateError, setShowDateError] = React.useState(false);
     const [showTimeError, setShowTimeError] = React.useState(false);
     const [showServiceError, setShowServiceError] = React.useState(false);
+    const handleDateChange = (e) => {
+        setSelectedDate(e.target.value); // Atualiza o estado com a data selecionada
+        setIsModalOpen(true); // Abre o modal
+    };
 
     React.useEffect(() => {
         const timer = 3000;
@@ -146,7 +99,7 @@ const SchedulingComponent = () => {
 
     const handleReset = () => {
         reset();
-        setSelectedServices([]);
+        setIsModalOpen(false)
     };
 
     const onSubmit = async (data) => {
@@ -172,100 +125,28 @@ const SchedulingComponent = () => {
     return (
         <>
             <FormContainer>
-                <h1>Criar Agendamento</h1>
+                <h2>Adicionar Agendamento</h2>
                 <Toaster position="top-center" reverseOrder={false} />
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <FormGroup>
-                        <FormLabel>Cliente</FormLabel>
-                        <FormInput
-                            type="text"
-                            {...register("clientName", {
-                                required: "Nome do cliente é obrigatório",
-                            })}
-                        />
-                        {errors.clientName && showClientNameError && (
-                            <p>{errors.clientName.message}</p>
-                        )}
-                    </FormGroup>
-                    <FormGroup>
-                        <FormLabel>Telefone</FormLabel>
-                        <FormInput
-                            type="tel"
-                            {...register("phoneNumber", {
-                                required: "Número de telefone é obrigatório",
-                            })}
-                        />
-                        {errors.phoneNumber && showPhoneNumberError && (
-                            <p>{errors.phoneNumber.message}</p>
-                        )}
-                    </FormGroup>
-                    <FormGroup>
-                        <FormLabel>Data</FormLabel>
                         <FormInput
                             type="date"
                             {...register("date", {
                                 required: "Data é obrigatória",
                             })}
+                            onChange={handleDateChange} // Adiciona o manipulador de mudança
                         />
-                        {errors.date && showDateError && (
-                            <p>{errors.date.message}</p>
-                        )}
+                        {errors.date && <p>{errors.date.message}</p>}
                     </FormGroup>
-                    <FormGroup>
-                        <FormLabel>Horário</FormLabel>
-                        <FormInput
-                            type="time"
-                            {...register("time", {
-                                required: "Horário é obrigatório",
-                            })}
-                        />
-                        {errors.time && showTimeError && (
-                            <p>{errors.time.message}</p>
-                        )}
-                    </FormGroup>
-                    <FormGroup>
-                        <FormLabel>Serviços</FormLabel>
-                        <div
-                            style={{
-                                border: showServiceError ? "1px solid red" : "",
-                                padding: "10px",
-                                borderRadius: "5px",
-                            }}
-                        >
-                            {services.map((service) => (
-                                <ServiceTag
-                                    key={service.name}
-                                    $isSelected={selectedServices.includes(
-                                        service.name
-                                    )}
-                                    onClick={() => {
-                                        handleServiceChange(service.name);
-                                        if (showServiceError)
-                                            setShowServiceError(false);
-                                    }}
-                                >
-                                    {service.name}
-                                </ServiceTag>
-                            ))}
-                        </div>
-                        {showServiceError && (
-                            <p style={{ color: "red" }}>
-                                Ao menos um serviço deve ser selecionado
-                            </p>
-                        )}
-                    </FormGroup>
-                    <ButtonContainer>
-                        {isDirty && (
-                            <CancelButton type="button" onClick={handleReset}>
-                                <FaTimes />
-                            </CancelButton>
-                        )}
-                        <SubmitButton type="submit">
-                            <FaCheck />
-                        </SubmitButton>
-                    </ButtonContainer>
                 </form>
             </FormContainer>
+            {isModalOpen && (
+                <HorarioDisponivelModal
+                    isOpen={isModalOpen}
+                    onClose={handleReset}
+                    selectedDate={selectedDate}
+                ></HorarioDisponivelModal>
+            )}
         </>
     );
 };

@@ -1,28 +1,28 @@
-import AppointmentCRUD from "../../components/modals/AppointmentCRUD";
-import { sampleAppointments } from "../../responses/sampleAppointments";
-import { RiEyeLine } from "react-icons/ri";
 import React, { useState } from "react";
-import { format, parseISO } from "date-fns";
-import ptBR from "date-fns/locale/pt-BR";
 import styled from "styled-components";
-import ModalBase from "../modals/BasedModal";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
-
 import dayjs from "dayjs";
+import "dayjs/locale/de";
+import "dayjs/locale/en-gb";
+import "dayjs/locale/pt-br";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
+import "react-calendar/dist/Calendar.css";
+import { RiEyeLine } from "react-icons/ri";
+import AppointmentCRUD from "../../components/modals/AppointmentCRUD";
+import ModalBase from "../modals/BasedModal";
+import { ptBR } from "@mui/x-date-pickers/locales";
+import { slots } from "../../responses/slots.js";
+import CardInfoClient from "./CardInfoClient.jsx";
 
 const Container = styled.div`
-    padding: 20px 0;
+    padding: 12px;
     border-radius: 10px;
-    margin: 20px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow-y: auto;
-    max-height: 80vh;
+    max-height: 85vh;
     width: 100%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
@@ -45,12 +45,14 @@ const ViewButton = styled.button`
 
 const AppointmentSection = styled.div`
     margin-top: 20px;
+    width: 100%;
 `;
 
 const AppointmentList = styled.ul`
     list-style: none;
     margin: 0;
     padding: 0;
+    width: 100%;
 `;
 
 const AppointmentItem = styled.li`
@@ -62,10 +64,11 @@ const AppointmentItem = styled.li`
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: ${(props) => (props.x ? "#f8f8d7" : "#d4edda")};
 `;
 
 const AppointmentInfo = styled.div`
-    flex: 1;
+    width: 100%;
 `;
 
 const DeleteButton = styled.button`
@@ -86,436 +89,53 @@ const EditButton = styled.button`
     margin-left: 10px;
 `;
 
+// Componente ScreenAppointment
 const ScreenAppointment = ({ isOpen, onClose }) => {
     const [selectedDate, setSelectedDate] = useState(dayjs());
-
     const [showAppointmentCRUD, setShowAppointmentCRUD] = useState(false);
 
-    const slots = [
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-02-28T08:00:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-        },
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-02-28T08:30:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-02-28T09:00:00.000Z",
-            ocupado: true,
-            client: {
-                id: 1,
-                name: "client A",
-                phone: "62548778459",
-                description: "descrição 123123123 lorem inpsum",
-                plan: 1,
-                created_at: "2024-2-20T12:00:00Z",
-                updated_at: "2024-2-20T12:00:00Z",
-            },
-            service: [
-                {
-                    service_name: "Corte Americano",
-                    description: "exemplo de descrição",
-                    price: 50.0,
-                },
-                {
-                    service_name: "Pigmentação na Barba",
-                    description: "exemplo de descrição",
-                    price: 30.0,
-                },
-            ],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-02-28T09:30:00.000Z",
-            ocupado: true,
-            client: {
-                id: 1,
-                name: "client A",
-                phone: "62548778459",
-                plan: 2,
-            },
-            service: [
-                {
-                    id: 2,
-                    descricao: "Barba",
-                    duracao: 30,
-                },
-            ],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-02-28T10:00:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-        },
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-02-28T10:30:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-02-28T19:00:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-02-28T19:30:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-02-28T20:00:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-02-28T20:30:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-02-28T21:00:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-02-28T21:30:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-02-28T22:00:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-02-28T22:30:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-02-28T23:00:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-02-28T23:30:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-03-02T00:00:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-03-02T00:30:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-03-02T01:00:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-03-02T01:30:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-03-02T02:00:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-03-02T02:30:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-03-02T03:00:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-03-02T03:30:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-03-02T04:00:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-03-02T04:30:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-03-02T05:00:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-03-02T05:30:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-03-02T06:00:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-03-02T06:30:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-03-02T07:00:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-
-        {
-            id: 1,
-            user_id: 1,
-            appointment_date: "2024-03-02T07:30:00.000Z",
-            ocupado: false,
-            client: null,
-            service: [],
-            description: "descrição 123123123 lorem inpsum",
-            created_at: "2024-2-20T12:00:00Z",
-            updated_at: "2024-2-20T12:00:00Z",
-        },
-    ];
-
-    const slotsForSelectedDate = slots.filter((slot) => {
-        return (
+    const slotsForSelectedDate = slots.filter(
+        (slot) =>
             dayjs(slot.appointment_date).format("YYYY-MM-DD") ===
             selectedDate.format("YYYY-MM-DD")
-        );
-    });
+    );
 
     return (
         <ModalBase isOpen={isOpen} onClose={onClose}>
-            <AppointmentCRUD
-                isOpen={showAppointmentCRUD}
-                onClose={() => setShowAppointmentCRUD(false)}
-            />
-            <h3>
-                Agendamentos para dia {selectedDate.format("DD")} de{" "}
-                {selectedDate.format("MMMM", { locale: ptBR })}
-            </h3>
             <Container>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <div>
+                <h3>Agendamentos para dia {selectedDate.format("DD")} de </h3>
+                <LocalizationProvider
+                    adapterLocale="pt-br"
+                    dateAdapter={AdapterDayjs}
+                >
+                    <div style={{ padding: "0px", width: "100%" }}>
                         <DateCalendar
+                            sx={{
+                                width: "100%", // Define a largura para 100%
+                                maxWidth: "100%",
+                                ".MuiPickersCalendarHeader-dayLabel": {
+                                    backgroundColor: "green", // Cor de fundo dos dias da semana
+                                    color: "red", // Altera a cor das letras
+                                    fontWeight: "bold", // Torna o texto em negrito
+                                    fontSize: "1rem", // Aumenta o tamanho da fonte
+                                },
+                                // Estilização do calendário
+                                ".MuiPickersDay-root": {
+                                    color: "blue",
+                                    width: "100%", // Cor dos dias
+                                },
+                                ".Mui-selected": {
+                                    borderRadius: "10%",
+                                    color: "white", // Cor do texto para o dia selecionado
+                                    "&:hover": {
+                                        backgroundColor: "darkred", // Cor de fundo ao passar o mouse
+                                    },
+                                },
+                                "& .MuiPickersCalendarHeader-iconButton": {
+                                    // Estilização dos botões de navegação do calendário
+                                    color: "red", // Cor dos ícones de navegação
+                                },
+                            }}
                             value={selectedDate}
                             onChange={(newValue) => setSelectedDate(newValue)}
                             renderInput={(params) => <div {...params} />}
@@ -524,11 +144,15 @@ const ScreenAppointment = ({ isOpen, onClose }) => {
                 </LocalizationProvider>
                 <AppointmentSection>
                     <AppointmentList>
-                        {slotsForSelectedDate.map((slot, index) => (
-                            <AppointmentItem key={index}>
+                        {slotsForSelectedDate.map((slot, index) => {
+                            return <AppointmentItem
+                                key={index}
+                                y={"green"}
+                                x={slot.ocupado ? true : false}
+                            >
                                 <AppointmentInfo>
-                                    <div>
-                                        Horário:{" "}
+                                    <div style={{ width: "100%" }}>
+                                        Horário:
                                         <strong>
                                             {dayjs(
                                                 slot.appointment_date
@@ -536,13 +160,20 @@ const ScreenAppointment = ({ isOpen, onClose }) => {
                                         </strong>
                                     </div>
                                     <div>
-                                        Status:{" "}
+                                        Status:
                                         {slot.ocupado ? "Ocupado" : "Vazio"}
                                     </div>
                                     {slot.ocupado && (
                                         <div>
-                                            Cliente:{" "}
-                                            <strong>{slot.client.name}</strong>
+                                            <AppointmentCRUD
+                                                isOpen={showAppointmentCRUD}
+                                                client={slot.client}
+                                                onClose={() =>
+                                                    setShowAppointmentCRUD(
+                                                        false
+                                                    )
+                                                }
+                                            />
                                         </div>
                                     )}
                                 </AppointmentInfo>
@@ -555,8 +186,8 @@ const ScreenAppointment = ({ isOpen, onClose }) => {
                                         <RiEyeLine />
                                     </ViewButton>
                                 )}
-                            </AppointmentItem>
-                        ))}
+                            </AppointmentItem>;
+                        })}
                     </AppointmentList>
                 </AppointmentSection>
             </Container>

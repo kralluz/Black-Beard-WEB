@@ -1,3 +1,4 @@
+import CardInfoClient from "./CardInfoClient.jsx";
 import clients from "../../responses/clients";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
@@ -160,7 +161,7 @@ const ScreenClients = ({ isOpen, onClose }) => {
         setPhone("");
         setEditingId(null);
     };
-    
+
     const handleCancel = () => {
         // Reseta o estado dos inputs e esconde o formulário sem salvar
         setName("");
@@ -253,48 +254,9 @@ const ScreenClients = ({ isOpen, onClose }) => {
                         <React.Fragment key={letter}>
                             <LetterHeader>{letter}</LetterHeader>
                             {groupedClientes[letter].map((client) => (
-                                <ClientSection key={client.id}>
-                                    <ClientDetails
-                                        onClick={() => setOpenShowClient(true)}
-                                    >
-                                        <ClientName>
-                                            <FaUserAlt /> {client.name}
-                                        </ClientName>
-                                        <ClientInfo>
-                                            <FaPhoneAlt /> {client.phone}
-                                        </ClientInfo>
-                                    </ClientDetails>
-                                    <div
-                                        style={{
-                                            display: "flex",
-                                            flexDirection: "column",
-                                            alignItems: "center",
-                                            justifyContent: " center",
-                                        }}
-                                    >
-                                        <div
-                                            style={{
-                                                display: "flex",
-                                                flexDirection: "row",
-                                                alignItems: "center",
-                                                justifyContent: " center",
-                                                flexWrap: "wrap",
-                                                gap: "10px",
-                                            }}
-                                        >
-                                            <Button onClick={handleMakeCall}>
-                                                <FaPhoneAlt />
-                                                 Ligar
-                                            </Button>
-                                            <Button
-                                                onClick={() => openWhatsApp()}
-                                            >
-                                                <FaWhatsapp />
-                                                 Conversar
-                                            </Button>
-                                        </div>
-                                    </div>
-                                </ClientSection>
+                                <>
+                                    <CardInfoClient key={client.id} client={client} />
+                                </>
                             ))}
                         </React.Fragment>
                     ))}

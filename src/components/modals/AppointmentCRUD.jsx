@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import ModalBase from "./BasedModal";
+import CardInfoClient from "../actionButtonsScreens/CardInfoClient";
 
 // Estilos dos componentes utilizando styled-components
 const Form = styled.form`
@@ -27,26 +28,41 @@ const Input = styled.input`
 const TextArea = styled(Input).attrs({ as: "textarea" })``;
 
 const Button = styled.button`
-    padding: 10px;
+    padding: 10px 16px;
     border: none;
     border-radius: 4px;
-    margin-top: 5px;
     cursor: pointer;
-    background-color: #007bff;
     color: white;
-    &:disabled {
-        background-color: #cccccc;
-        cursor: not-allowed;
-    }
+    background-color: ${({ buttonType }) => {
+        switch (buttonType) {
+            case "negative":
+                return "#e74c3c"; // Vermelho para ações negativas/destrutivas
+            case "positive":
+                return "#3498db"; // Verde para salvar, criar, concluir
+            case "neutral":
+                return "#2ecc71"; // Azul para ligar, conversar, acessar
+            default:
+                return "#002842"; // Cinza como cor padrão
+        }
+    }};
 `;
 
 const FormGroup = styled.div`
+`;
+const ButtonsContainer = styled.div`
     margin-bottom: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 `;
 
 const FormLabel = styled.label`
     margin-bottom: 0.5rem;
     display: inline-block;
+`;
+const FormDescriptionKey = styled.label`
+    font-weight: bold;
+    margin-bottom: 5px;
 `;
 
 const DataDisplay = styled.p`
@@ -69,9 +85,24 @@ const ServiceTag = styled.div`
         background-color: #f4d03f;
     }
 `;
+const TotalValue = styled.p`
+    padding-top: 1rem;
+    font-weight: bold;
+    font-size: 24px;
+    color: #2c3e50;
+`;
+
+const ServicesContainer = styled.div`
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+
+`;
 
 // Componente principal: AppointmentCRUD
-const AppointmentCRUD = ({ isOpen, onClose }) => {
+const AppointmentCRUD = ({ isOpen, onClose, client }) => {
+    console.log("🚀 ~ AppointmentCRUD ~ client:", client);
     // Estado do componente
     const [isEditable, setIsEditable] = useState(false);
     const [showServiceError, setShowServiceError] = useState(false);
@@ -96,6 +127,15 @@ const AppointmentCRUD = ({ isOpen, onClose }) => {
                 user_id: 101,
                 name: "Corte de Cabelo",
                 price: 35.0,
+                description: "Corte tradicional masculino.",
+                created_at: new Date().toISOString(),
+                updated_at: null,
+            },
+            {
+                id: 2,
+                user_id: 101,
+                name: "Lavagem de Cabelo",
+                price: 20.0,
                 description: "Corte tradicional masculino.",
                 created_at: new Date().toISOString(),
                 updated_at: null,
@@ -139,7 +179,7 @@ const AppointmentCRUD = ({ isOpen, onClose }) => {
         setIsEditable(true);
     };
     const handleDelete = () => {
-        console.log("Deletar agendamento");
+        alert("Deletar agendamento");
         onClose();
     };
     const toggleEdit = () => {
@@ -152,6 +192,18 @@ const AppointmentCRUD = ({ isOpen, onClose }) => {
         "dd, iiii, 'de' MMMM",
         { locale: ptBR }
     );
+    const calculateTotal = () => {
+        return defaultValues.service.reduce(
+            (acc, service) => acc + service.price,
+            0
+        );
+    };
+
+    const total = calculateTotal();
+    const valorFormatado = total.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+    });
 
     // Renderização do formulário com condicionais para edição e visualização
     return (
@@ -177,7 +229,7 @@ const AppointmentCRUD = ({ isOpen, onClose }) => {
                         </FormGroup>
                         <FormGroup>
                             <FormLabel>
-                                Descrição do agendamento: 
+                                Descrição do agendamento:
                                 <TextArea {...register("description")} />
                             </FormLabel>
                         </FormGroup>
@@ -220,40 +272,52 @@ const AppointmentCRUD = ({ isOpen, onClose }) => {
                     </>
                 ) : (
                     <>
-                        <DataDisplay>
-                            Cliente: {watch("client.name")}
-                        </DataDisplay>
-                        <DataDisplay>
-                            Telefone: {watch("client.phone")}
-                        </DataDisplay>
-                        <DataDisplay>
-                            Descrição do agendamento: {watch("description")}
-                        </DataDisplay>
+                        <CardInfoClient client={client} />
+                        <FormDescriptionKey>
+                            Descrição do agendamento:{" "}
+                        </FormDescriptionKey>
+                        <p>{defaultValues.description}</p>
                         <FormGroup>
-                            <FormLabel>Serviços Agendados:</FormLabel>
-                            <div>
-                                {selectedServices.map((serviceName) => (
-                                    <ServiceTag key={serviceName}>
-                                        {serviceName}
-                                    </ServiceTag>
-                                ))}
-                            </div>
+                            <FormDescriptionKey>
+                                Serviços Agendados:
+                            </FormDescriptionKey>
+                            <ServicesContainer>
+                                <div style={{width: "100%"}}>
+                                    {selectedServices.map((serviceName) => (
+                                        <>
+                                            <ServiceTag key={serviceName}>
+                                                {serviceName}
+                                            </ServiceTag>
+                                        </>
+                                    ))}
+                                </div>
+                                <TotalValue>
+                                    Valor total: {valorFormatado}
+                                </TotalValue>
+                            </ServicesContainer>
                         </FormGroup>
                     </>
                 )}
-                <Button
-                    type="button"
-                    onClick={handleEdit}
-                    disabled={isEditable}
-                >
-                    Editar
-                </Button>
-                <Button type="submit" disabled={!isEditable}>
-                    Salvar
-                </Button>
-                <Button type="button" onClick={handleDelete}>
-                    Excluir
-                </Button>
+                <ButtonsContainer style={{ display: "flex", gap: "10px" }}>
+                    <Button
+                        buttonType="negative"
+                        type="button"
+                        onClick={
+                            isEditable
+                                ? () => setIsEditable(false)
+                                : handleDelete
+                        }
+                    >
+                        {isEditable ? "Cancelar" : "Excluir"}
+                    </Button>
+                    <Button
+                        buttonType="positive"
+                        type="button"
+                        onClick={toggleEdit}
+                    >
+                        {isEditable ? "Salvar" : "Editar"}
+                    </Button>
+                </ButtonsContainer>
             </Form>
         </ModalBase>
     );
