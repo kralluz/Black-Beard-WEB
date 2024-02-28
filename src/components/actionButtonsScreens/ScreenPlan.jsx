@@ -1,5 +1,6 @@
 import { plans } from "../../responses/plans";
 import styled from "styled-components";
+import ScreenPlanCreate from "./ScreenPlanCreate.jsx";
 import React, { useState } from "react";
 import { RiEdit2Line, RiDeleteBinLine } from "react-icons/ri";
 import ModalBase from "../modals/BasedModal";
@@ -41,7 +42,7 @@ const ScreenPlan = ({ isOpen, onClose }) => {
     const [isViewOpen, setViewOpen] = useState(true);
     const [isEditOpen, setEditOpen] = useState(false);
     const [selectedPlan, setSelectedPlan] = useState(null);
-
+    const [isCreateOpen, setCreateOpen] = useState(false);
     const handleEdit = (plan) => {
         setSelectedPlan(plan);
         setEditOpen(true); // Abra o modal de edição com o plano selecionado
@@ -59,6 +60,16 @@ const ScreenPlan = ({ isOpen, onClose }) => {
                 <h2 style={{ color: "#333", marginBottom: "20px" }}>
                     Meus Planos
                 </h2>
+                <ServiceButton // Use o mesmo estilo do botão de serviço para manter a consistência
+                    type="button"
+                    onClick={() => setCreateOpen(true)} // Abre o modal de criação
+                >
+                    <FaPlus size={20} /> Adicionar um plano
+                </ServiceButton>
+                    <ScreenPlanCreate
+                        isOpen={isCreateOpen}
+                        onClose={() => setCreateOpen(false)}
+                    />
                 {plans.map((plan) => (
                     <PlanDetails key={plan.id}>
                         {isEditOpen && selectedPlan === plan && (

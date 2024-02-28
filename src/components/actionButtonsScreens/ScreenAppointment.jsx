@@ -9,6 +9,11 @@ import ModalBase from "../modals/BasedModal";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
+import dayjs from "dayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
+
 const Container = styled.div`
     padding: 20px 0;
     border-radius: 10px;
@@ -82,52 +87,420 @@ const EditButton = styled.button`
 `;
 
 const ScreenAppointment = ({ isOpen, onClose }) => {
-    const [selectedDate, setSelectedDate] = useState(new Date());
-    const [appointments, setAppointments] = useState(sampleAppointments);
+    const [selectedDate, setSelectedDate] = useState(dayjs());
+
     const [showAppointmentCRUD, setShowAppointmentCRUD] = useState(false);
 
-    const appointmentsForSelectedDate = appointments.filter((appointment) => {
+    const slots = [
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-02-28T08:00:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+        },
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-02-28T08:30:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-02-28T09:00:00.000Z",
+            ocupado: true,
+            client: {
+                id: 1,
+                name: "client A",
+                phone: "62548778459",
+                description: "descrição 123123123 lorem inpsum",
+                plan: 1,
+                created_at: "2024-2-20T12:00:00Z",
+                updated_at: "2024-2-20T12:00:00Z",
+            },
+            service: [
+                {
+                    service_name: "Corte Americano",
+                    description: "exemplo de descrição",
+                    price: 50.0,
+                },
+                {
+                    service_name: "Pigmentação na Barba",
+                    description: "exemplo de descrição",
+                    price: 30.0,
+                },
+            ],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-02-28T09:30:00.000Z",
+            ocupado: true,
+            client: {
+                id: 1,
+                name: "client A",
+                phone: "62548778459",
+                plan: 2,
+            },
+            service: [
+                {
+                    id: 2,
+                    descricao: "Barba",
+                    duracao: 30,
+                },
+            ],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-02-28T10:00:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+        },
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-02-28T10:30:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-02-28T19:00:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-02-28T19:30:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-02-28T20:00:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-02-28T20:30:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-02-28T21:00:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-02-28T21:30:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-02-28T22:00:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-02-28T22:30:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-02-28T23:00:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-02-28T23:30:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-03-02T00:00:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-03-02T00:30:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-03-02T01:00:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-03-02T01:30:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-03-02T02:00:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-03-02T02:30:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-03-02T03:00:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-03-02T03:30:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-03-02T04:00:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-03-02T04:30:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-03-02T05:00:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-03-02T05:30:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-03-02T06:00:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-03-02T06:30:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-03-02T07:00:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+
+        {
+            id: 1,
+            user_id: 1,
+            appointment_date: "2024-03-02T07:30:00.000Z",
+            ocupado: false,
+            client: null,
+            service: [],
+            description: "descrição 123123123 lorem inpsum",
+            created_at: "2024-2-20T12:00:00Z",
+            updated_at: "2024-2-20T12:00:00Z",
+        },
+    ];
+
+    const slotsForSelectedDate = slots.filter((slot) => {
         return (
-            format(parseISO(appointment.date), "yyyy-MM-dd") ===
-            format(selectedDate, "yyyy-MM-dd")
+            dayjs(slot.appointment_date).format("YYYY-MM-DD") ===
+            selectedDate.format("YYYY-MM-DD")
         );
     });
-
-    const handleDelete = (id) => {
-        setAppointments(
-            appointments.filter((appointment) => appointment.id !== id)
-        );
-    };
-
-    const handleEdit = (id) => {
-        console.log("Editando agendamento", id);
-    };
-
-    function getMonthName(isoDateString) {
-        const months = [
-            "Janeiro",
-            "Fevereiro",
-            "Março",
-            "Abril",
-            "Maio",
-            "Junho",
-            "Julho",
-            "Agosto",
-            "Setembro",
-            "Outubro",
-            "Novembro",
-            "Dezembro",
-        ];
-
-        const date = new Date(isoDateString);
-        const monthIndex = date.getMonth();
-
-        return months[monthIndex];
-    }
-
-    const isoDateString = selectedDate;
-    const monthName = getMonthName(isoDateString);
-
 
     return (
         <ModalBase isOpen={isOpen} onClose={onClose}>
@@ -135,35 +508,53 @@ const ScreenAppointment = ({ isOpen, onClose }) => {
                 isOpen={showAppointmentCRUD}
                 onClose={() => setShowAppointmentCRUD(false)}
             />
+            <h3>
+                Agendamentos para dia {selectedDate.format("DD")} de{" "}
+                {selectedDate.format("MMMM", { locale: ptBR })}
+            </h3>
             <Container>
-                <Calendar
-                    onChange={setSelectedDate}
-                    value={selectedDate}
-                    locale="pt-BR"
-                />
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <div>
+                        <DateCalendar
+                            value={selectedDate}
+                            onChange={(newValue) => setSelectedDate(newValue)}
+                            renderInput={(params) => <div {...params} />}
+                        />
+                    </div>
+                </LocalizationProvider>
                 <AppointmentSection>
-                    <h3>
-                        Agendamentos para dia{" "}
-                        {format(selectedDate, "dd", { locale: ptBR })} de{" "}
-                        {getMonthName(selectedDate)}
-                    </h3>
                     <AppointmentList>
-                        {appointmentsForSelectedDate.map((appointment) => (
-                            <AppointmentItem key={appointment.id}>
+                        {slotsForSelectedDate.map((slot, index) => (
+                            <AppointmentItem key={index}>
                                 <AppointmentInfo>
                                     <div>
-                                        <strong>{appointment.name}</strong>
+                                        Horário:{" "}
+                                        <strong>
+                                            {dayjs(
+                                                slot.appointment_date
+                                            ).format("HH:mm")}
+                                        </strong>
                                     </div>
                                     <div>
-                                        {appointment.service} - R$
-                                        {appointment.total}
+                                        Status:{" "}
+                                        {slot.ocupado ? "Ocupado" : "Vazio"}
                                     </div>
+                                    {slot.ocupado && (
+                                        <div>
+                                            Cliente:{" "}
+                                            <strong>{slot.client.name}</strong>
+                                        </div>
+                                    )}
                                 </AppointmentInfo>
-                                <ViewButton
-                                    onClick={() => setShowAppointmentCRUD(true)}
-                                >
-                                    <RiEyeLine />
-                                </ViewButton>
+                                {slot.ocupado && (
+                                    <ViewButton
+                                        onClick={() =>
+                                            setShowAppointmentCRUD(true)
+                                        }
+                                    >
+                                        <RiEyeLine />
+                                    </ViewButton>
+                                )}
                             </AppointmentItem>
                         ))}
                     </AppointmentList>
