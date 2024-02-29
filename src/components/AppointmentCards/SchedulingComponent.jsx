@@ -59,15 +59,18 @@ const SchedulingComponent = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [showClientNameError, setShowClientNameError] = React.useState(false);
     const [selectedDate, setSelectedDate] = useState("");
+
+    const handleDateChange = (e) => {
+        const localDate = new Date(e.target.value + 'T00:00:00');
+        setSelectedDate(localDate.toISOString());
+        setIsModalOpen(true);
+    };
     const [showPhoneNumberError, setShowPhoneNumberError] =
         React.useState(false);
     const [showDateError, setShowDateError] = React.useState(false);
     const [showTimeError, setShowTimeError] = React.useState(false);
     const [showServiceError, setShowServiceError] = React.useState(false);
-    const handleDateChange = (e) => {
-        setSelectedDate(e.target.value); // Atualiza o estado com a data selecionada
-        setIsModalOpen(true); // Abre o modal
-    };
+
 
     React.useEffect(() => {
         const timer = 3000;

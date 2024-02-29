@@ -29,7 +29,7 @@ const Item = styled.li`
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: ${(props) => (props.x ? "#f8f8d7" : "#d4edda")};
+    background-color: ${(props) => (props.ocupado ? "#f8f8d7" : "#d4edda")};
 `;
 
 const Info = styled.div`
@@ -46,84 +46,114 @@ const ViewButton = styled.button`
 `;
 
 const HorarioDisponivelModal = ({ isOpen, onClose, selectedDate }) => {
-    // Estado para gerenciar a seleção do horário
     const [selectedTime, setSelectedTime] = useState(null);
     const [showAppointmentCRUD, setShowAppointmentCRUD] = useState(null);
     const [showEscolhaCliente, setShowEscolhaCliente] = useState(null);
+    const [selectedSlot, setSelectedSlot] = useState(null);
+    function formatarData(data) {
+        const diasDaSemana = [
+            "domingo",
+            "segunda-feira",
+            "terça-feira",
+            "quarta-feira",
+            "quinta-feira",
+            "sexta-feira",
+            "sábado",
+        ];
+        const meses = [
+            "janeiro",
+            "fevereiro",
+            "março",
+            "abril",
+            "maio",
+            "junho",
+            "julho",
+            "agosto",
+            "setembro",
+            "outubro",
+            "novembro",
+            "dezembro",
+        ];
 
-    // Função para manipular a seleção do horário
+        const dataObj = new Date(data);
+        const diaSemana = diasDaSemana[dataObj.getDay()];
+        const dia = dataObj.getDate();
+        const mes = meses[dataObj.getMonth()];
+
+        return `${diaSemana}, dia ${dia} de ${mes}`;
+    }
+
     const handleTimeSelection = (time) => {
         setSelectedTime(time);
     };
 
-    // Função para prosseguir para a próxima etapa (pode ser ajustada conforme necessário)
     const handleNext = () => {
-        console.log("Proceder para a seleção do cliente");
-        // Aqui você pode implementar a lógica para abrir o próximo modal
     };
+
+    function extrairHorario(data) {
+        const dataObj = new Date(data);
+        const horas = dataObj.getUTCHours().toString().padStart(2, "0");
+        const minutos = dataObj.getUTCMinutes().toString().padStart(2, "0");
+        return `${horas}:${minutos}`;
+    }
 
     return (
         <ModalBase isOpen={isOpen} onClose={onClose}>
             <div style={{ padding: "20px" }}>
-                <h2>Data Selecionada: {selectedDate}</h2>
+                <h2>Horários para{formatarData(selectedDate)}</h2>
                 <AppointmentSection>
                     <List>
                         {slots.map((slot, index) => (
-                            <>
-                                <EscolhaClienteModal
-                                    date={slot.appointment_date}
-                                    isOpen={showEscolhaCliente}
-                                    onClose={() => setShowEscolhaCliente(false)}
-                                />
-
-                                <Item
-                                    key={index}
-                                    x={slot.ocupado ? true : false}
-                                >
-                                    <Info>
-                                        <div>
-                                            Horário:{" "}
-                                            <strong>
-                                                {dayjs(
-                                                    slot.appointment_date
-                                                ).format("HH:mm")}
-                                            </strong>
-                                        </div>
-                                        <div>
-                                            Status:{" "}
-                                            {slot.ocupado ? "Ocupado" : "Vazio"}
-                                        </div>
-                                    </Info>
-                                    {!slot.ocupado ? (
+                            <Item key={index} ocupado={slot.ocupado}>
+                                {selectedSlot === index && (
+                                    <EscolhaClienteModal
+                                        date={selectedDate}
+                                        hour={slot.appointment_date}
+                                        isOpen={selectedSlot === index}
+                                        onClose={() => setSelectedSlot(null)}
+                                    />
+                                )}
+                                <Info>
+                                    <div>
+                                        Horário:{" "}
+                                        <strong>
+                                            {extrairHorario(
+                                                slot.appointment_date
+                                            )}
+                                        </strong>
+                                    </div>
+                                    <div>
+                                        Status:{" "}
+                                        {slot.ocupado ? "Ocupado" : "Vazio"}
+                                    </div>
+                                </Info>
+                                {!slot.ocupado ? (
+                                    <ViewButton
+                                        onClick={() => setSelectedSlot(index)}
+                                    >
+                                        <FaSquarePlus size={24} />
+                                    </ViewButton>
+                                ) : (
+                                    <>
                                         <ViewButton
-                                            onClick={() => {
-                                                setShowEscolhaCliente(true);
-                                            }}
+                                            onClick={() =>
+                                                setSelectedSlot(index)
+                                            }
                                         >
-                                            <FaSquarePlus size={24} />
+                                            <FaEye />
                                         </ViewButton>
-                                    ) : (
-                                        <>
-                                            <ViewButton
-                                                onClick={() =>
-                                                    setShowAppointmentCRUD(true)
-                                                }
-                                            >
-                                                <FaEye />
-                                            </ViewButton>
+                                        {selectedSlot === index && (
                                             <AppointmentCRUD
-                                                isOpen={showAppointmentCRUD}
+                                                isOpen={selectedSlot === index}
                                                 onClose={() =>
-                                                    setShowAppointmentCRUD(
-                                                        false
-                                                    )
+                                                    setSelectedSlot(null)
                                                 }
                                                 client={slot.client}
                                             />
-                                        </>
-                                    )}
-                                </Item>
-                            </>
+                                        )}
+                                    </>
+                                )}
+                            </Item>
                         ))}
                     </List>
                 </AppointmentSection>
@@ -143,5 +173,4 @@ const HorarioDisponivelModal = ({ isOpen, onClose, selectedDate }) => {
         </ModalBase>
     );
 };
-
 export default HorarioDisponivelModal;

@@ -90,7 +90,6 @@ export const slots = [
         created_at: "2024-2-20T12:00:00Z",
         updated_at: "2024-2-20T12:00:00Z",
     },
-
     {
         id: 1,
         user_id: 1,
@@ -113,7 +112,6 @@ export const slots = [
         created_at: "2024-2-20T12:00:00Z",
         updated_at: "2024-2-20T12:00:00Z",
     },
-
     {
         id: 1,
         user_id: 1,
@@ -136,7 +134,6 @@ export const slots = [
         created_at: "2024-2-20T12:00:00Z",
         updated_at: "2024-2-20T12:00:00Z",
     },
-
     {
         id: 1,
         user_id: 1,
@@ -148,7 +145,6 @@ export const slots = [
         created_at: "2024-2-20T12:00:00Z",
         updated_at: "2024-2-20T12:00:00Z",
     },
-
     {
         id: 1,
         user_id: 1,
@@ -160,7 +156,6 @@ export const slots = [
         created_at: "2024-2-20T12:00:00Z",
         updated_at: "2024-2-20T12:00:00Z",
     },
-
     {
         id: 1,
         user_id: 1,
@@ -172,7 +167,6 @@ export const slots = [
         created_at: "2024-2-20T12:00:00Z",
         updated_at: "2024-2-20T12:00:00Z",
     },
-
     {
         id: 1,
         user_id: 1,
@@ -184,7 +178,6 @@ export const slots = [
         created_at: "2024-2-20T12:00:00Z",
         updated_at: "2024-2-20T12:00:00Z",
     },
-
     {
         id: 1,
         user_id: 1,
@@ -196,7 +189,6 @@ export const slots = [
         created_at: "2024-2-20T12:00:00Z",
         updated_at: "2024-2-20T12:00:00Z",
     },
-
     {
         id: 1,
         user_id: 1,
@@ -208,7 +200,6 @@ export const slots = [
         created_at: "2024-2-20T12:00:00Z",
         updated_at: "2024-2-20T12:00:00Z",
     },
-
     {
         id: 1,
         user_id: 1,
@@ -220,7 +211,6 @@ export const slots = [
         created_at: "2024-2-20T12:00:00Z",
         updated_at: "2024-2-20T12:00:00Z",
     },
-
     {
         id: 1,
         user_id: 1,
@@ -232,7 +222,6 @@ export const slots = [
         created_at: "2024-2-20T12:00:00Z",
         updated_at: "2024-2-20T12:00:00Z",
     },
-
     {
         id: 1,
         user_id: 1,
@@ -244,7 +233,6 @@ export const slots = [
         created_at: "2024-2-20T12:00:00Z",
         updated_at: "2024-2-20T12:00:00Z",
     },
-
     {
         id: 1,
         user_id: 1,
@@ -256,7 +244,6 @@ export const slots = [
         created_at: "2024-2-20T12:00:00Z",
         updated_at: "2024-2-20T12:00:00Z",
     },
-
     {
         id: 1,
         user_id: 1,
@@ -268,7 +255,6 @@ export const slots = [
         created_at: "2024-2-20T12:00:00Z",
         updated_at: "2024-2-20T12:00:00Z",
     },
-
     {
         id: 1,
         user_id: 1,
@@ -280,7 +266,6 @@ export const slots = [
         created_at: "2024-2-20T12:00:00Z",
         updated_at: "2024-2-20T12:00:00Z",
     },
-
     {
         id: 1,
         user_id: 1,
@@ -292,7 +277,6 @@ export const slots = [
         created_at: "2024-2-20T12:00:00Z",
         updated_at: "2024-2-20T12:00:00Z",
     },
-
     {
         id: 1,
         user_id: 1,
@@ -304,7 +288,6 @@ export const slots = [
         created_at: "2024-2-20T12:00:00Z",
         updated_at: "2024-2-20T12:00:00Z",
     },
-
     {
         id: 1,
         user_id: 1,
@@ -316,7 +299,6 @@ export const slots = [
         created_at: "2024-2-20T12:00:00Z",
         updated_at: "2024-2-20T12:00:00Z",
     },
-
     {
         id: 1,
         user_id: 1,
@@ -328,7 +310,6 @@ export const slots = [
         created_at: "2024-2-20T12:00:00Z",
         updated_at: "2024-2-20T12:00:00Z",
     },
-
     {
         id: 1,
         user_id: 1,
@@ -340,7 +321,6 @@ export const slots = [
         created_at: "2024-2-20T12:00:00Z",
         updated_at: "2024-2-20T12:00:00Z",
     },
-
     {
         id: 1,
         user_id: 1,
@@ -352,7 +332,6 @@ export const slots = [
         created_at: "2024-2-20T12:00:00Z",
         updated_at: "2024-2-20T12:00:00Z",
     },
-
     {
         id: 1,
         user_id: 1,
@@ -364,7 +343,6 @@ export const slots = [
         created_at: "2024-2-20T12:00:00Z",
         updated_at: "2024-2-20T12:00:00Z",
     },
-
     {
         id: 1,
         user_id: 1,
@@ -376,7 +354,6 @@ export const slots = [
         created_at: "2024-2-20T12:00:00Z",
         updated_at: "2024-2-20T12:00:00Z",
     },
-
     {
         id: 1,
         user_id: 1,
@@ -388,11 +365,10 @@ export const slots = [
         created_at: "2024-2-20T12:00:00Z",
         updated_at: "2024-2-20T12:00:00Z",
     },
-
     {
         id: 1,
         user_id: 1,
-        appointment_date: "2024-03-02T07:30:00.000Z",
+        appointment_date: "2024-03-02T07:45:00.000Z",
         ocupado: false,
         client: null,
         service: [],

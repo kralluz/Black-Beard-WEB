@@ -76,6 +76,7 @@ const Button = styled.button`
     }
 `;
 const CardInfoClient = ({ client }) => {
+
     const [openShowClient, setOpenShowClient] = useState(false);
 
     const handleMakeCall = () => {
@@ -88,19 +89,25 @@ const CardInfoClient = ({ client }) => {
     };
     return (
         <>
-            <ShowClient
-                isOpen={openShowClient}
-                onClose={() => setOpenShowClient(false)}
-                client={client}
-            />
+            {client.name && (
+                <ShowClient
+                    isOpen={openShowClient}
+                    onClose={() => setOpenShowClient(false)}
+                    client={client}
+                />
+            )}
             <ClientSection key={client.id}>
                 <ClientDetails onClick={() => setOpenShowClient(true)}>
-                    <ClientName>
-                        <FaUserAlt /> {client.name}
-                    </ClientName>
-                    <ClientInfo>
-                        <FaPhoneAlt /> {client.phone}
-                    </ClientInfo>
+                    {client.name && (
+                        <ClientName>
+                            <FaUserAlt /> {client.name}
+                        </ClientName>
+                    )}
+                    {client.phone && (
+                        <ClientInfo>
+                            <FaPhoneAlt /> {client.phone}
+                        </ClientInfo>
+                    )}
                 </ClientDetails>
                 <div
                     style={{

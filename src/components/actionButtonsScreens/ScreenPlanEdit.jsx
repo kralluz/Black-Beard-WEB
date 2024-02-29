@@ -20,7 +20,6 @@ const ScreenPlanEdit = ({ isOpen, onClose, plan }) => {
     });
 
     const submitEdit = (data) => {
-        console.log(data);
         onClose(); // Feche o modal após salvar
     };
 

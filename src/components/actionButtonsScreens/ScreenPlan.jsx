@@ -49,9 +49,6 @@ const ScreenPlan = ({ isOpen, onClose }) => {
     };
 
     const handleDelete = (planId) => {
-        // Aqui você implementaria a lógica para excluir o plano
-        console.log("Deletando plano com ID:", planId);
-        // Após excluir o plano, você poderia atualizar a lista de planos para refletir a exclusão
     };
 
     return (

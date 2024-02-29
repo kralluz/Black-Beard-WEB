@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-// Estilos do Backdrop
 const Backdrop = styled.div`
     position: fixed;
     top: 0;
@@ -17,8 +16,6 @@ const Backdrop = styled.div`
     opacity: ${(props) => (props.isOpen ? "1" : "0")};
     pointer-events: ${(props) => (props.isOpen ? "all" : "none")};
 `;
-
-// Estilos do ModalWrapper
 const ModalWrapper = styled.div`
     position: fixed;
     background: #ffffff;
@@ -28,7 +25,7 @@ const ModalWrapper = styled.div`
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     z-index: 1001;
     width: 98vw;
-    max-width: 500px; 
+    max-width: 500px;
     max-height: 98vh;
     overflow: auto;
 `;

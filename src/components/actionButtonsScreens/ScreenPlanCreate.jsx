@@ -17,8 +17,6 @@ const ScreenPlanCreate = ({ isOpen, onClose }) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
-        console.log(data);
-        // Aqui você implementaria a lógica para adicionar o novo plano
         onClose(); // Feche o modal após a criação
     };
 

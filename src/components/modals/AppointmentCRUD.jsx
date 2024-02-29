@@ -102,7 +102,6 @@ const ServicesContainer = styled.div`
 
 // Componente principal: AppointmentCRUD
 const AppointmentCRUD = ({ isOpen, onClose, client }) => {
-    console.log("🚀 ~ AppointmentCRUD ~ client:", client);
     // Estado do componente
     const [isEditable, setIsEditable] = useState(false);
     const [showServiceError, setShowServiceError] = useState(false);
@@ -170,7 +169,6 @@ const AppointmentCRUD = ({ isOpen, onClose, client }) => {
             setShowServiceError(true);
             return;
         }
-        console.log(data, selectedServices);
         setIsEditable(false);
     };
 
