@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { RiDeleteBinLine } from "react-icons/ri";
-import ModalBase from "../../modals/BasedModal.jsx";
+import ModalBase from "../../BasedModal.jsx";
 import { services } from "../../../responses/services.js";
 import EditServiceScreen from "./EditServiceScreen.jsx";
 import { RiEdit2Line } from "react-icons/ri";
@@ -163,7 +163,6 @@ const ServicesScreen = ({ isOpen, onClose }) => {
                                 <ServiceButton
                                     onClick={() => setShowEditService(true)}
                                     style={{
-                                        color: "white",
                                         width: "100%",
                                         padding: "8px 16px",
                                         borderRadius: "5px",

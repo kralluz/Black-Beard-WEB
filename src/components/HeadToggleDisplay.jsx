@@ -43,7 +43,7 @@ const Button = styled.button`
     }
 `;
 
-const ToggleDisplayComponent = ({ agendaComponent, estoqueComponent }) => {
+const ToggleDisplayComponent = ({ MainContentComponent, estoqueComponent }) => {
     const [activeTab, setActiveTab] = useState("agenda");
 
     return (
@@ -68,7 +68,7 @@ const ToggleDisplayComponent = ({ agendaComponent, estoqueComponent }) => {
                     </ButtonContainer>
                 </Container>
             </SubHeader>
-            {activeTab === "agenda" ? agendaComponent : estoqueComponent}
+            {activeTab === "agenda" ? MainContentComponent : estoqueComponent}
         </>
     );
 };

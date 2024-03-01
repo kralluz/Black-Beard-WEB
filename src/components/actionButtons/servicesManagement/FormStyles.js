@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import ModalBase from "../../modals/BasedModal";
+import ModalBase from "../../BasedModal";
 
 export const Form = styled.form`
     display: flex;

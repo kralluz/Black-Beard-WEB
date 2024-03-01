@@ -1,7 +1,7 @@
-import ScreenWeeklyModal from "../SchedulingScreens/ScreenWeekly";
+import ScreenWeeklyModal from "./WeeklyScreen";
 import React, { useState } from "react";
-import CardComponent from "./CardComponent";
-import { Data, DataKey, DataValue } from "./styles";
+import CardComponent from "../CardComponent";
+import { Data, DataKey, DataValue } from "../styles";
 
 const WeeklyCard = () => {
     const weeklySummary = {

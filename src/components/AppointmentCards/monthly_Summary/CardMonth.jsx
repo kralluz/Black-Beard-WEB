@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import CardComponent from "./CardComponent";
-import { Data, DataKey, DataValue } from "./styles";
-import ScreenMonthModal from "../SchedulingScreens/ScreenMonth";
+import CardComponent from "../CardComponent";
+import { Data, DataKey, DataValue } from "../styles";
+import ScreenMonthModal from "./MonthlyScreen";
 
 const MonthlyCard = () => {
     const monthlySummary = {

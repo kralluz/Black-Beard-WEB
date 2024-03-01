@@ -19,7 +19,7 @@ const DataTitle = styled.h3`
     color: #333;
     margin-bottom: 8px;
 `;
-const EstoqueData = () => {
+const ERPContent = () => {
     return (
         <DataContainer>
             <DataCard>
@@ -29,4 +29,4 @@ const EstoqueData = () => {
     );
 };
 
-export default EstoqueData;
+export default ERPContent;

@@ -1,7 +1,7 @@
-import { receitaTotal } from "../../responses/appointments";
+import { receitaTotal } from "../../../responses/appointments";
 import React, { useState } from "react";
-import CardComponent from "./CardComponent";
-import ScreenDayModal from "../SchedulingScreens/ScreenDay";
+import CardComponent from "../CardComponent";
+import ScreenDayModal from "./DailyScreen";
 import {
     SummaryInfo,
     ClientList,
@@ -12,9 +12,9 @@ import {
     ServicesContainer,
     ServiceTag,
     AppointmentsList,
-} from "./styles";
-import { agenda } from "../../providers/agendamento";
-import appointments from "../../responses/appointments";
+} from "../styles";
+import { agenda } from "../../../providers/agendamento";
+import appointments from "../../../responses/appointments";
 import { color } from "react-magic-motion";
 
 const DailyCard = () => {

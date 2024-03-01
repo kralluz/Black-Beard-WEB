@@ -4,7 +4,7 @@ import services from "../../../responses/services";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import ModalBase from "../../modals/BasedModal";
+import ModalBase from "../../BasedModal";
 import ClientContact from "../../globalComponents/ClientContact";
 
 const Form = styled.form`

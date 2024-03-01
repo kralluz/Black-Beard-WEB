@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-import ModalBase from "../modals/BasedModal"; // Assumindo que o nome correto é ModalBase
+import ModalBase from "../../BasedModal"; // Assumindo que o nome correto é ModalBase
 
 const MonthlyPerformanceCard = styled.div`
     background: #f0f0f0; // Um fundo mais claro para destaque

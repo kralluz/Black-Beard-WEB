@@ -2,7 +2,7 @@ import ClientContact from "../../globalComponents/ClientContact";
 import clients from "../../../responses/clients";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import ModalBase from "../../modals/BasedModal";
+import ModalBase from "../../BasedModal";
 import {
     FaUserAlt,
     FaWhatsapp,

@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
-import ModalBase from "../modals/BasedModal";
-import appointments from "../../responses/appointments";
+import ModalBase from "../../BasedModal";
+import appointments from "../../../responses/appointments";
 const NextAppointmentCard = styled.div`
     background: transparent;
     padding: 20px;

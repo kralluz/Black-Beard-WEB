@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import ModalBase from "../modals/BasedModal";
+import ModalBase from "../../BasedModal.jsx";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import EscolhaServicoModal from "./EscolhaServicoModal.jsx";
+import SelectServices from "./SelectServices.jsx";
 
 // Styled components para o formulário e botões
 const Form = styled.form`
@@ -49,7 +49,7 @@ const dataBase = [
     { name: "Maria Oliveira", phone: "987654321", email: "maria@gmail.com" },
 ];
 
-const EscolhaClienteModal = ({ isOpen, onClose, date, hour }) => {
+const SelectClient = ({ isOpen, onClose, date, hour }) => {
     const { register, setValue, watch, handleSubmit } = useForm();
     const name = watch("name");
     const phone = watch("phone");
@@ -129,7 +129,7 @@ const EscolhaClienteModal = ({ isOpen, onClose, date, hour }) => {
                 Agendamento para {formatarData(date)} às {extrairHorario(hour)}
             </h4>
 
-            <EscolhaServicoModal
+            <SelectServices
                 date={date}
                 hour={hour}
                 isOpen={isOpenSelectService}
@@ -187,4 +187,4 @@ const EscolhaClienteModal = ({ isOpen, onClose, date, hour }) => {
     );
 };
 
-export default EscolhaClienteModal;
+export default SelectClient;
