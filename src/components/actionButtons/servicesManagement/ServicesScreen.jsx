@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { RiDeleteBinLine } from "react-icons/ri";
-import ModalBase from "../modals/BasedModal";
-import { services } from "../../responses/services";
-import EditServiceModal from "./EditServiceModal.jsx";
+import ModalBase from "../../modals/BasedModal.jsx";
+import { services } from "../../../responses/services.js";
+import EditServiceScreen from "./EditServiceScreen.jsx";
 import { RiEdit2Line } from "react-icons/ri";
 import ServiceForm from "./ServiceForm.jsx";
 
-// Estilos aplicados ao componente
 const NewServiceCard = styled.div`
     background: #ffffff;
     padding: 20px;
@@ -86,7 +85,7 @@ const Input = styled.input`
     width: calc(100% - 16px);
 `;
 
-const ScreenServices = ({ isOpen, onClose }) => {
+const ServicesScreen = ({ isOpen, onClose }) => {
     const [localServices, setLocalServices] = useState(services);
     const [showCreateForm, setShowCreateForm] = useState(false);
     const [showEditService, setShowEditService] = useState(false);
@@ -127,7 +126,7 @@ const ScreenServices = ({ isOpen, onClose }) => {
                 )}
                 {localServices.map((service) => (
                     <React.Fragment key={service.id}>
-                        <EditServiceModal
+                        <EditServiceScreen
                             isOpen={showEditService}
                             onClose={() => setShowEditService(false)}
                             service={service}
@@ -183,4 +182,4 @@ const ScreenServices = ({ isOpen, onClose }) => {
     );
 };
 
-export default ScreenServices;
+export default ServicesScreen;

@@ -1,9 +1,8 @@
-import CardInfoClient from "./CardInfoClient.jsx";
-import clients from "../../responses/clients";
+import ClientContact from "../../globalComponents/ClientContact";
+import clients from "../../../responses/clients";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import ModalBase from "../modals/BasedModal";
-import ShowClient from "../modals/ShowClient.jsx";
+import ModalBase from "../../modals/BasedModal";
 import {
     FaUserAlt,
     FaWhatsapp,
@@ -127,7 +126,7 @@ const SearchInput = styled.input`
     font-size: 1rem;
 `;
 
-const ScreenClients = ({ isOpen, onClose }) => {
+const ClientsScreen = ({ isOpen, onClose }) => {
     const [clientes, setClientes] = useState(clients);
     const [searchTerm, setSearchTerm] = useState("");
     const [name, setName] = useState("");
@@ -201,15 +200,10 @@ const ScreenClients = ({ isOpen, onClose }) => {
         window.open(url, "_blank");
     };
 
-    const [openShowClient, setOpenShowClient] = useState(false);
 
     return (
         <ModalBase isOpen={isOpen} onClose={onClose}>
-            <ShowClient
-                isOpen={openShowClient}
-                onClose={() => setOpenShowClient(false)}
-                client={clients[0]}
-            />
+            
             <ContentScreen>
                 <h2>Gerenciar Clientes</h2>
                 <SearchContainer>
@@ -255,7 +249,7 @@ const ScreenClients = ({ isOpen, onClose }) => {
                             <LetterHeader>{letter}</LetterHeader>
                             {groupedClientes[letter].map((client) => (
                                 <>
-                                    <CardInfoClient key={client.id} client={client} />
+                                    <ClientContact key={client.id} client={client} />
                                 </>
                             ))}
                         </React.Fragment>
@@ -265,4 +259,4 @@ const ScreenClients = ({ isOpen, onClose }) => {
     );
 };
 
-export default ScreenClients;
+export default ClientsScreen;

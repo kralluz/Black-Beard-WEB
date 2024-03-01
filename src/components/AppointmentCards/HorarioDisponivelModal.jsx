@@ -2,7 +2,7 @@ import { FaSquarePlus, FaEye } from "react-icons/fa6";
 import ModalBase from "../modals/BasedModal";
 import React, { useState } from "react";
 import styled from "styled-components";
-import AppointmentCRUD from "../modals/AppointmentCRUD";
+import AppointmentPanel from "../actionButtons/scheduleManagement/AppointmentPanel.jsx";
 import { RiEyeLine } from "react-icons/ri";
 import { slots } from "../../responses/slots";
 import dayjs from "dayjs";
@@ -47,7 +47,7 @@ const ViewButton = styled.button`
 
 const HorarioDisponivelModal = ({ isOpen, onClose, selectedDate }) => {
     const [selectedTime, setSelectedTime] = useState(null);
-    const [showAppointmentCRUD, setShowAppointmentCRUD] = useState(null);
+    const [showAppointmentPanel, setShowAppointmentPanel] = useState(null);
     const [showEscolhaCliente, setShowEscolhaCliente] = useState(null);
     const [selectedSlot, setSelectedSlot] = useState(null);
     function formatarData(data) {
@@ -143,7 +143,7 @@ const HorarioDisponivelModal = ({ isOpen, onClose, selectedDate }) => {
                                             <FaEye />
                                         </ViewButton>
                                         {selectedSlot === index && (
-                                            <AppointmentCRUD
+                                            <AppointmentPanel
                                                 isOpen={selectedSlot === index}
                                                 onClose={() =>
                                                     setSelectedSlot(null)

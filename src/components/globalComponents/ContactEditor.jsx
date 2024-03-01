@@ -343,7 +343,7 @@ const ModalButton = styled.button`
     // styles for the modal button
 `;
 
-const EditClientModal = ({ isOpen, onClose, client }) => {
+const ContactEditor = ({ isOpen, onClose, client }) => {
     const { register, handleSubmit } = useForm();
 
     const onSubmit = (data) => {};
@@ -441,4 +441,4 @@ const EditClientModal = ({ isOpen, onClose, client }) => {
     );
 };
 
-export default EditClientModal;
+export default ContactEditor;

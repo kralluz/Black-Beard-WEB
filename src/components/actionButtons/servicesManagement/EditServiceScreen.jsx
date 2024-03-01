@@ -1,9 +1,9 @@
-// EditServiceModal.js
+// EditServiceScreen.js
 import React from "react";
-import ModalBase from "../modals/BasedModal";
+import ModalBase from "../../modals/BasedModal";
 import ServiceForm from "./ServiceForm"; // Importe o ServiceForm
 
-const EditServiceModal = ({ isOpen, onClose, service, updateService }) => {
+const EditServiceScreen = ({ isOpen, onClose, service, updateService }) => {
     const handleFormSubmit = (data) => {
         updateService(service.id, data);
         onClose();
@@ -20,4 +20,4 @@ const EditServiceModal = ({ isOpen, onClose, service, updateService }) => {
     );
 };
 
-export default EditServiceModal;
+export default EditServiceScreen;

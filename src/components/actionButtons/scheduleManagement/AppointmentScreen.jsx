@@ -9,11 +9,10 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import "react-calendar/dist/Calendar.css";
 import { RiEyeLine } from "react-icons/ri";
-import AppointmentCRUD from "../../components/modals/AppointmentCRUD";
-import ModalBase from "../modals/BasedModal";
+import AppointmentPanel from "../../actionButtons/scheduleManagement/AppointmentPanel.jsx";
+import ModalBase from "../../modals/BasedModal.jsx";
 import { ptBR } from "@mui/x-date-pickers/locales";
-import { slots } from "../../responses/slots.js";
-import CardInfoClient from "./CardInfoClient.jsx";
+import { slots } from "../../../responses/slots.js";
 
 const Container = styled.div`
     padding: 12px;
@@ -89,10 +88,9 @@ const EditButton = styled.button`
     margin-left: 10px;
 `;
 
-// Componente ScreenAppointment
-const ScreenAppointment = ({ isOpen, onClose }) => {
+const AppointmentScreen = ({ isOpen, onClose }) => {
     const [selectedDate, setSelectedDate] = useState(dayjs());
-    const [showAppointmentCRUD, setShowAppointmentCRUD] = useState(false);
+    const [showAppointmentPanel, setShowAppointmentPanel] = useState(false);
 
     const slotsForSelectedDate = slots.filter(
         (slot) =>
@@ -165,11 +163,11 @@ const ScreenAppointment = ({ isOpen, onClose }) => {
                                     </div>
                                     {slot.ocupado && (
                                         <div>
-                                            <AppointmentCRUD
-                                                isOpen={showAppointmentCRUD}
+                                            <AppointmentPanel
+                                                isOpen={showAppointmentPanel}
                                                 client={slot.client}
                                                 onClose={() =>
-                                                    setShowAppointmentCRUD(
+                                                    setShowAppointmentPanel(
                                                         false
                                                     )
                                                 }
@@ -180,7 +178,7 @@ const ScreenAppointment = ({ isOpen, onClose }) => {
                                 {slot.ocupado && (
                                     <ViewButton
                                         onClick={() =>
-                                            setShowAppointmentCRUD(true)
+                                            setShowAppointmentPanel(true)
                                         }
                                     >
                                         <RiEyeLine />
@@ -195,4 +193,4 @@ const ScreenAppointment = ({ isOpen, onClose }) => {
     );
 };
 
-export default ScreenAppointment;
+export default AppointmentScreen;

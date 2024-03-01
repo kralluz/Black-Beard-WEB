@@ -57,7 +57,7 @@ const SchedulingComponent = () => {
     } = useForm();
     const [selectedServices, setSelectedServices] = React.useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [showClientNameError, setShowClientNameError] = React.useState(false);
+    const [ContactDetailsNameError, setContactDetailsNameError] = React.useState(false);
     const [selectedDate, setSelectedDate] = useState("");
 
     const handleDateChange = (e) => {
@@ -75,8 +75,8 @@ const SchedulingComponent = () => {
     React.useEffect(() => {
         const timer = 3000;
         if (errors.clientName) {
-            setShowClientNameError(true);
-            setTimeout(() => setShowClientNameError(false), timer);
+            setContactDetailsNameError(true);
+            setTimeout(() => setContactDetailsNameError(false), timer);
         }
         if (errors.phoneNumber) {
             setShowPhoneNumberError(true);

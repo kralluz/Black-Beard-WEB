@@ -4,7 +4,7 @@ import ModalBase from "../modals/BasedModal";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import ServiceSelector from "../inputs/InputSelectService.jsx";
-import CardInfoClient from "../actionButtonsScreens/CardInfoClient.jsx";
+import ClientContact from "../globalComponents/ClientContact.jsx";
 
 const Form = styled.form`
     display: flex;
@@ -116,7 +116,7 @@ const EscolhaServicoModal = ({ client, isOpen, onClose, date, hour }) => {
                     Agendamento para  {formatarData(date)} às{" "}
                     {extrairHorario(hour)}
                 </h4>
-                <CardInfoClient client={client} />
+                <ClientContact client={client} />
                 <Label htmlFor="servico">Escolha um Serviço </Label>
                 <div>
                     <ServiceSelector

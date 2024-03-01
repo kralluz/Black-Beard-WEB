@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ShowClient from "../modals/ShowClient.jsx";
+import ContactDetails from "./ContactDetails";
 import {
     FaUserAlt,
     FaWhatsapp,
@@ -75,9 +75,9 @@ const Button = styled.button`
         background-color: #45a049;
     }
 `;
-const CardInfoClient = ({ client }) => {
+const ClientContact = ({ client }) => {
 
-    const [openShowClient, setOpenShowClient] = useState(false);
+    const [openContactDetails, setOpenContactDetails] = useState(false);
 
     const handleMakeCall = () => {
         window.location.href = `tel:${"62985401969"}`;
@@ -90,14 +90,14 @@ const CardInfoClient = ({ client }) => {
     return (
         <>
             {client.name && (
-                <ShowClient
-                    isOpen={openShowClient}
-                    onClose={() => setOpenShowClient(false)}
+                <ContactDetails
+                    isOpen={openContactDetails}
+                    onClose={() => setOpenContactDetails(false)}
                     client={client}
                 />
             )}
             <ClientSection key={client.id}>
-                <ClientDetails onClick={() => setOpenShowClient(true)}>
+                <ClientDetails onClick={() => setOpenContactDetails(true)}>
                     {client.name && (
                         <ClientName>
                             <FaUserAlt /> {client.name}
@@ -141,4 +141,4 @@ const CardInfoClient = ({ client }) => {
         </>
     );
 };
-export default CardInfoClient;
+export default ClientContact;

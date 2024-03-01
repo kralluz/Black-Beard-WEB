@@ -1,11 +1,10 @@
-import { plans } from "../../responses/plans";
+import { plans } from "../../../responses/plans.js";
 import styled from "styled-components";
-import ScreenPlanCreate from "./ScreenPlanCreate.jsx";
+import CreatePlanScreen from "../plansManagement/CreatePlanScreen.jsx";
 import React, { useState } from "react";
 import { RiEdit2Line, RiDeleteBinLine } from "react-icons/ri";
-import ModalBase from "../modals/BasedModal";
-import ScreenPlanView from "./ScreenPlanView.jsx";
-import ScreenPlanEdit from "./ScreenPlanEdit.jsx";
+import ModalBase from "../../modals/BasedModal.jsx";
+import ScreenPlanEdit from "../plansManagement/ScreenPlanEdit.jsx";
 import { useForm } from "react-hook-form";
 import {
     MdFormatListBulletedAdd,
@@ -63,7 +62,7 @@ const ScreenPlan = ({ isOpen, onClose }) => {
                 >
                     <FaPlus size={20} /> Adicionar um plano
                 </ServiceButton>
-                    <ScreenPlanCreate
+                    <CreatePlanScreen
                         isOpen={isCreateOpen}
                         onClose={() => setCreateOpen(false)}
                     />

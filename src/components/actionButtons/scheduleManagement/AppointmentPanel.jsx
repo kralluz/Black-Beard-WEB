@@ -1,14 +1,12 @@
-// Importações necessárias para o componente
 import { format, parseISO } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
-import services from "../../responses/services";
+import services from "../../../responses/services";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import ModalBase from "./BasedModal";
-import CardInfoClient from "../actionButtonsScreens/CardInfoClient";
+import ModalBase from "../../modals/BasedModal";
+import ClientContact from "../../globalComponents/ClientContact";
 
-// Estilos dos componentes utilizando styled-components
 const Form = styled.form`
     display: flex;
     flex-direction: column;
@@ -100,8 +98,8 @@ const ServicesContainer = styled.div`
 
 `;
 
-// Componente principal: AppointmentCRUD
-const AppointmentCRUD = ({ isOpen, onClose, client }) => {
+// Componente principal: AppointmentPanel
+const AppointmentPanel = ({ isOpen, onClose, client }) => {
     // Estado do componente
     const [isEditable, setIsEditable] = useState(false);
     const [showServiceError, setShowServiceError] = useState(false);
@@ -270,7 +268,7 @@ const AppointmentCRUD = ({ isOpen, onClose, client }) => {
                     </>
                 ) : (
                     <>
-                        <CardInfoClient client={client} />
+                        <ClientContact client={client} />
                         <FormDescriptionKey>
                             Descrição do agendamento:{" "}
                         </FormDescriptionKey>
@@ -321,4 +319,4 @@ const AppointmentCRUD = ({ isOpen, onClose, client }) => {
     );
 };
 
-export default AppointmentCRUD;
+export default AppointmentPanel;

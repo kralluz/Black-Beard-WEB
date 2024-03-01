@@ -1,7 +1,7 @@
-import ScreenAppointment from "./actionButtonsScreens/ScreenAppointment";
-import ScreenPlan from "./actionButtonsScreens/ScreenPlan";
-import ScreenClients from "./actionButtonsScreens/ScreenClients";
-import ScreenSettings from "./actionButtonsScreens/ScreenSettings";
+import AppointmentScreen from "./actionButtons/scheduleManagement/AppointmentScreen";
+import PlansScreen from "./actionButtons/plansManagement/PlansScreen";
+import ClientsScreen from "./actionButtons/clientsManagement/ClientsScreen";
+import ScreenSettings from "./actionButtons/settings/ScreenSettings";
 import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { RxScissors } from "react-icons/rx";
@@ -11,7 +11,7 @@ import {
     MdLibraryAddCheck,
 } from "react-icons/md";
 import { FaUser, FaTools } from "react-icons/fa";
-import ScreenServices from "./actionButtonsScreens/ScreenServices";
+import ServicesScreen from "./actionButtons/servicesManagement/ServicesScreen";
 
 const slideIn = keyframes`
 from {
@@ -127,21 +127,21 @@ function ActionButton() {
 
     return (
         <>
-            <ScreenPlan //Gerenciar o plano
-                isOpen={isPlanModalOpen}
-                onClose={() => setIsPlanModalOpen(false)}
-            />
-            <ScreenAppointment //Gerenciar agendamentos
+            <AppointmentScreen //Gerenciar agendamentos
                 isOpen={isAppointmentModalOpen}
                 onClose={() => setIsAppointmentModalOpen(false)}
             />
-            <ScreenServices
-                isOpen={isServiceModalOpen}
-                onClose={() => setIsServiceModalOpen(false)}
-            />
-            <ScreenClients
+            <ClientsScreen
                 isOpen={isClientModalOpen}
                 onClose={() => setIsClientModalOpen(false)}
+            />
+            <PlansScreen //Gerenciar o plano
+                isOpen={isPlanModalOpen}
+                onClose={() => setIsPlanModalOpen(false)}
+            />
+            <ServicesScreen
+                isOpen={isServiceModalOpen}
+                onClose={() => setIsServiceModalOpen(false)}
             />
             <ScreenSettings
                 isOpen={isSettingsModalOpen}

@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import { RiEdit2Line, RiDeleteBinLine } from "react-icons/ri";
 import { FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
 import ModalBase from "../modals/BasedModal";
-import EditClientModal from "./EditClientModal.jsx";
+import ContactEditor from "./ContactEditor";
 
 const ContentScreen = styled.div`
     border-radius: 10px;
@@ -251,7 +251,7 @@ const EditButton = styled.button`
 `;
 
 const ClientModal = ({ isOpen, onClose, client }) => {
-    const [showEditClientModal, setShowEditClientModal] = useState(false);
+    const [showContactEditor, setShowContactEditor] = useState(false);
     const clientPlan = {
         id: 2,
         user_id: 102,
@@ -283,9 +283,9 @@ const ClientModal = ({ isOpen, onClose, client }) => {
 
     return (
         <ModalBase isOpen={isOpen} onClose={onClose}>
-            <EditClientModal
-                isOpen={showEditClientModal}
-                onClose={() => setShowEditClientModal(false)}
+            <ContactEditor
+                isOpen={showContactEditor}
+                onClose={() => setShowContactEditor(false)}
                 client={client}
             />
             <ContentScreen>
@@ -334,7 +334,7 @@ const ClientModal = ({ isOpen, onClose, client }) => {
                         <DeleteButton>
                             <RiDeleteBinLine /> Excluir
                         </DeleteButton>
-                        <EditButton onClick={() =>setShowEditClientModal(true)}>
+                        <EditButton onClick={() =>setShowContactEditor(true)}>
                             <RiEdit2Line /> Editar
                         </EditButton>
                     </Panel>

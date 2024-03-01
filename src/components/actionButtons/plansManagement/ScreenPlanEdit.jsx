@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import ModalBase from "../modals/BasedModal";
+import ModalBase from "../../modals/BasedModal";
 import {
     EditableContainer,
     PlanNameInput,
@@ -11,8 +11,7 @@ import {
     ButtonsContainer,
     Label,
     TextareaLabel,
-    
-} from "./StyledComponents.js"; // Estilos compartilhados
+} from "./StyledComponents.js";
 
 const ScreenPlanEdit = ({ isOpen, onClose, plan }) => {
     const { register, handleSubmit, reset } = useForm({
