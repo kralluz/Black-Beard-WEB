@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React, { useState } from "react";
-import ModalBase from "../modals/BasedModal";
+import ModalBase from "../../BasedModal";
 import { FiEdit2 } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 import { motion } from "framer-motion";

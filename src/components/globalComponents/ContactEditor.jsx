@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import { RiEdit2Line, RiDeleteBinLine } from "react-icons/ri";
 import { FaWhatsapp, FaPhoneAlt, FaSave } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-import ModalBase from "../modals/BasedModal";
+import ModalBase from "../BasedModal";
 
 //----------------------------------------------------------------------
 //----------------------------------------------------------------------

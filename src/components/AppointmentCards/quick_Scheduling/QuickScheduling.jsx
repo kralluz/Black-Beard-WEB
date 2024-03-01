@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
-import HorarioDisponivelModal from "./HorarioDisponivelModal.jsx";
+import SelectTime from "./SelectTime.jsx";
 
 const FormContainer = styled.div`
     max-width: 500px;
@@ -48,7 +48,7 @@ const ServiceTag = styled.div`
         `}
 `;
 
-const SchedulingComponent = () => {
+const QuickScheduling = () => {
     const {
         register,
         handleSubmit,
@@ -144,14 +144,14 @@ const SchedulingComponent = () => {
                 </form>
             </FormContainer>
             {isModalOpen && (
-                <HorarioDisponivelModal
+                <SelectTime
                     isOpen={isModalOpen}
                     onClose={handleReset}
                     selectedDate={selectedDate}
-                ></HorarioDisponivelModal>
+                ></SelectTime>
             )}
         </>
     );
 };
 
-export default SchedulingComponent;
+export default QuickScheduling;

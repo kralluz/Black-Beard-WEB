@@ -1,6 +1,6 @@
-import { nextAppointment } from "../../responses/appointments";
+import { nextAppointment } from "../../../responses/appointments";
 import React, { useState } from "react";
-import ScreenNextAppointmentModal from "../SchedulingScreens/ScreenNextAppointment";
+import ScreenNextAppointmentModal from "./NextScreen";
 import {
     NextAppointmentCard,
     CardHeader,
@@ -11,8 +11,8 @@ import {
     ServiceTag,
     TotalValue,
     Button,
-} from "./styles";
-import appointments from "../../responses/appointments";
+} from "../styles";
+import appointments from "../../../responses/appointments";
 
 const NextAppointmentComponent = () => {
     const [nextModal, setNextModal] = useState(false);

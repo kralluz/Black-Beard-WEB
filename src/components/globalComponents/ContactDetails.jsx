@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { RiEdit2Line, RiDeleteBinLine } from "react-icons/ri";
 import { FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
-import ModalBase from "../modals/BasedModal";
+import ModalBase from "../BasedModal";
 import ContactEditor from "./ContactEditor";
 
 const ContentScreen = styled.div`

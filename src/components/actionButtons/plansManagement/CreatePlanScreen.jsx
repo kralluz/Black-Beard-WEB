@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import ModalBase from "../../modals/BasedModal.jsx";
+import ModalBase from "../../BasedModal.jsx";
 import {
     EditableContainer,
     PlanNameInput,

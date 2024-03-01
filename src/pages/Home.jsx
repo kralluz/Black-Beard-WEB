@@ -1,7 +1,7 @@
 import React from "react";
 import ToggleDisplayComponent from "../components/HeadToggleDisplay";
-import AgendaCards from "../components/AgendaCards";
-import EstoqueData from "../components/StockData";
+import MainContent from "../components/MainContent";
+import ERPContent from "../components/ERPContent";
 import ActionButton from "../components/ActionButton";
 
 const Home = () => {
@@ -12,8 +12,8 @@ const Home = () => {
                 {"("} nome do barbeiro{")"}
             </h1>
             <ToggleDisplayComponent //Barra de baixo do header
-                agendaComponent={<AgendaCards />}
-                estoqueComponent={<EstoqueData />}
+                MainContentComponent={<MainContent />}
+                estoqueComponent={<ERPContent />}
             />
             <ActionButton />
         </>

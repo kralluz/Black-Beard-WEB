@@ -1,12 +1,12 @@
 import { FaSquarePlus, FaEye } from "react-icons/fa6";
-import ModalBase from "../modals/BasedModal";
+import ModalBase from "../../BasedModal.jsx";
 import React, { useState } from "react";
 import styled from "styled-components";
-import AppointmentPanel from "../actionButtons/scheduleManagement/AppointmentPanel.jsx";
+import AppointmentPanel from "../../actionButtons/scheduleManagement/AppointmentPanel.jsx";
 import { RiEyeLine } from "react-icons/ri";
-import { slots } from "../../responses/slots";
+import { slots } from "../../../responses/slots.js";
 import dayjs from "dayjs";
-import EscolhaClienteModal from "./EscolhaClienteModal.jsx";
+import SelectClient from "./SelectClient.jsx";
 
 const AppointmentSection = styled.div`
     margin-top: 20px;
@@ -45,7 +45,7 @@ const ViewButton = styled.button`
     margin-left: 10px;
 `;
 
-const HorarioDisponivelModal = ({ isOpen, onClose, selectedDate }) => {
+const SelectTime = ({ isOpen, onClose, selectedDate }) => {
     const [selectedTime, setSelectedTime] = useState(null);
     const [showAppointmentPanel, setShowAppointmentPanel] = useState(null);
     const [showEscolhaCliente, setShowEscolhaCliente] = useState(null);
@@ -106,7 +106,7 @@ const HorarioDisponivelModal = ({ isOpen, onClose, selectedDate }) => {
                         {slots.map((slot, index) => (
                             <Item key={index} ocupado={slot.ocupado}>
                                 {selectedSlot === index && (
-                                    <EscolhaClienteModal
+                                    <SelectClient
                                         date={selectedDate}
                                         hour={slot.appointment_date}
                                         isOpen={selectedSlot === index}
@@ -173,4 +173,4 @@ const HorarioDisponivelModal = ({ isOpen, onClose, selectedDate }) => {
         </ModalBase>
     );
 };
-export default HorarioDisponivelModal;
+export default SelectTime;

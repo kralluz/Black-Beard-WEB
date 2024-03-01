@@ -3,7 +3,7 @@ import styled from "styled-components";
 import CreatePlanScreen from "../plansManagement/CreatePlanScreen.jsx";
 import React, { useState } from "react";
 import { RiEdit2Line, RiDeleteBinLine } from "react-icons/ri";
-import ModalBase from "../../modals/BasedModal.jsx";
+import ModalBase from "../../BasedModal.jsx";
 import ScreenPlanEdit from "../plansManagement/ScreenPlanEdit.jsx";
 import { useForm } from "react-hook-form";
 import {

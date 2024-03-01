@@ -1,10 +1,10 @@
-import { services } from "../../responses/services";
+import { services } from "../../../responses/services.js";
 import React from "react";
-import ModalBase from "../modals/BasedModal";
+import ModalBase from "../../BasedModal.jsx";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import ServiceSelector from "../inputs/InputSelectService.jsx";
-import ClientContact from "../globalComponents/ClientContact.jsx";
+import ServiceSelector from "../../inputs/InputSelectService.jsx";
+import ClientContact from "../../globalComponents/ClientContact.jsx";
 
 const Form = styled.form`
     display: flex;
@@ -45,7 +45,7 @@ const Button = styled.button`
     }
 `;
 
-const EscolhaServicoModal = ({ client, isOpen, onClose, date, hour }) => {
+const SelectServices = ({ client, isOpen, onClose, date, hour }) => {
 
     const { register, handleSubmit } = useForm();
 
@@ -142,4 +142,4 @@ const EscolhaServicoModal = ({ client, isOpen, onClose, date, hour }) => {
     );
 };
 
-export default EscolhaServicoModal;
+export default SelectServices;

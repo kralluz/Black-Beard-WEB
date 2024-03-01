@@ -10,7 +10,7 @@ import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import "react-calendar/dist/Calendar.css";
 import { RiEyeLine } from "react-icons/ri";
 import AppointmentPanel from "../../actionButtons/scheduleManagement/AppointmentPanel.jsx";
-import ModalBase from "../../modals/BasedModal.jsx";
+import ModalBase from "../../BasedModal.jsx";
 import { ptBR } from "@mui/x-date-pickers/locales";
 import { slots } from "../../../responses/slots.js";
 

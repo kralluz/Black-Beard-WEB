@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import ModalBase from '../modals/BasedModal';
+import ModalBase from '../../BasedModal';
 
 const WeeklyPerformanceCard = styled.div`
     background: #f0f0f0;

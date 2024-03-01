@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React, { useState } from "react";
-import ModalBase from "../../modals/BasedModal";
+import ModalBase from "../../BasedModal";
 
 const ContentScreen = styled.div`
     background: transparent;
