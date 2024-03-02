@@ -1,4 +1,4 @@
-export const slots = [
+const slots = [
     {
         id: 1,
         user_id: 1,
@@ -377,3 +377,5 @@ export const slots = [
         updated_at: "2024-2-20T12:00:00Z",
     },
 ];
+
+export default slots;

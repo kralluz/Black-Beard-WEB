@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const api = axios.create({
+const api = axios.create({
     baseURL: "https://connect-hub-back-end.onrender.com", // url para ambiente em produção
     //baseURL: "https://localhost:3000", // url para ambiente em desenvolvimento
     timeout: 80000,
@@ -22,3 +22,5 @@ api.interceptors.request.use(
         return Promise.reject(error);
     }
 );
+
+export default api;

@@ -168,7 +168,7 @@ const appointments = [
             {
                 id: 5,
                 user_id: 105,
-                name: "Limpeza de Pele",
+                name: "Corte de Cabelo",
                 price: 50.0,
                 description:
                     "Limpeza profunda facial com produtos específicos.",
@@ -184,39 +184,9 @@ const appointments = [
                     "Serviço de coloração e pintura de cabelo com produtos de alta qualidade.",
                 created_at: new Date().toISOString(),
                 updated_at: null,
-            },
-            {
-                id: 7,
-                user_id: 107,
-                name: "Manicure Masculina",
-                price: 30.0,
-                description:
-                    "Cuidados com as mãos e unhas, incluindo corte, limpeza e polimento.",
-                created_at: new Date().toISOString(),
-                updated_at: null,
-            },
-            {
-                id: 8,
-                user_id: 108,
-                name: "Massagem Relaxante",
-                price: 70.0,
-                description:
-                    "Massagem corporal relaxante para aliviar tensões e promover bem-estar.",
-                created_at: new Date().toISOString(),
-                updated_at: null,
-            },
-            {
-                id: 9,
-                user_id: 109,
-                name: "Tratamento para Calvície",
-                price: 80.0,
-                description:
-                    "Tratamento especializado para prevenção e cuidado da calvície masculina.",
-                created_at: new Date().toISOString(),
-                updated_at: null,
-            },
+            }
         ],
-        appointment_time: "2024-02-24T20:30:00.000Z",
+        appointment_time: "2024-03-24T20:30:00.000Z",
         description: "Agendamento para limpeza de pele.",
         created_at: new Date().toISOString(),
         updated_at: null,
