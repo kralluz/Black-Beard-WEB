@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import QuickScheduling from "./AppointmentCards/quick_Scheduling/QuickScheduling.jsx";
-import NextAppointmentComponent from "./AppointmentCards/next_Appointment/NextAppointment.jsx";
-import ScheduleComponent from "./AppointmentCards/daily_Summary/DailySummary.jsx";
-import WeeklySummaryComponent from "./AppointmentCards/weekly_Summary/CardWeekly.jsx";
-import MonthSummaryComponent from "./AppointmentCards/monthly_Summary/CardMonth.jsx";
+import QuickScheduling from "./AppointmentCards/quick_Scheduling/QuickScheduling";
+import NextAppointmentComponent from "./AppointmentCards/next_Appointment/NextAppointment";
+import ScheduleComponent from "./AppointmentCards/daily_Summary/DailySummary";
+import WeeklySummaryComponent from "./AppointmentCards/weekly_Summary/CardWeekly";
+import MonthSummaryComponent from "./AppointmentCards/monthly_Summary/CardMonth";
 
 const CardsContainer = styled.div`
     padding: 16px;
