@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import ModalBase from "../../../BasedModal";
 
 import {
@@ -10,8 +11,8 @@ import {
     TotalValue,
     EditIcon,
     WhatsAppIcon,
-    DetailHighlight,
     Button,
+    DetailHighlight,
 } from "./styles.js";
 
 const ScreenNextAppointmentModal = ({ isOpen, onClose, nextAppointment }) => {
@@ -27,7 +28,6 @@ const ScreenNextAppointmentModal = ({ isOpen, onClose, nextAppointment }) => {
     });
 
     const handleEdit = (field) => {
-        // Implementar a lógica de edição aqui, possivelmente utilizando um modal ou um prompt
     };
 
     const totalValue = nextAppointment.service.reduce(

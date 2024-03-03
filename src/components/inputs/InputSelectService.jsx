@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
 const ServiceTag = styled.div`
     display: inline-flex;
@@ -11,7 +11,7 @@ const ServiceTag = styled.div`
     margin: 5px;
     cursor: pointer;
     background-color: ${({ selected }) => (selected ? "#3f63f4" : "#f9e79f")};
-    color:  black;
+    color: black;
 `;
 
 const ServicesContainer = styled.div`
@@ -23,21 +23,17 @@ const ServicesContainer = styled.div`
     border: ${({ showError }) => (showError ? "1px solid red" : "none")};
 `;
 
-// Atualização do componente para ser independente
 const ServiceSelector = ({ services, showError, onSelectedServicesChange }) => {
-    // Estado interno para gerenciar serviços selecionados
     const [selectedServices, setSelectedServices] = useState([]);
 
-    // Manipula a seleção e desseleção de serviços
     const handleServiceClick = (serviceName) => {
         const isSelected = selectedServices.includes(serviceName);
         const updatedSelectedServices = isSelected
-            ? selectedServices.filter(service => service !== serviceName)
+            ? selectedServices.filter((service) => service !== serviceName)
             : [...selectedServices, serviceName];
-        
+
         setSelectedServices(updatedSelectedServices);
 
-        // Callback para notificar o componente pai (opcional)
         if (onSelectedServicesChange) {
             onSelectedServicesChange(updatedSelectedServices);
         }

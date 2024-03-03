@@ -4,13 +4,13 @@ import {
     WeeklyPerformanceCard,
     PerformanceDetail,
     ServiceList,
-    FeedbackList,
-    ImprovementTip,
 } from "./styles.js";
+
+import { FeedbackList, ImprovementTip } from "./styles.js";
+
 const formatCurrency = (value) => `R$ ${value.toFixed(2).replace(".", ",")}`;
 
-const ScreenWeekly = ({ isOpen, onClose }) => {
-    // Dados de exemplo internos
+const WeeklyScreen = ({ isOpen, onClose }) => {
     const weeklyData = {
         weekRange: "20-26 Dezembro",
         totalRevenue: 3486.45,
@@ -35,14 +35,17 @@ const ScreenWeekly = ({ isOpen, onClose }) => {
         <ModalBase isOpen={isOpen} onClose={onClose}>
             <WeeklyPerformanceCard>
                 <h2>Desempenho Semanal: {weeklyData.weekRange}</h2>
+
                 <PerformanceDetail>
                     <h3>Receita Total</h3>
                     <p>{formatCurrency(weeklyData.totalRevenue)}</p>
                 </PerformanceDetail>
+
                 <PerformanceDetail>
                     <h3>Agendamentos Totais</h3>
                     <p>{weeklyData.totalAppointments}</p>
                 </PerformanceDetail>
+
                 <PerformanceDetail>
                     <h3>Serviços Mais Prestados</h3>
                     <ServiceList>
@@ -55,6 +58,7 @@ const ScreenWeekly = ({ isOpen, onClose }) => {
                         )}
                     </ServiceList>
                 </PerformanceDetail>
+
                 <PerformanceDetail>
                     <h3>Taxa de Ocupação</h3>
                     <p>{`${weeklyData.occupancyRate}%`}</p>
@@ -64,4 +68,4 @@ const ScreenWeekly = ({ isOpen, onClose }) => {
     );
 };
 
-export default ScreenWeekly;
+export default WeeklyScreen;

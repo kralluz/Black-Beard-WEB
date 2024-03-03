@@ -1,7 +1,8 @@
-import ClientContact from "../../../globalComponents/ClientContact";
-import clients from "../../../../responses/clients";
 import React, { useState, useEffect } from "react";
+import ClientContact from "../../../globalComponents/ClientContact";
 import ModalBase from "../../../BasedModal";
+import clients from "../../../../responses/clients";
+
 import {
     FaUserAlt,
     FaWhatsapp,
@@ -12,10 +13,6 @@ import {
 
 import {
     ContentScreen,
-    ClientSection,
-    ClientDetails,
-    ClientName,
-    ClientInfo,
     LetterHeader,
     Button,
     Form,
@@ -60,7 +57,6 @@ const ClientsScreen = ({ isOpen, onClose }) => {
     };
 
     const handleCancel = () => {
-        // Reseta o estado dos inputs e esconde o formulário sem salvar
         setName("");
         setEmail("");
         setPhone("");

@@ -1,12 +1,14 @@
-import { FaSquarePlus, FaEye } from "react-icons/fa6";
-import ModalBase from "../../../BasedModal.jsx";
 import React, { useState } from "react";
 import styled from "styled-components";
-import AppointmentPanel from "../../../actionButtons/scheduleManagement/AppointmentPanel/index.jsx";
-import { RiEyeLine } from "react-icons/ri";
-import slots from "../../../../responses/slots.js";
 import dayjs from "dayjs";
+import { FaSquarePlus, FaEye } from "react-icons/fa6";
+import { RiEyeLine } from "react-icons/ri";
+
+import ModalBase from "../../../BasedModal.jsx";
+import AppointmentPanel from "../../../actionButtons/scheduleManagement/AppointmentPanel/index.jsx";
 import SelectClient from "../SelectClient/index.jsx";
+import slots from "../../../../responses/slots.js";
+
 import { AppointmentSection, List, Item, Info, ViewButton } from "./styles";
 
 const SelectTime = ({ isOpen, onClose, selectedDate }) => {
@@ -14,6 +16,7 @@ const SelectTime = ({ isOpen, onClose, selectedDate }) => {
     const [showAppointmentPanel, setShowAppointmentPanel] = useState(null);
     const [showEscolhaCliente, setShowEscolhaCliente] = useState(null);
     const [selectedSlot, setSelectedSlot] = useState(null);
+
     function formatarData(data) {
         const diasDaSemana = [
             "domingo",
@@ -63,7 +66,7 @@ const SelectTime = ({ isOpen, onClose, selectedDate }) => {
     return (
         <ModalBase isOpen={isOpen} onClose={onClose}>
             <div style={{ padding: "20px" }}>
-                <h2>Horários para{formatarData(selectedDate)}</h2>
+                <h2>Horários para {formatarData(selectedDate)}</h2>
                 <AppointmentSection>
                     <List>
                         {slots.map((slot, index) => (
@@ -136,4 +139,5 @@ const SelectTime = ({ isOpen, onClose, selectedDate }) => {
         </ModalBase>
     );
 };
+
 export default SelectTime;

@@ -1,5 +1,5 @@
 import React from "react";
-import ModalBase from "../../../BasedModal"; // Assumindo que o nome correto é ModalBase
+import ModalBase from "../../../BasedModal";
 import {
     MonthlyPerformanceCard,
     PerformanceDetails,
@@ -22,6 +22,7 @@ const ScreenMonthlyModal = ({ isOpen, onClose }) => {
         averageRating: 4.8,
         dataDate: "1 de Abril de 2024",
     };
+
     return (
         <ModalBase isOpen={isOpen} onClose={onClose}>
             <MonthlyPerformanceCard>

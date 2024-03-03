@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import ModalBase from "../../../BasedModal";
-import styled from "styled-components";
 import { useForm } from "react-hook-form";
+import ModalBase from "../../../BasedModal";
 import SelectServices from "../SelectServices";
 import { Form, Label, StyledInput, ButtonGroup, Button } from "./styles";
 

@@ -1,10 +1,11 @@
-import { services } from "../../../../responses/services.js";
 import React from "react";
-import ModalBase from "../../../BasedModal.jsx";
 import { useForm } from "react-hook-form";
+import ModalBase from "../../../BasedModal.jsx";
 import ServiceSelector from "../../../inputs/InputSelectService.jsx";
 import ClientContact from "../../../globalComponents/ClientContact/index.jsx";
+import { services } from "../../../../responses/services.js";
 import { Form, Label, ButtonGroup, Button } from "./styles";
+
 const SelectServices = ({ client, isOpen, onClose, date, hour }) => {
     const { register, handleSubmit } = useForm();
 

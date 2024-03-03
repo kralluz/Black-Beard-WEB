@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { RiEdit2Line, RiDeleteBinLine } from "react-icons/ri";
 import { FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
+
 import ModalBase from "../../BasedModal";
 import ContactEditor from "../ContactEditor";
+
 import {
     DescriptionContainer,
     DescriptionKey,
@@ -31,8 +33,10 @@ import {
     DeleteButton,
     EditButton,
 } from "./styles";
+
 const ClientModal = ({ isOpen, onClose, client }) => {
     const [showContactEditor, setShowContactEditor] = useState(false);
+
     const clientPlan = {
         id: 2,
         user_id: 102,
@@ -53,6 +57,7 @@ const ClientModal = ({ isOpen, onClose, client }) => {
             year: "numeric",
         }
     );
+
     const handleMakeCall = () => {
         window.location.href = `tel:${client.phone}`;
     };
