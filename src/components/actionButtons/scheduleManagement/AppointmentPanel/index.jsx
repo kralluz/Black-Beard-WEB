@@ -1,9 +1,8 @@
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { format, parseISO } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
 import services from "../../../../responses/services";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import styled from "styled-components";
 import ModalBase from "../../../BasedModal";
 import ClientContact from "../../../globalComponents/ClientContact";
 import {
@@ -20,9 +19,8 @@ import {
     TotalValue,
     ServicesContainer,
 } from "./styles";
-// Componente principal: AppointmentPanel
+
 const AppointmentPanel = ({ isOpen, onClose, client }) => {
-    // Estado do componente
     const [isEditable, setIsEditable] = useState(false);
     const [showServiceError, setShowServiceError] = useState(false);
 
@@ -69,10 +67,8 @@ const AppointmentPanel = ({ isOpen, onClose, client }) => {
         defaultValues.service.map((service) => service.name)
     );
 
-    // Configuração do useForm do react-hook-form
     const { register, handleSubmit, reset, watch } = useForm({ defaultValues });
 
-    // Manipulação dos serviços selecionados
     const handleServiceChange = (serviceName) => {
         if (selectedServices.includes(serviceName)) {
             setSelectedServices(
@@ -83,7 +79,6 @@ const AppointmentPanel = ({ isOpen, onClose, client }) => {
         }
     };
 
-    // Função para submeter o formulário
     const onSubmit = (data) => {
         if (selectedServices.length === 0) {
             setShowServiceError(true);
@@ -92,7 +87,6 @@ const AppointmentPanel = ({ isOpen, onClose, client }) => {
         setIsEditable(false);
     };
 
-    // Funções para manipulação do estado de edição
     const handleEdit = () => {
         setIsEditable(true);
     };
@@ -104,7 +98,6 @@ const AppointmentPanel = ({ isOpen, onClose, client }) => {
         setIsEditable(!isEditable);
     };
 
-    // Formatação da data do agendamento
     const formattedDate = format(
         parseISO(watch("appointment_time")),
         "dd, iiii, 'de' MMMM",
@@ -123,7 +116,6 @@ const AppointmentPanel = ({ isOpen, onClose, client }) => {
         currency: "BRL",
     });
 
-    // Renderização do formulário com condicionais para edição e visualização
     return (
         <ModalBase isOpen={isOpen} onClose={onClose}>
             <h1>{formattedDate}</h1>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import SelectTime from "../SelectTime";
@@ -11,24 +11,18 @@ const QuickScheduling = () => {
         formState: { errors, isDirty },
         reset,
     } = useForm();
-    const [selectedServices, setSelectedServices] = React.useState([]);
+
+    const [selectedServices, setSelectedServices] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [ContactDetailsNameError, setContactDetailsNameError] =
-        React.useState(false);
+    const [ContactDetailsNameError, setContactDetailsNameError] = useState(false);
     const [selectedDate, setSelectedDate] = useState("");
 
-    const handleDateChange = (e) => {
-        const localDate = new Date(e.target.value + "T00:00:00");
-        setSelectedDate(localDate.toISOString());
-        setIsModalOpen(true);
-    };
-    const [showPhoneNumberError, setShowPhoneNumberError] =
-        React.useState(false);
-    const [showDateError, setShowDateError] = React.useState(false);
-    const [showTimeError, setShowTimeError] = React.useState(false);
-    const [showServiceError, setShowServiceError] = React.useState(false);
+    const [showPhoneNumberError, setShowPhoneNumberError] = useState(false);
+    const [showDateError, setShowDateError] = useState(false);
+    const [showTimeError, setShowTimeError] = useState(false);
+    const [showServiceError, setShowServiceError] = useState(false);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const timer = 3000;
         if (errors.clientName) {
             setContactDetailsNameError(true);
@@ -47,6 +41,12 @@ const QuickScheduling = () => {
             setTimeout(() => setShowTimeError(false), timer);
         }
     }, [errors.clientName]);
+
+    const handleDateChange = (e) => {
+        const localDate = new Date(e.target.value + "T00:00:00");
+        setSelectedDate(localDate.toISOString());
+        setIsModalOpen(true);
+    };
 
     const handleServiceChange = (service) => {
         setSelectedServices((prev) =>
@@ -93,7 +93,7 @@ const QuickScheduling = () => {
                             {...register("date", {
                                 required: "Data é obrigatória",
                             })}
-                            onChange={handleDateChange} // Adiciona o manipulador de mudança
+                            onChange={handleDateChange}
                         />
                         {errors.date && <p>{errors.date.message}</p>}
                     </FormGroup>

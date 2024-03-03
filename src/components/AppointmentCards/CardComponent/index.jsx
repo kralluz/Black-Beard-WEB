@@ -1,7 +1,12 @@
-import React from 'react';
-import { Card, CardHeader, Content, Button } from './styles.js';
+import React from "react";
+import { Card, CardHeader, Content, Button } from "./styles.js";
 
-const CardComponent = ({ headerContent, children, buttonText, onButtonClick }) => {
+const CardComponent = ({
+    headerContent,
+    children,
+    buttonText,
+    onButtonClick,
+}) => {
     return (
         <Card>
             <CardHeader>{headerContent}</CardHeader>

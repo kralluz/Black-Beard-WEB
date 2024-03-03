@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import ModalBase from "../../../BasedModal.jsx";
-
 import {
     EditableContainer,
     PlanNameInput,
@@ -14,13 +13,13 @@ import {
     TextareaLabel,
 } from "./styles.js";
 
-const ScreenPlanEdit = ({ isOpen, onClose, plan }) => {
+const PlansScreenEdit = ({ isOpen, onClose, plan }) => {
     const { register, handleSubmit, reset } = useForm({
         defaultValues: plan,
     });
 
     const submitEdit = (data) => {
-        onClose(); // Feche o modal após salvar
+        onClose();
     };
 
     return (
@@ -56,4 +55,4 @@ const ScreenPlanEdit = ({ isOpen, onClose, plan }) => {
     );
 };
 
-export default ScreenPlanEdit;
+export default PlansScreenEdit;

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
 
 const SessionForm = () => {
     const [isHidden, setIsHidden] = useState(true);
@@ -69,7 +69,7 @@ const SessionForm = () => {
                                     placeholder="Senha"
                                     type={isHidden ? "password" : "text"}
                                     {...register("password", {
-                                        required: "Senha é obrigatória"
+                                        required: "Senha é obrigatória",
                                     })}
                                 />
                                 <button
@@ -101,7 +101,9 @@ const SessionForm = () => {
                                 }`}
                                 disabled={isSubmitting}
                             >
-                                {isSubmitting ? "Fazendo login..." : "Iniciar sessão"}
+                                {isSubmitting
+                                    ? "Fazendo login..."
+                                    : "Iniciar sessão"}
                             </button>
                         </div>
                     </form>

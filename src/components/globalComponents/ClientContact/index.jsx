@@ -1,5 +1,4 @@
-import { useState } from "react";
-import ContactDetails from "../ContactDetails/ContactDetails";
+import React, { useState } from "react";
 import {
     FaUserAlt,
     FaWhatsapp,
@@ -7,6 +6,7 @@ import {
     FaPhoneAlt,
     FaPhone,
 } from "react-icons/fa";
+import ContactDetails from "../ContactDetails/ContactDetails";
 import {
     ClientSection,
     ClientDetails,
@@ -15,6 +15,7 @@ import {
     LetterHeader,
     Button,
 } from "./styles";
+
 const ClientContact = ({ client }) => {
     const [openContactDetails, setOpenContactDetails] = useState(false);
 
@@ -26,6 +27,7 @@ const ClientContact = ({ client }) => {
         const url = `https://wa.me/${"62985401969"}`;
         window.open(url, "_blank");
     };
+
     return (
         <>
             {client.name && (
@@ -53,7 +55,7 @@ const ClientContact = ({ client }) => {
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
-                        justifyContent: " center",
+                        justifyContent: "center",
                     }}
                 >
                     <div
@@ -61,18 +63,16 @@ const ClientContact = ({ client }) => {
                             display: "flex",
                             flexDirection: "row",
                             alignItems: "center",
-                            justifyContent: " center",
+                            justifyContent: "center",
                             flexWrap: "wrap",
                             gap: "10px",
                         }}
                     >
                         <Button onClick={handleMakeCall}>
-                            <FaPhoneAlt />
-                             Ligar
+                            <FaPhoneAlt /> Ligar
                         </Button>
                         <Button onClick={() => openWhatsApp()}>
-                            <FaWhatsapp />
-                             Conversar
+                            <FaWhatsapp /> Conversar
                         </Button>
                     </div>
                 </div>
@@ -80,4 +80,5 @@ const ClientContact = ({ client }) => {
         </>
     );
 };
+
 export default ClientContact;

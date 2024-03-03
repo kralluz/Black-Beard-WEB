@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { RiDeleteBinLine } from "react-icons/ri";
+import { RiDeleteBinLine, RiEdit2Line } from "react-icons/ri";
 import ModalBase from "../../../BasedModal.jsx";
-import { services } from "../../../../responses/services.js";
 import EditServiceScreen from "../EditServiceScreen/index.jsx";
-import { RiEdit2Line } from "react-icons/ri";
 import ServiceForm from "../ServiceForm/index.jsx";
+import { services } from "../../../../responses/services.js";
 import {
     NewServiceCard,
     ContentScreen,

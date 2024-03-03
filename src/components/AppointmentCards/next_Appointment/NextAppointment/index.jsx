@@ -14,9 +14,8 @@ import {
 } from "./styles.js";
 import appointments from "../../../../responses/appointments";
 
-const NextAppointmentComponent = () => {
+const NextAppointment = () => {
     const [nextModal, setNextModal] = useState(false);
-    // Ajusta a condição para verificar se services é não-nulo e não-vazio
     const services =
         nextAppointment && nextAppointment.service
             ? nextAppointment.service
@@ -80,4 +79,4 @@ const NextAppointmentComponent = () => {
     );
 };
 
-export default NextAppointmentComponent;
+export default NextAppointment;

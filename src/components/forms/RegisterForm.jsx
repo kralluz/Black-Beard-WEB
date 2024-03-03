@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { UserContext } from "../../providers/userProvider";
 import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import { UserContext } from "../../providers/userProvider";
+import { signupSchema } from "../../Zodrezolvers/register";
 import InputField from "../inputs/InputField";
 import PasswordInput from "../inputs/PasswordInput";
-import { signupSchema } from "../../Zodrezolvers/register";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 const RegisterForm = () => {
     const navigate = useNavigate();
@@ -14,6 +15,7 @@ const RegisterForm = () => {
     const { clientRegister } = useContext(UserContext);
     const [isHidden, setIsHidden] = useState(true);
     const [isConfirmHidden, setIsConfirmHidden] = useState(true);
+
     const {
         register,
         handleSubmit,

@@ -1,27 +1,8 @@
-import { plans } from "../../../../responses/plans.js";
-import CreatePlanScreen from "../CreatePlanScreen/index.jsx";
 import React, { useState } from "react";
-import { RiEdit2Line, RiDeleteBinLine } from "react-icons/ri";
 import ModalBase from "../../../BasedModal.jsx";
-import ScreenPlanEdit from "../ScreenPlanEdit/index.jsx";
-import { useForm } from "react-hook-form";
-import {
-    MdFormatListBulletedAdd,
-    MdDescription,
-    MdOutlineEditNote,
-} from "react-icons/md";
-import {
-    FaRegCalendarAlt,
-    FaPlus,
-    FaMoneyBillWave,
-    FaHistory,
-    FaSpa,
-    FaCalendarAlt,
-    FaRedo,
-    FaShoppingCart,
-    FaSortNumericDown,
-    FaHashtag,
-} from "react-icons/fa";
+import CreatePlanScreen from "../CreatePlanScreen/index.jsx";
+import PlansScreenEdit from "../ScreenPlanEdit";
+import { plans } from "../../../../responses/plans.js";
 
 import {
     ContentScreen,
@@ -37,14 +18,39 @@ import {
     DeleteButton,
 } from "./styles";
 
-const ScreenPlan = ({ isOpen, onClose }) => {
+import {
+    RiEdit2Line,
+    RiDeleteBinLine
+} from "react-icons/ri";
+
+import {
+    MdFormatListBulletedAdd,
+    MdDescription,
+    MdOutlineEditNote,
+} from "react-icons/md";
+
+import {
+    FaRegCalendarAlt,
+    FaPlus,
+    FaMoneyBillWave,
+    FaHistory,
+    FaSpa,
+    FaCalendarAlt,
+    FaRedo,
+    FaShoppingCart,
+    FaSortNumericDown,
+    FaHashtag,
+} from "react-icons/fa";
+
+const PlansScreen = ({ isOpen, onClose }) => {
     const [isViewOpen, setViewOpen] = useState(true);
     const [isEditOpen, setEditOpen] = useState(false);
     const [selectedPlan, setSelectedPlan] = useState(null);
     const [isCreateOpen, setCreateOpen] = useState(false);
+
     const handleEdit = (plan) => {
         setSelectedPlan(plan);
-        setEditOpen(true); // Abra o modal de edição com o plano selecionado
+        setEditOpen(true);
     };
 
     const handleDelete = (planId) => {};
@@ -55,7 +61,7 @@ const ScreenPlan = ({ isOpen, onClose }) => {
                 <h2 style={{ color: "#333", marginBottom: "20px" }}>
                     Meus Planos
                 </h2>
-                <ServiceButton // Use o mesmo estilo do botão de serviço para manter a consistência
+                <ServiceButton
                     type="button"
                     onClick={() => setCreateOpen(true)} // Abre o modal de criação
                 >
@@ -68,7 +74,7 @@ const ScreenPlan = ({ isOpen, onClose }) => {
                 {plans.map((plan) => (
                     <PlanDetails key={plan.id}>
                         {isEditOpen && selectedPlan === plan && (
-                            <ScreenPlanEdit
+                            <PlansScreenEdit
                                 isOpen={isEditOpen}
                                 onClose={() => setEditOpen(false)}
                                 plan={selectedPlan}
@@ -121,4 +127,4 @@ const ScreenPlan = ({ isOpen, onClose }) => {
     );
 };
 
-export default ScreenPlan;
+export default PlansScreen;

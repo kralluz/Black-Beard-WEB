@@ -1,6 +1,6 @@
-import ScreenWeeklyModal from "../WeeklyScreen";
 import React, { useState } from "react";
 import CardComponent from "../../CardComponent";
+import WeeklyScreenModal from "../WeeklyScreen";
 import { Data, DataKey, DataValue } from "./styles.js";
 
 const WeeklyCard = () => {
@@ -16,7 +16,7 @@ const WeeklyCard = () => {
 
     return (
         <>
-            <ScreenWeeklyModal
+            <WeeklyScreenModal
                 isOpen={showWeekly}
                 onClose={() => setShowWeekly(false)}
             />

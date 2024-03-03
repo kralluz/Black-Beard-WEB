@@ -2,6 +2,7 @@ import React from "react";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import ModalBase from "../../../BasedModal";
 import appointments from "../../../../responses/appointments";
+
 import {
     NextAppointmentCard,
     AppointmentDetails,
@@ -10,7 +11,7 @@ import {
     SummaryInfo,
 } from "./styles";
 
-const ScreenDayModal = ({ isOpen, onClose }) => {
+const DailyScreen = ({ isOpen, onClose }) => {
     const getCurrentDateInfo = () => {
         const now = new Date();
         const options = { weekday: "long", month: "long", day: "numeric" };
@@ -66,4 +67,4 @@ const ScreenDayModal = ({ isOpen, onClose }) => {
     );
 };
 
-export default ScreenDayModal;
+export default DailyScreen;

@@ -1,7 +1,7 @@
-import { receitaTotal } from "../../../../responses/appointments";
 import React, { useState } from "react";
+import { receitaTotal } from "../../../../responses/appointments";
 import CardComponent from "../../CardComponent";
-import ScreenDayModal from "../DailyScreen";
+import DailyScreen from "../DailyScreen";
 import {
     ClientList,
     Data,
@@ -14,7 +14,7 @@ import {
 } from "./styles.js";
 import appointments from "../../../../responses/appointments";
 
-const DailyCard = () => {
+const DailySummary = () => {
     const dailySummary = {
         totalAppointments: 12,
         estimatedRevenue: "R$ 1.200,00",
@@ -25,15 +25,14 @@ const DailyCard = () => {
             { name: "Ana Júlia", service: "Escova" },
         ],
     };
+
     const day = new Date().toLocaleDateString("pt-BR", { weekday: "long" });
     const headerText = `Resumo Diário:  ${day}`;
     const [dayModal, setDayModal] = useState(false);
+
     return (
         <>
-            <ScreenDayModal
-                isOpen={dayModal}
-                onClose={() => setDayModal(false)}
-            />
+            <DailyScreen isOpen={dayModal} onClose={() => setDayModal(false)} />
             <CardComponent
                 headerContent={headerText}
                 buttonText="Ver Mais"
@@ -69,4 +68,4 @@ const DailyCard = () => {
     );
 };
 
-export default DailyCard;
+export default DailySummary;
