@@ -1,9 +1,12 @@
 import { Toaster, toast } from "react-hot-toast";
-import { useEffect } from "react";
 import AppRoutes from "./routes/AppRoutes";
 import { UserProvider } from "./providers/userProvider";
+import "./styles.css";
+import React from "react";
+
 
 function App() {
+    
     return (
         <>
             <Toaster
@@ -20,6 +23,7 @@ function App() {
             <UserProvider>
                 <AppRoutes />
             </UserProvider>
+
         </>
     );
 }

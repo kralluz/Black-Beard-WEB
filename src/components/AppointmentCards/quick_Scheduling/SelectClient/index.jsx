@@ -1,36 +1,51 @@
-import React, { useState } from "react";
+import { MdEmail } from "react-icons/md";
+import { FaPhone } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import ModalBase from "../../../BasedModal";
 import SelectServices from "../SelectServices";
-import { Form, Label, StyledInput, ButtonGroup, Button } from "./styles";
+import { Form, ButtonGroup, Button } from "./styles";
+import { IoMdPerson } from "react-icons/io";
 
 const dataBase = [
     { name: "João Silva", phone: "123456789", email: "joao@gmail.com" },
     { name: "Maria Oliveira", phone: "987654321", email: "maria@gmail.com" },
+    { name: "Pedro Santos", phone: "456789123", email: "pedro@gmail.com" },
+    { name: "Ana Souza", phone: "789123456", email: "ana@gmail.com" },
+    { name: "Carlos Pereira", phone: "321654987", email: "carlos@gmail.com" },
+    { name: "Mariana Costa", phone: "654987321", email: "mariana@gmail.com" },
+    { name: "Lucas Almeida", phone: "987321654", email: "lucas@gmail.com" },
+    { name: "Julia Rodrigues", phone: "654123789", email: "julia@gmail.com" },
+    { name: "Rafaela Santos", phone: "321789654", email: "rafaela@gmail.com" },
+    { name: "Gustavo Lima", phone: "789654321", email: "gustavo@gmail.com" },
 ];
 
 const SelectClient = ({ isOpen, onClose, date, hour }) => {
     const { register, setValue, watch, handleSubmit } = useForm();
     const name = watch("name");
     const phone = watch("phone");
+    const email = watch("email");
     const [isOpenSelectService, setIsOpenSelectService] = useState(false);
+    const [suggestionsVisible, setSuggestionsVisible] = useState(true);
 
-    const buscarSugestoes = () => {
-        if (!name && !phone) return [];
-        return dataBase.filter(
+    const searchSuggestions = () => {
+        if (!name && !phone && !email) return [];
+        const results = dataBase.filter(
             (item) =>
                 item.name.toLowerCase().includes(name?.toLowerCase()) ||
                 item.phone.includes(phone)
         );
+        return results.slice(0, 3);
     };
 
-    const sugestoes = buscarSugestoes();
+    const suggestions = searchSuggestions();
 
-    // Função para preencher o formulário com a sugestão selecionada
+    // Função para preencher o formulário com a sugestão selecionada e esconder as sugestões
     const preencherFormulario = (sugestao) => {
         setValue("name", sugestao.name);
         setValue("phone", sugestao.phone);
         setValue("email", sugestao.email);
+        setSuggestionsVisible(false);
     };
     const onEscolherServicos = () => {
         ("Escolher serviços");
@@ -39,8 +54,30 @@ const SelectClient = ({ isOpen, onClose, date, hour }) => {
     const onSubmit = (data) => {
         setClientData(data);
         setIsOpenSelectService(true);
-        onEscolherServicos(); // Supondo que esta função seja para tratar a escolha de serviços
     };
+
+    useEffect(() => {
+        const inputs = document.querySelectorAll(".input-box input");
+
+        inputs.forEach((input) => {
+            if (input.value.trim() !== "") {
+                input.nextElementSibling.classList.add("active");
+            } else {
+                input.nextElementSibling.classList.remove("active");
+            }
+        });
+
+        // Retorne uma função de limpeza para remover os event listeners quando o componente for desmontado
+        return () => {
+            inputs.forEach((input) => {
+                if (input.value.trim() !== "") {
+                    input.nextElementSibling.classList.add("active");
+                } else {
+                    input.nextElementSibling.classList.remove("active");
+                }
+            });
+        };
+    }, [name, phone, email]); // Adicione name e phone como dependências
 
     function formatarData(data) {
         const diasDaSemana = [
@@ -96,34 +133,38 @@ const SelectClient = ({ isOpen, onClose, date, hour }) => {
                 onClose={() => setIsOpenSelectService(false)}
                 client={clientData}
             />
+
             <Form onSubmit={handleSubmit(onSubmit)}>
-                <Label htmlFor="name">name</Label>
-                <StyledInput
-                    id="name"
-                    {...register("name")}
-                    placeholder="name"
-                />
+                <div className="input-box">
+                    <span className="icon">
+                        <IoMdPerson size={27} />
+                    </span>
+                    <input type="text" id="name" {...register("name")} />
+                    <label htmlFor="name">Name</label>
+                </div>
 
-                <Label htmlFor="phone">phone</Label>
-                <StyledInput
-                    id="phone"
-                    {...register("phone")}
-                    placeholder="phone"
-                />
+                <div className="input-box">
+                    <span className="icon">
+                        <FaPhone size={24} />
+                    </span>
+                    <input type="text" id="phone" {...register("phone")} />
+                    <label htmlFor="phone">Telefone</label>
+                </div>
 
-                <Label htmlFor="email">Email</Label>
-                <StyledInput
-                    id="email"
-                    {...register("email")}
-                    placeholder="Email"
-                    type="email"
-                />
+                <div className="input-box">
+                    <span className="icon">
+                        <MdEmail size={28} />
+                    </span>
+                    <input type="email" id="email" {...register("email")} />
+                    <label htmlFor="email">Email</label>
+                </div>
 
-                {sugestoes.length > 0 && (
-                    <div>
-                        {sugestoes.map((sugestao, index) => (
+                {suggestionsVisible && suggestions.length > 0 && (
+                    <div className="suggestions-container">
+                        {suggestions.map((sugestao, index) => (
                             <div
                                 key={index}
+                                className="suggestions-item"
                                 onClick={() => preencherFormulario(sugestao)}
                             >
                                 {sugestao.name}

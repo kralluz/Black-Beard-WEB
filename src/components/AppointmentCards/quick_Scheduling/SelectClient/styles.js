@@ -38,3 +38,26 @@ export const Button = styled.button`
         color: white;
     }
 `;
+
+export const SuggestionsContainer = styled.div`
+    position: absolute;
+    top: calc(100% + 5px); /* Posiciona a lista abaixo do campo de entrada */
+    left: 0;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Adiciona sombra */
+    z-index: 999; /* Garante que a lista esteja acima dos outros elementos */
+`;
+
+export const SuggestionItem = styled.div`
+    padding: 10px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #f0f0f0;
+    }
+`;
