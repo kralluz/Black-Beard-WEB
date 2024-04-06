@@ -6,69 +6,75 @@ const SubHeader = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #F9E79F;
-    padding: 4px 16px;
 `;
 const Container = styled.div`
     width: 100vw;
-    max-width: 800px;
+    max-width: 500px;
+    display: flex;
+    justify-content: center;
 `;
 const ButtonContainer = styled.div`
-    width: "100vw";
+    width: calc(100vw - 30px);
     display: flex;
     align-items: center;
     justify-content: space-between;
-`;
-
-const Underline = styled.div`
-    background-color: #F9E79F;
-    width: 100px;
-    height: 2px;
+    
 `;
 
 const Button = styled.button`
-    background-color: ${(props) => (props.$active ? "#e2c07d" : "transparent")};
-    color: ${(props) => (props.$active ? "#fff" : "#000000")};
+    position: relative;
+    background-color: #212121;
+    color: #fff;
     border: none;
-    border-radius: 4px;
-    padding: 8px;
+    border-radius: 5px;
+    padding: 10px;
     cursor: pointer;
     outline: none;
-    font-size: 16px;
-    font-weight: 600;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
-    &:hover {
-        background-color: ${(props) => (props.$active ? "#cbac70" : "#e2c07d")};
+    width: calc(50% - 7.5px);
+    font-size: .9em;
+    &:nth-child(${(props) => props.$active}){
+        &::after{
+            background-color: #EDB784;
+        }
+    }
+    &::after{
+        content: "";
+        position: absolute;
+        width: calc(100% - 30px);
+        height: 3px;
+        border-radius: 3px;
+        background-color: #212121;
+        bottom: 3px;
+        left: 50%;
+        transform: translateX(-50%);
+        transition: .2s;
     }
 `;
 
 const ToggleDisplayComponent = ({ MainContentComponent, estoqueComponent }) => {
     const [activeTab, setActiveTab] = useState("agenda");
-
+    const [indexOfActive, setIndexOfActive ] = useState(1);
     return (
         <>
             <SubHeader>
                 <Container>
                     <ButtonContainer>
                         <Button
-                            $active={activeTab === "agenda"}
-                            onClick={() => setActiveTab("agenda")}
+                            onClick={() => setIndexOfActive(1)}
+                            $active={indexOfActive}
                         >
                             Agenda
-                            <Underline></Underline>
                         </Button>
                         <Button
-                            $active={activeTab === "estoque"}
-                            onClick={() => setActiveTab("estoque")}
+                            onClick={() => setIndexOfActive(2)}
+                            $active={indexOfActive}
                         >
-                            Estoque
-                            <Underline></Underline>
+                            Estoque  
                         </Button>
                     </ButtonContainer>
                 </Container>
             </SubHeader>
-            {activeTab === "agenda" ? MainContentComponent : estoqueComponent}
+            {indexOfActive === 1 ? MainContentComponent : estoqueComponent}
         </>
     );
 };
